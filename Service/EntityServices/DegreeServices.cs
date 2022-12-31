@@ -52,7 +52,7 @@ namespace Service.EntityServices
         {
             try
             {
-                degreeDto.Id = Guid.NewGuid();
+               
                 var degree = _mapper.Map<Degree>(degreeDto);
                 return await _degreeRepository.AddAsync(degree);
             }

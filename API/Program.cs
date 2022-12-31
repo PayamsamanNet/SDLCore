@@ -11,11 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(options => 
+builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter());
 });
 
+//builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -58,7 +59,7 @@ builder.Services.AddDbContext<SDLDbContext>(options =>
 });
 
 builder.Services.RegisterServiesEntities();
-
+builder.Services.RegisterJwtService(_siteSetting);
 
 var app = builder.Build();
 

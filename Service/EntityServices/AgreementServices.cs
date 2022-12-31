@@ -51,7 +51,7 @@ namespace Service.EntityServices
         {
             try
             {
-                 agreementDto.Id = Guid.NewGuid();
+               
                 var agreement = _mapper.Map<Agreement>(agreementDto);
                 return await _agreementRepository.AddAsync(agreement);
             }

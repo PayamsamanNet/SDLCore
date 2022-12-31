@@ -51,7 +51,7 @@ namespace Service.EntityServices
         {
             try
             {
-                logDto.Id = Guid.NewGuid();
+               
                 var log = _mapper.Map<Log>(logDto);
                 return await _ilogRepository.AddAsync(log);
             }

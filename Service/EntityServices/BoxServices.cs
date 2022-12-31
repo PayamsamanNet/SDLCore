@@ -51,7 +51,7 @@ namespace Service.EntityServices
         {
             try
             {
-                  boxDto.Id = Guid.NewGuid();
+            
                 var box = _mapper.Map<Box>(boxDto);
                 return await _boxRepository.AddAsync(box);
             }

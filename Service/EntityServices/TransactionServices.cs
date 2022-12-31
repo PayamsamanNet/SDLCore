@@ -51,7 +51,7 @@ namespace Service.EntityServices
         {
             try
             {
-                transactionDto.Id = Guid.NewGuid();
+                
                 var transaction = _mapper.Map<Transaction>(transactionDto);
                 return await _transactionRepository.AddAsync(transaction);
             }

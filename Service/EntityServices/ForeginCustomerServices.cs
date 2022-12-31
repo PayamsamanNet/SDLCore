@@ -51,7 +51,7 @@ namespace Service.EntityServices
         {
             try
             {
-                foreignCustomerDto.Id = Guid.NewGuid();
+               
                 var foreginCustomer = _mapper.Map<ForeignCustomer>(foreignCustomerDto);
                 return await _foreignCustomerRepository.AddAsync(foreginCustomer);
             }

@@ -51,7 +51,6 @@ namespace Service.EntityServices
         {
             try
             {
-                smsDto.Id = Guid.NewGuid();
                 var sms = _mapper.Map<Sms>(smsDto);
                 return await _smsRepository.AddAsync(sms);
             }

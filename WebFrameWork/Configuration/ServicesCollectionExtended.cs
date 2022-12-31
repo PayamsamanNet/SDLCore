@@ -1,6 +1,10 @@
-﻿using Data.Interfaces;
+﻿using Common;
+using Data.Interfaces;
 using Data.Repos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebFrameWork.Configuration
 {
@@ -33,6 +37,50 @@ namespace WebFrameWork.Configuration
             services.AddScoped<ISmsRepository, SmsRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+        }
+        public static void RegisterJwtService(this IServiceCollection services, SecuritySetting _siteSetting)
+        {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                var secretKey = Encoding.UTF8.GetBytes(_siteSetting.SecretKey);
+                ///Encrypting
+                var keyEncrypting = Encoding.UTF8.GetBytes(_siteSetting.Encryptkey);
+                var securityKeyEncryp = new SymmetricSecurityKey(keyEncrypting);
+                var validationParameters = new TokenValidationParameters
+                {
+                    ClockSkew = TimeSpan.Zero,
+                    RequireSignedTokens = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+                    TokenDecryptionKey = securityKeyEncryp,
+                    RequireExpirationTime = true,
+                    ValidateLifetime = true,
+                    ValidateAudience = true,
+                    ValidAudience = _siteSetting.Audience,
+                    ValidateIssuer = true,
+                    ValidIssuer = _siteSetting.Issuer,
+
+                };
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = validationParameters;
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCors", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+                   .Build();
+
+                });
+            });
+
         }
     }
 }

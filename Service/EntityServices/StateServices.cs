@@ -51,7 +51,7 @@ namespace Service.EntityServices
         {
             try
             {
-                //stateDto.Id = Guid.NewGuid();
+               
                 var state = _mapper.Map<State>(stateDto);
                 return await _stateRepository.AddAsync(state);
 

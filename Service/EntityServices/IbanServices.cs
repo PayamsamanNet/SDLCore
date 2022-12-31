@@ -52,7 +52,7 @@ namespace Service.EntityServices
         {
             try
             {
-                ibanDto.Id = Guid.NewGuid();
+               
                 var iban = _mapper.Map<Iban>(ibanDto);
                 return await _ibanRepository.AddAsync(iban);
             }

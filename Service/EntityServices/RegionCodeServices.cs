@@ -51,7 +51,7 @@ namespace Service.EntityServices
         {
             try
             {
-                regionCodeDto.Id = Guid.NewGuid();
+               
                 var regionCode = _mapper.Map<RegionCode>(regionCodeDto);
                 return await _regionCodeRepository.AddAsync(regionCode);
             }

@@ -50,7 +50,6 @@ namespace Service.EntityServices
         {
             try
             {
-                branchManagerDto.Id = Guid.NewGuid();
                 var branchManager = _mapper.Map<BranchManager>(branchManagerDto);
                 return await _branchManagerRepository.AddAsync(branchManager);
             }

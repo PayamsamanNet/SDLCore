@@ -52,7 +52,7 @@ namespace Service.EntityServices
         {
             try
             {
-                branchDto.Id = Guid.NewGuid();
+               
                 var branch = _mapper.Map<Branch>(branchDto);
                 return await _branchRepository.AddAsync(branch);
             }

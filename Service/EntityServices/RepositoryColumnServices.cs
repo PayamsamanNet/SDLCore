@@ -52,7 +52,7 @@ namespace Service.EntityServices
         {
             try
             {
-                repositoryColumnDto.Id = Guid.NewGuid();
+               
                 var repositoryColumn = _mapper.Map<RepositoryColumn>(repositoryColumnDto);
                 return await _repositoryColumnRepository.AddAsync(repositoryColumn);
             }

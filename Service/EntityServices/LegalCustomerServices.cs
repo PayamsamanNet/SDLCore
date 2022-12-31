@@ -53,7 +53,7 @@ namespace Service.EntityServices
         {
             try
             {
-                legalCustomerDto.Id = Guid.NewGuid();
+               
                 var legalCustomer = _mapper.Map<LegalCustomer>(legalCustomerDto);
                 return await _legalCustomerRepository.AddAsync(legalCustomer);
             }
