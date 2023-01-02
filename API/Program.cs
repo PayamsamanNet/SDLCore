@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
-
+    
 });
 
 builder.Services.AddDbContext<SDLDbContext>(options =>

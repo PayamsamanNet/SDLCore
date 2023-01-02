@@ -10,7 +10,7 @@ namespace Data.Dto
         public int CityCode { get; set; }
 
         public Guid StateId { get; set; }
-        [ForeignKey(nameof(StateId))]
-        public virtual StateDto State { get; set; }
+        //[ForeignKey(nameof(StateId))]
+        //public virtual StateDto State { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace Common.Temp
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
+    
     public class StatesController : ControllerBase
     {
 

@@ -74,10 +74,11 @@ namespace Data.Repos
         {
             try
             {
+                Guid vv = new Guid();
                 var typeId = entity.GetType().GetProperty("Id").PropertyType.Name;
                 if (typeId == "Guid")
                 {
-                    entity.GetType().GetProperty("Id").SetValue(entity, Guid.NewGuid);
+                    entity.GetType().GetProperty("Id").SetValue(entity, vv);
                 }
                 await Entities.AddAsync(entity);
                 await DbContext.SaveChangesAsync();

@@ -9,6 +9,10 @@ namespace WebFrameWork.Mapper
     {
         public MapperConfig()
         {
+            ///UserAccount
+            CreateMap<UserAccountDto, UserAccount>().ReverseMap();
+            CreateMap<UserAccount, UserAccountDto>().ReverseMap();
+
             ///Address
             CreateMap<AddressDto, Address>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
