@@ -1,10 +1,10 @@
-﻿using Common;
+﻿using Common.Setting;
 using Data.Interfaces;
 using Data.Repos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Services.Authentication;
+using Service.Authentication;
 using System.Text;
 
 namespace WebFrameWork.Configuration

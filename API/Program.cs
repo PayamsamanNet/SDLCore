@@ -1,4 +1,4 @@
-using Common;
+using Common.Setting;
 using Data.Context;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;

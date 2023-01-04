@@ -1,24 +1,23 @@
-﻿using Common;
-using Common.ApiResult;
+﻿using Common.ApiResult;
+using Common.Setting;
 using Common.Utilities;
 using Core.Entities;
 using Data.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Services.Authentication;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 
-namespace Services.Authentication
+namespace Service.Authentication
 {
     public class JwtRepository : IJwtRepository
     {
         private readonly SecuritySetting _siteSetting;
         //private readonly UserManager<User> _userManager;
-       
+
         public JwtRepository(IOptions<SecuritySetting> options /*UserManager<User> userManager*/)
         {
             _siteSetting = options.Value;
@@ -51,15 +50,15 @@ namespace Services.Authentication
                 List<string> Roles = new List<string>();
                 foreach (var item in Claims.ToList())
                 {
-                    if(item.Type == ClaimTypes.Role)
+                    if (item.Type == ClaimTypes.Role)
                     {
                         Roles.Add(item.Value);
                     }
                 }
                 return new ResponseAccount
                 {
-                    Token= JwtToken,
-                    Roles= Roles
+                    Token = JwtToken,
+                    Roles = Roles
                 };
             }
             catch (Exception)
@@ -75,7 +74,7 @@ namespace Services.Authentication
                 new Claim(ClaimTypes.Role,"Admin"),
                 new Claim(ClaimTypes.Role,"test")
             };
-          
+
             //if (roles == null)
             //{
             //    foreach (var item in roles)
@@ -83,7 +82,7 @@ namespace Services.Authentication
             //        ListCliams.Add(ClaimTypes.Role, item.ToString());
             //    }
             //}
-           
+
             return ListCliams;
         }
 

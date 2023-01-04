@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Common;
+using Common.Pagination;
 using Core.Entities;
 using Data.Dto;
 

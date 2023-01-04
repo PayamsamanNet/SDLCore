@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Services.Authentication;
+using Service.Authentication;
 
 namespace API.Controllers
 {
@@ -25,18 +25,18 @@ namespace API.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> GetToken(string Username, string Password, [FromServices] IJwtRepository jwtRepository) 
+        [HttpPost]
+        public async Task<IActionResult> GetToken(UserAccountDto userAccountDto, [FromServices] IJwtRepository jwtRepository) 
         {
-            var hash = SecurityHelper.GetSha256Hash(Password);
+            var hash = SecurityHelper.GetSha256Hash(userAccountDto.Password);
 
-            var user =await _userAccountRepository.TableNoTracking.AnyAsync(a => a.UserName == Username && a.Password == hash);
+            var user = await _userAccountRepository.TableNoTracking.AnyAsync(a => a.UserName == userAccountDto.UserName && a.Password == hash);
             if (user)
             {
-                UserAccountDto userAccountDto = new UserAccountDto
+                UserAccountDto _userAccountDto = new UserAccountDto
                 {
-                    UserName = Username,
-                    Password = Password,
+                    UserName = userAccountDto.UserName,
+                    Password = userAccountDto.Password,
                 };
                 var result = jwtRepository.CreateToken(userAccountDto);
                 return Ok(result);

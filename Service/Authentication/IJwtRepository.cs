@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Authentication
+namespace Service.Authentication
 {
     public interface IJwtRepository
     {

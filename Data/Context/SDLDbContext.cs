@@ -1,11 +1,13 @@
 ﻿using Common.Utilities;
 using Core.Base;
 using Core.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context
 {
-    public class SDLDbContext : DbContext
+    public class SDLDbContext : IdentityDbContext<IdentityUser>
     {
         public SDLDbContext(DbContextOptions<SDLDbContext> options) : base(options)
         {

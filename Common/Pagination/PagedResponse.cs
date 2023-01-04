@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Common
+namespace Common.Pagination
 {
     public class PagedResponse<TData>
     {
@@ -32,7 +31,7 @@ namespace Common
             {
                 PreviousPage = pageNumber - 1;
             }
-           
+
             PageNumber = pageNumber;
             PageSize = 10;
             FirstPage = 1;
@@ -47,18 +46,18 @@ namespace Common
             {
                 LastPage = 1;
                 NextPage = 1;
-                TotalPages=1;
+                TotalPages = 1;
             }
-           
+
         }
         public int PageNumber { get; set; }
         public int PageSize { get; } = 10;
-        public int FirstPage { get;  }
-        public int LastPage { get;  }
+        public int FirstPage { get; }
+        public int LastPage { get; }
         public int TotalPages { get; }
         public int TotalRecords { get; }
         public int NextPage { get; }
-        public int StartIndex { get;}
+        public int StartIndex { get; }
         public int NumberReturned { get; }
         public int PreviousPage { get; }
         public TData Data { get; set; }
