@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Data.Context;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SDLDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SDLConnectionString"));
 });
+
 
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -35,8 +38,9 @@ app.UseAuthentication();;
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

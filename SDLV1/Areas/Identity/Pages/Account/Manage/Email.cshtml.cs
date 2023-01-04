@@ -69,7 +69,7 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "New email")]
+            [Display(Name = "ایمیل جدید")]
             public string NewEmail { get; set; }
         }
 
@@ -91,7 +91,7 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"عدم توانایی لود کردن اطلاعات کاربری با شناسه '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -103,7 +103,7 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"عدم توانایی لود کردن اطلاعات کاربری با شناسه '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -125,14 +125,14 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "ایمیل خود را تایید کنید",
+                    $"لطفا برای تایید ایمیل خود <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>اینجا را کلیک کنید</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = " لینک تأیید تغییر ایمیل ارسال شده. لطفا ایمیل خود را چک کنید";
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "ایمیل شما بدون تغییر است.";
             return RedirectToPage();
         }
 
@@ -141,7 +141,7 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"عدم توانایی لود کردن اطلاعات کاربری با شناسه '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -161,10 +161,10 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "ایمیل خود را تایید کنید",
+                $"لطفا برای تایید اکانت خود  <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>اینجا را کلیک کنید </a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "ایمیل تایید ارسال شد. لطفا ایمیل خود را چک کنید.";
             return RedirectToPage();
         }
     }

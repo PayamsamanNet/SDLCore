@@ -76,7 +76,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "ابمیل")]
             public string Email { get; set; }
 
             /// <summary>
@@ -86,7 +86,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "رمز عبور")]
             public string Password { get; set; }
 
             /// <summary>
@@ -94,8 +94,8 @@ namespace SDLV1.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "تایید رمز عبور")]
+            [Compare("Password", ErrorMessage = "رمز عبور و رمز عبور تأیید مطابقت ندارند.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -120,7 +120,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("کاربر یک حساب کاربری جدید با رمز عبور ایجاد کرد");
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -131,7 +131,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Input.Email, "تایید ایمیل",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -172,7 +172,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
         {
             if (!_userManager.SupportsUserEmail)
             {
-                throw new NotSupportedException("The default UI requires a user store with email support.");
+                throw new NotSupportedException("رابط کاربری پیش‌فرض به یک فروشگاه کاربر با پشتیبانی ایمیل نیاز دارد");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
         }

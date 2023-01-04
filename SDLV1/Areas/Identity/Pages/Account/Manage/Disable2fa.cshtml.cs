@@ -36,12 +36,12 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"عدم توانایی اطلاعات کاربری با شناسه '{_userManager.GetUserId(User)}'.");
             }
 
             if (!await _userManager.GetTwoFactorEnabledAsync(user))
             {
-                throw new InvalidOperationException($"Cannot disable 2FA for user as it's not currently enabled.");
+                throw new InvalidOperationException($"نمی توان  احراز هویت دو عاملی را برای کاربر غیرفعال کرد زیرا در حال حاضر فعال نیست.");
             }
 
             return Page();
@@ -52,17 +52,18 @@ namespace SDLV1.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"عدم توانایی اطلاعات کاربری با شناسه '{_userManager.GetUserId(User)}'.");
             }
 
             var disable2faResult = await _userManager.SetTwoFactorEnabledAsync(user, false);
             if (!disable2faResult.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred disabling 2FA.");
+                throw new InvalidOperationException($"اشکال غیر منتظره رخ داده است");
             }
 
-            _logger.LogInformation("User with ID '{UserId}' has disabled 2fa.", _userManager.GetUserId(User));
-            StatusMessage = "2fa has been disabled. You can reenable 2fa when you setup an authenticator app";
+            _logger.LogInformation("کاربر با شناسه  '{UserId}' احراز هویت دو عاملی را غیر فعال کرده است", _userManager.GetUserId(User));
+            StatusMessage = " احراز هویت دو عاملی غیر فعال شده است. هنگامی که یک برنامه احراز هویت را راه اندازی می کنید، می توانید آنرا را دوباره فعال کنید ";
+            
             return RedirectToPage("./TwoFactorAuthentication");
         }
     }

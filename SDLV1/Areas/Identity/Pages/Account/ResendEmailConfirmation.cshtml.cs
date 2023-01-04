@@ -64,7 +64,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+                ModelState.AddModelError(string.Empty, "ایمیل تایید ارسال شد. لطفا ایمیل خود را چک کنید");
                 return Page();
             }
 
@@ -78,10 +78,10 @@ namespace SDLV1.Areas.Identity.Pages.Account
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 Input.Email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "ایمیل خود را تایید کنید",
+                $"لطفاً حساب خود را تائید کنید <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>اینجا را کلیک کنید</a>.");
 
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(string.Empty, "ایمیل تایید ارسال شد. لطفا ایمیل خود را چک کنید");
             return Page();
         }
     }

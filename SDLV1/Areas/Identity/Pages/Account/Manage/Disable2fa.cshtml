@@ -1,7 +1,7 @@
 ﻿@page
 @model Disable2faModel
 @{
-    ViewData["Title"] = "Disable two-factor authentication (2FA)";
+    ViewData["Title"] = "غیر فعال کردن  احراز هویت دو عاملی";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
@@ -10,16 +10,16 @@
 
 <div class="alert alert-warning" role="alert">
     <p>
-        <strong>This action only disables 2FA.</strong>
+        <strong>این بخش فقط احراز هویت دو عاملی را غیر فعال می کند.</strong>
     </p>
     <p>
-        Disabling 2FA does not change the keys used in authenticator apps. If you wish to change the key
-        used in an authenticator app you should <a asp-page="./ResetAuthenticator">reset your authenticator keys.</a>
+        غیرفعال کردن 2FA کلیدهای مورد استفاده در برنامه های احراز هویت را تغییر نمی دهد. اگر می خواهید کلید را تغییر دهید
+        باید در یک برنامه احراز هویت استفاده شود <a asp-page="./ResetAuthenticator">کلیدهای احراز هویت خود را بازنشانی کنید</a>
     </p>
 </div>
 
 <div>
     <form method="post">
-        <button class="btn btn-danger" type="submit">Disable 2FA</button>
+        <button class="btn btn-danger" type="submit"> 2FA غیر فعال کردن</button>
     </form>
 </div>
