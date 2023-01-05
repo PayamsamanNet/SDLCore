@@ -1,9 +1,22 @@
-﻿
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 @{
     ViewData["Title"] = "Home Page";
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("ar") || CultureInfo.CurrentCulture.Name.StartsWith("fa");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en" dir="@(isRTL ? "RTL" : "LTR")">
+    <head>
+
+    </head>
+    <body>
+        <div class="text-center">
+        <h1 class="display-4">@ViewBag.WelcomeMessage</h1>
+            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        </div>
+    </body>
+
+</html>

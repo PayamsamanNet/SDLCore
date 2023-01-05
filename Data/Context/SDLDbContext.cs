@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context
 {
-    public class SDLDbContext : IdentityDbContext<IdentityUser>
+    public class SDLDbContext : IdentityDbContext<UserAccount>
     {
         public SDLDbContext(DbContextOptions<SDLDbContext> options) : base(options)
         {
@@ -20,7 +20,8 @@ namespace Data.Context
             var Assmebly = typeof(IEntity).Assembly;
             modelBuilder.RegisterAllEntities<IEntity>(Assmebly);
             modelBuilder.RegisterEntityTypeConfiguration(Assmebly);
-            modelBuilder.Entity<State>().Property(e => e.Id).HasDefaultValueSql("(newid())");
+            modelBuilder.Entity<UserAccount>().Ignore(x => x.EmailConfirmed);
+         
 
 
         }

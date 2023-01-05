@@ -3,9 +3,12 @@ using Data.Context;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using SDLV1.Configuration;
 using System.Security;
 using WebFrameWork.Configuration;
 using WebFrameWork.Mapper;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +61,7 @@ builder.Services.AddDbContext<SDLDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SDLConnectionString"));
 });
 
+
 builder.Services.RegisterServiesEntities();
 builder.Services.RegisterJwtService(_siteSetting);
 
@@ -69,6 +73,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options => options.DefaultModelsExpandDepth(-1));
 }
+
+app.UseStaticFiles();
+
+
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,9 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject IViewLocalizer localizer
 
-<ul class="navbar-nav">
+@{
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("ar") || CultureInfo.CurrentCulture.Name.StartsWith("fa");
+}
+
+
+
+<ul class="navbar-nav" dir="@(isRTL ? "RTL" : "LTR")">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
@@ -18,10 +27,10 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">ثبت نام</a>
+        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">@localizer["register"]</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">ورود</a>
+        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">@localizer["log in"]</a>
     </li>
 }
 </ul>
