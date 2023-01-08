@@ -1,10 +1,24 @@
 ﻿@page
 @model AccessDeniedModel
+
+@inject LocalizationService localizationService
+
+@inject IOptions<RequestLocalizationOptions> ioOptions
+
 @{
-    ViewData["Title"] = "عدم دسترسی";
+    ViewData["Title"] = @localizationService.GetLocalizedHtmlString("Access denied");
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
 }
 
-<header>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options;
+@using SDLV1.Resources;
+
+@inject IViewLocalizer localizer
+
+
+<header dir="@(isRTL ? "RTL" : "LTR")">
     <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">شما برای این منبع دسترسی ندارید</p>
+    <p class="text-danger">@localizationService.GetLocalizedHtmlString("You do not have access to this resource")</p>
 </header>

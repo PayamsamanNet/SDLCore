@@ -54,7 +54,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
             [BindProperty]
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "بازیابی کد")]
+            [Display(Name = "Recovery Code")]
             public string RecoveryCode { get; set; }
         }
 
@@ -104,7 +104,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
             else
             {
                 _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
-                ModelState.AddModelError(string.Empty, "کد بازیابی نامعتبر وارد شده است");
+                ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
                 return Page();
             }
         }

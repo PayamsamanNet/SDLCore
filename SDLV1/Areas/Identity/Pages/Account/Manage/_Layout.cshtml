@@ -1,4 +1,18 @@
-﻿@{
+﻿@using Microsoft.Extensions.Options;
+@using SDLV1.Resources;
+@using System.Globalization;
+@inject LocalizationService localizationService
+
+@inject IOptions<RequestLocalizationOptions> ioOptions
+
+@{
+    
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
+}
+
+
+@{
+
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
         Layout = (string)parentLayout;
@@ -9,10 +23,10 @@
     }
 }
 
-<h1>Manage your account</h1>
+<h1>@localizationService.GetLocalizedHtmlString("Manage your account")</h1>
 
-<div>
-    <h2>Change your account settings</h2>
+<div dir="@(isRTL ? "RTL" : "LTR")">
+    <h2>@localizationService.GetLocalizedHtmlString("Change your account settings")</h2>
     <hr />
     <div class="row">
         <div class="col-md-3">

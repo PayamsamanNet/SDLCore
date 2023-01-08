@@ -1,21 +1,31 @@
 ﻿@page
+@using Microsoft.Extensions.Options;
+@using SDLV1.Resources;
+@using System.Globalization;
 @model LogoutModel
+
+@inject LocalizationService localizationService
+
+@inject IOptions<RequestLocalizationOptions> ioOptions
+
 @{
-    ViewData["Title"] = "خروج";
+    ViewData["Title"] = @localizationService.GetLocalizedHtmlString("Log out");
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
 }
 
-<header>
+
+<header dir="@(isRTL ? "RTL" : "LTR")">
     <h1>@ViewData["Title"]</h1>
     @{
         if (User.Identity.IsAuthenticated)
         {
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-dark">@localizationService.GetLocalizedHtmlString("Click here to Logout")</button>
             </form>
         }
         else
         {
-            <p>You have successfully logged out of the application.</p>
+            <p>@localizationService.GetLocalizedHtmlString("You have successfully logged out of the application.")</p>
         }
     }
 </header>

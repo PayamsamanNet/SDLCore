@@ -3,6 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Data.Context;
 using Microsoft.Extensions.Options;
 using SDLV1.Configuration;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using SDLV1.Resources;
+using System.Globalization;
+using System.Reflection;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SDLDbContext>(options =>
@@ -17,7 +23,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.RegisterLocalization();
-
 builder.Services.AddRazorPages();
 
 builder.Services.AddHttpClient("webclient", client =>
@@ -34,8 +39,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-
-var supportedCulture = new[] { "en-Us", "fa-IR", "ar-EG", "de-DE" };
+var supportedCulture = new[] { "en", "fa"};
 var locatiozationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture(supportedCulture[0])
     .AddSupportedCultures(supportedCulture)
@@ -43,9 +47,9 @@ var locatiozationOptions = new RequestLocalizationOptions()
 
 app.UseRequestLocalization(locatiozationOptions);
 
-app.MapRazorPages();
 app.UseRouting();
 
+app.MapRazorPages();
 
 app.UseAuthentication();;
 

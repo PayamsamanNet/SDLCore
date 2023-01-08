@@ -1,22 +1,33 @@
 ﻿@page
+@using Microsoft.Extensions.Options;
+@using SDLV1.Resources;
+@using System.Globalization;
 @model RegisterConfirmationModel
+
+@inject LocalizationService localizationService
+
+@inject IOptions<RequestLocalizationOptions> ioOptions
+
 @{
-    ViewData["Title"] = "تایید ثبت نام";
+    ViewData["Title"] = @localizationService.GetLocalizedHtmlString("Register confirmation");
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
 }
 
-<h1 style="direction:rtl">@ViewData["Title"]</h1>
+
+
+<h1>@ViewData["Title"]</h1>
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
-<p>
+<p dir="@(isRTL ? "RTL" : "LTR")">
     This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">برای تایید ایمیل اینجا را کلیک کنید</a>
+            Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">@localizationService.GetLocalizedHtmlString("Click here to confirm your account")</a>
 </p>
     }
     else
     {
-<p>
-            لطفا ایمیل خود را بررسی کنید تا حساب خود را تأیید کنید
+ <p dir="@(isRTL ? "RTL" : "LTR")">
+            @localizationService.GetLocalizedHtmlString("Please check your email to confirm your account.")
 </p>
     }
 }

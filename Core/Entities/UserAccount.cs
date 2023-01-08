@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class UserAccount /*: BaseEntity*/: IdentityUser
+    public class UserAccount : BaseEntity /*IdentityUser*/
     {
-        //public string UserName { get; set; }
-        //public string Password { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }

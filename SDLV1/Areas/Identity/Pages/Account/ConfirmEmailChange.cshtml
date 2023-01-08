@@ -1,8 +1,17 @@
 ﻿@page
+@using Microsoft.Extensions.Options;
+@using SDLV1.Resources;
+@using System.Globalization;
 @model ConfirmEmailChangeModel
+
+@inject LocalizationService localizationService
+
+@inject IOptions<RequestLocalizationOptions> ioOptions
+
 @{
-    ViewData["Title"] = "تغییرات ایمیل را تایید کنید";
+    ViewData["Title"] = @localizationService.GetLocalizedHtmlString("Confirm email change");
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 dir="@(isRTL ? "RTL" : "LTR")">@ViewData["Title"]</h1>
 <partial name="_StatusMessage" model="Model.StatusMessage" />

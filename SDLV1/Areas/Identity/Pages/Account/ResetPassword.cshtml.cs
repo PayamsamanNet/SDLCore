@@ -58,8 +58,8 @@ namespace SDLV1.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "تایید رمز عبور")]
-            [Compare("Password", ErrorMessage = "رمز عبور و رمز عبور تأیید مطابقت ندارند")]
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
             /// <summary>
@@ -75,7 +75,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
         {
             if (code == null)
             {
-                return BadRequest("یک کد برای بازنشانی رمز عبور باید ارائه شود");
+                return BadRequest("A code must be supplied for password reset.");
             }
             else
             {

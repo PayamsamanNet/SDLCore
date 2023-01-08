@@ -1,11 +1,17 @@
 ﻿@using System.Globalization
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options;
+@using SDLV1.Resources;
 
-@inject IViewLocalizer localizer
+@inject LocalizationService localizationService
+
+@inject IOptions<RequestLocalizationOptions> ioOptions
+
 @{
-    ViewData["Title"] = "Home Page";
-    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("ar") || CultureInfo.CurrentCulture.Name.StartsWith("fa");
+    ViewData["Title"] = @localizationService.GetLocalizedHtmlString("Home Page");
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
 }
+
 
 <!DOCTYPE html>
 <html lang="en" dir="@(isRTL ? "RTL" : "LTR")">

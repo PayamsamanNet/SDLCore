@@ -62,14 +62,14 @@ namespace SDLV1.Areas.Identity.Pages.Account
             [Required]
             [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Text)]
-            [Display(Name = "کد احراز هویت")]
+            [Display(Name = "Authenticator code")]
             public string TwoFactorCode { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "این ماشین را بخاطر بیاورید")]
+            [Display(Name = "Remember this machine")]
             public bool RememberMachine { get; set; }
         }
 
@@ -80,7 +80,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
 
             if (user == null)
             {
-                throw new InvalidOperationException($" لود کاربر احراز هویت دو مرحله ای امکان پذیر نیست ");
+                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
             ReturnUrl = returnUrl;
@@ -101,7 +101,7 @@ namespace SDLV1.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($" لود کاربر احراز هویت دو مرحله ای امکان پذیر نیست");
+                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
@@ -122,8 +122,8 @@ namespace SDLV1.Areas.Identity.Pages.Account
             }
             else
             {
-                _logger.LogWarning("کد احراز هویت نامعتبر برای کاربر با شناسه وارد شده است '{UserId}'.", user.Id);
-                ModelState.AddModelError(string.Empty, "کد احراز هویت نامعبر می باشد");
+                _logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
+                ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
                 return Page();
             }
         }
