@@ -17,18 +17,16 @@
 
 
 
-<div>
+<div >
     <form asp-controller="Culture"
           asp-action="SetLanguage"
-          asp-route-returnUrl="@Context.Request.Path" method="post" >
-          @localizationService.GetLocalizedHtmlString("SetLanguage")
-          <select name="Culture"
-                  onchange="this.form.submit();"
-                   asp-for="@requestCulture.RequestCulture.UICulture.Name"
-                   asp-items="cultureItems">
-
-
-          </select>
+          asp-route-returnUrl="@Context.Request.Path" method="post">
+            @localizationService.GetLocalizedHtmlString("SetLanguage")
+            <select name="Culture"
+                    onchange="this.form.submit();"
+                    asp-for="@requestCulture.RequestCulture.UICulture.Name"
+                    asp-items="cultureItems">
+            </select>
 
     </form>
 

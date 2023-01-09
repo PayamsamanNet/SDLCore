@@ -248,6 +248,9 @@
   <data name="Password" xml:space="preserve">
     <value>رمز عبور</value>
   </data>
+  <data name="PayamSaman" xml:space="preserve">
+    <value>توسعه خدمات شبکه پیام سامان</value>
+  </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>شماره تلفن</value>
   </data>

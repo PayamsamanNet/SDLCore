@@ -248,6 +248,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PayamSaman" xml:space="preserve">
+    <value>Payam Saman Network Services Consulting</value>
+  </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>PhoneNumber</value>
   </data>
