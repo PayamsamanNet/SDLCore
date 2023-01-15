@@ -22,7 +22,13 @@ namespace SDLV1.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.WelcomeMessage = string.Format(_stringLocalizer["Welcome"], "Jamal");
+            //ViewBag.WelcomeMessage = string.Format(_stringLocalizer["Welcome"], "Jamal");
+            return View();
+        }
+
+        public IActionResult Welcome()
+        {
+            //ViewBag.WelcomeMessage = string.Format(_stringLocalizer["Welcome"], "Jamal");
             return View();
         }
 

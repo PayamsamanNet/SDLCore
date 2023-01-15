@@ -11,10 +11,10 @@
 @{
     ViewData["Title"] = @localizationService.GetLocalizedHtmlString("Confirm email");
     var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
-}
-@{
-    ViewData["Title"] = "Confirm email";
+
 }
 
-<h1 dir="@(isRTL ? "RTL" : "LTR")">@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="container-md justify-content-md-between col-md-4" dir="@(isRTL ? "RTL" : "LTR")">
+    <h1 dir="@(isRTL ? "RTL" : "LTR")">@ViewData["Title"]</h1>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+</div>

@@ -9,6 +9,11 @@ using WebFrameWork.Configuration;
 using WebFrameWork.Mapper;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
+using Common.IdentityUttilies;
+using Microsoft.AspNetCore.Identity;
+using System.Data;
+using System;
+using Core.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +23,7 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter());
 });
+builder.Services.AddIdentity<SystemUser, Role>().AddEntityFrameworkStores<SDLDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
 
 //builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(MapperConfig));

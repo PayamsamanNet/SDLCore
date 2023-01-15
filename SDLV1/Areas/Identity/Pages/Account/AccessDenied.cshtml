@@ -18,7 +18,17 @@
 @inject IViewLocalizer localizer
 
 
-<header dir="@(isRTL ? "RTL" : "LTR")">
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">@localizationService.GetLocalizedHtmlString("You do not have access to this resource")</p>
+
+<header>
+    <div>
+        class="container-md justify-content-md-between col-md-4" dir="@(isRTL ? "RTL" : "LTR")"
+
+        <div class="row">
+            <div class="p-4" style="border:4px solid red">
+                <h1 class="text-danger">@ViewData["Title"]</h1>
+                <p class="text-danger">@localizationService.GetLocalizedHtmlString("You do not have access to this resource")</p>
+            </div>
+        </div>
+    </div>
 </header>
+

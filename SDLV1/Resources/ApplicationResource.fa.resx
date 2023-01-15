@@ -117,8 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="A new way for new banking" xml:space="preserve">
+    <value>راهی نوین برای بانکداری نوین</value>
+  </data>
+  <data name="A sample of the cash register installed in Shiraz Agricultural Bank" xml:space="preserve">
+    <value>نمونه صندوق نصب شده در بانک کشاورزی شیراز</value>
+  </data>
+  <data name="A sample of the cash register installed in Tehran's New Economy Bank" xml:space="preserve">
+    <value>نمونه صندوق نصب شده در بانک اقتصاد نوین تهران</value>
+  </data>
+  <data name="A sample of the cash register installed in the Agricultural Bank of Isfahan" xml:space="preserve">
+    <value>نمونه صندوق نصب شده در بانک کشاورزی اصفهان</value>
+  </data>
   <data name="Access denied" xml:space="preserve">
     <value>عدم دسترسی</value>
+  </data>
+  <data name="Bank Mellat, your bank" xml:space="preserve">
+    <value>بانک ملت، بانک شما</value>
+  </data>
+  <data name="Bank of all people of Iran" xml:space="preserve">
+    <value>بانک همه مردم ایران</value>
+  </data>
+  <data name="Bank Tejarat, Bank Farda" xml:space="preserve">
+    <value>بانک تجارت، بانک فردا</value>
+  </data>
+  <data name="Can be connected to all types of trust-rental funds of other companies" xml:space="preserve">
+    <value>قابل اتصال به انواع صندوق های امانت - اجاره ای شرکت های دیگر</value>
   </data>
   <data name="Change email" xml:space="preserve">
     <value>تغییر ایمیل</value>
@@ -187,6 +211,12 @@
   <data name="Enter your email." xml:space="preserve">
     <value>ایمیلتان را وارد کنید</value>
   </data>
+  <data name="Example of a box installed in Europe" xml:space="preserve">
+    <value>نمونه صندوق نصب شده در اروپا</value>
+  </data>
+  <data name="Examples of postal lockers" xml:space="preserve">
+    <value>نمونه لاکر های پستی</value>
+  </data>
   <data name="Forgot password confirmation" xml:space="preserve">
     <value>فراموشی رمز عبور تایید</value>
   </data>
@@ -208,6 +238,12 @@
   </data>
   <data name="If you lose your device and don't have the recovery codes you will lose access to your account." xml:space="preserve">
     <value>اگر دستگاه خود را گم کنید و کدهای بازیابی را نداشته باشید، دسترسی به حساب خود را از دست خواهید داد</value>
+  </data>
+  <data name="Keshavarzi" xml:space="preserve">
+    <value>بانک کشاورزی</value>
+  </data>
+  <data name="Leave your valuables to us in a very beautiful and safe environment with complete peace of mind" xml:space="preserve">
+    <value>بسیار زیبا و در محیطی امن و با آرامش کامل اشیاء قیمتی خود را به ما بسپارید</value>
   </data>
   <data name="Locked out" xml:space="preserve">
     <value>قفل شدن</value>
@@ -233,8 +269,17 @@
   <data name="Manage your account" xml:space="preserve">
     <value>مدیریت اکانت</value>
   </data>
+  <data name="Mellat" xml:space="preserve">
+    <value>بانک ملت</value>
+  </data>
+  <data name="Melli" xml:space="preserve">
+    <value>بانک ملی</value>
+  </data>
   <data name="MobileNumber" xml:space="preserve">
     <value>شماره موبایل</value>
+  </data>
+  <data name="New Economy Bank" xml:space="preserve">
+    <value>بانک اقتصاد نوین</value>
   </data>
   <data name="New password" xml:space="preserve">
     <value>رمز عبور جدید</value>
@@ -244,6 +289,9 @@
   </data>
   <data name="OldPassword" xml:space="preserve">
     <value>رمز عبور قبلی</value>
+  </data>
+  <data name="Our current and future customers" xml:space="preserve">
+    <value>مشتریان ما در حال و آینده</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>رمز عبور</value>
@@ -305,6 +353,12 @@
   <data name="reset your authenticator keys." xml:space="preserve">
     <value>کلید های احراز هویت را خالی کنید</value>
   </data>
+  <data name="Saderat" xml:space="preserve">
+    <value>بانک صادرات</value>
+  </data>
+  <data name="Saderat Bank of Iran, at the service of the people" xml:space="preserve">
+    <value>بانک صادرات ايران، در خدمت مردم</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>ذخیره</value>
   </data>
@@ -319,6 +373,15 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>ذخیره</value>
+  </data>
+  <data name="Tejarat" xml:space="preserve">
+    <value>بانک تجارت</value>
+  </data>
+  <data name="The example of the cash register installed in Saderat Bank, Asif branch in Tehran" xml:space="preserve">
+    <value>نمونه صندوق نصب شده در بانک صادرات شعبه آصف تهران</value>
+  </data>
+  <data name="The example of the cash register installed in Shahrara Agricultural Bank, Tehran" xml:space="preserve">
+    <value>نمونه صندوق نصب شده در بانک کشاورزی شهرآرا تهران</value>
   </data>
   <data name="This account has been locked out, please try again later." xml:space="preserve">
     <value>این اکانت قفل شده است لطفا" بعدا مجددا" سعی کنید</value>
@@ -340,6 +403,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>نام کاربری</value>
+  </data>
+  <data name="Wherever there is talk of trust, the name of National Bank of Iran shines" xml:space="preserve">
+    <value>هر جا سخن از اعتماد است، نام بانک ملی ايران می درخشد</value>
   </data>
   <data name="You do not have access to this resource" xml:space="preserve">
     <value>شما به این منابع دسترسی ندارد</value>

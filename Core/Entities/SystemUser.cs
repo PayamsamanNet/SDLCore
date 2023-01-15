@@ -1,5 +1,6 @@
 ﻿using Core.Base;
 using Core.Enum;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +11,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Core.Entities
 {
-    public class SystemUser : BaseEntity
+    public class SystemUser : IdentityUser, IEntity
     {
 
         public DateTime LastLoginDate { get; set; }
