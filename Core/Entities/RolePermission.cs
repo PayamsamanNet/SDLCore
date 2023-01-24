@@ -11,7 +11,7 @@ namespace Core.Entities
     public class RolePermission:BaseEntity
     {
         public string RoleId { get; set; }
-        public int PermissionId { get; set; }
+        public Guid PermissionId { get; set; }
         [ForeignKey(nameof(RoleId))]
         public Role Role { get; set; }
         [ForeignKey(nameof(PermissionId))]

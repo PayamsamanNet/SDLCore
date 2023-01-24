@@ -4,19 +4,19 @@
 }
 <style>
     /*import url(http://fonts.googleapis.com/css?family=Roboto:400);*/
-body {
-  background-color:#fff;
-  -webkit-font-smoothing: antialiased;
-  font: normal 14px Roboto,arial,sans-serif;
-  direction:rtl
-}
+    body {
+        background-color: #fff;
+        -webkit-font-smoothing: antialiased;
+        font: normal 14px Roboto,arial,sans-serif;
+        direction: rtl
+    }
 
-.container {
-    padding: 25px;
-    position: fixed;
-}
+    .container {
+        padding: 25px;
+        position: fixed;
+    }
 
-.form-login {
+    .form-login {
         background-color: #EDEDED;
         padding-top: 10px;
         padding-bottom: 20px;
@@ -27,22 +27,22 @@ body {
         border-width: 5px;
         box-shadow: 0 1px 0 #cfcfcf;
         line-height: 37px;
-}
+    }
 
-h4 { 
- border:0 solid #fff; 
- border-bottom-width:1px;
- padding-bottom:10px;
- text-align: center;
-}
+    h4 {
+        border: 0 solid #fff;
+        border-bottom-width: 1px;
+        padding-bottom: 10px;
+        text-align: center;
+    }
 
-.form-control {
-    border-radius: 10px;
-}
+    .form-control {
+        border-radius: 10px;
+    }
 
-.wrapper {
-    text-align: center;
-}
+    .wrapper {
+        text-align: center;
+    }
 </style>
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 @*<form method="post">
@@ -64,26 +64,24 @@ h4 {
 
 </div>
 </form>*@
-<form method="post">
-<div class="container">
-    <div class="">
-        <div class="col-md-4  offset-md-5" style="margin-right: 58%;">
-            <div class="form-login">
+
+    <div class="container">
+        <div class="">
+            <form method="post" asp-controller="Account" asp-action="Index">
+            <div class="col-md-4  offset-md-5" style="margin-right: 58%;">
+                <div class="form-login">
                     <label asp-for="UserName"></label>
                     <input asp-for="UserName" id="userName" class="form-control input-sm chat-input" placeholder="username" />
-                </br>
+                    </br>
                     <input asp-for="Password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
-                </br>
-                <div class="wrapper">
-                    <span class="group-btn">
-                        <input type="submit" class="btn btn-primary btn-md" value="login" />
-                    </span>
+                    </br>
+                   
                 </div>
             </div>
+        </form>
         </div>
     </div>
-</div>
-</form>
+
 
 
 

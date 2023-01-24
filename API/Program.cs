@@ -23,7 +23,7 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add(new AuthorizeFilter());
 });
-builder.Services.AddIdentity<SystemUser, Role>().AddEntityFrameworkStores<SDLDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
+//builder.Services.AddIdentity<SystemUser, Role>().AddEntityFrameworkStores<SDLDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
 
 //builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(MapperConfig));
@@ -67,6 +67,7 @@ builder.Services.AddDbContext<SDLDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SDLConnectionString"));
 });
 
+builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<SDLDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
 
 builder.Services.RegisterServiesEntities();
 builder.Services.RegisterJwtService(_siteSetting);

@@ -10,6 +10,6 @@ namespace Service.Authentication
 {
     public interface IJwtRepository
     {
-        ResponseAccount CreateToken(UserAccountDto userAccountDto);
+        ResponseAccount CreateToken(UserDto userDto);
     }
 }

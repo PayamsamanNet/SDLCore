@@ -23,7 +23,7 @@ namespace Service.Authentication
             _siteSetting = options.Value;
             //_userManager = userManager;
         }
-        public ResponseAccount CreateToken(UserAccountDto userAccountDto)
+        public ResponseAccount CreateToken(UserDto userDto)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Service.Authentication
                 var keyEncrypting = Encoding.UTF8.GetBytes(_siteSetting.Encryptkey);
                 var securityKeyEncryp = new SymmetricSecurityKey(keyEncrypting);
                 var _EncryptingCredentials = new EncryptingCredentials(securityKeyEncryp, JwtConstants.DirectKeyUseAlg, SecurityAlgorithms.Aes256CbcHmacSha512);
-                var Claims = GetClaims(userAccountDto);
+                var Claims = GetClaims(userDto);
                 var DesCriptor = new SecurityTokenDescriptor
                 {
                     Issuer = _siteSetting.Issuer,
@@ -66,7 +66,7 @@ namespace Service.Authentication
                 throw new Exception(EnumExtensions.GetEnumDescription(ResponseStatus.ServerError));
             }
         }
-        private IEnumerable<Claim> GetClaims(UserAccountDto userAccountDto)
+        private IEnumerable<Claim> GetClaims(UserDto userDto)
         {
             //var roles = _userManager.GetRolesAsync(userAccountDto).Result;
             var ListCliams = new List<Claim>()

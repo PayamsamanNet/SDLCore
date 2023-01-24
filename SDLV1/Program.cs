@@ -9,6 +9,8 @@ using SDLV1.Resources;
 using System.Globalization;
 using System.Reflection;
 using Microsoft.Data.SqlClient;
+using Common.Setting;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SDLDbContext>(options =>
@@ -16,8 +18,8 @@ builder.Services.AddDbContext<SDLDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SDLConnectionString"));
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<SDLDbContext>();
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<SDLDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -25,10 +27,24 @@ builder.Services.AddControllersWithViews();
 builder.Services.RegisterLocalization();
 builder.Services.AddRazorPages();
 
-builder.Services.AddHttpClient("webclient", client =>
+builder.Services.Configure<SettingWeb>(builder.Configuration.GetSection("SettingWeb"));
+SettingWeb? _SettingWeb = builder.Configuration.GetSection("SettingWeb").Get<SettingWeb>();
+
+builder.Services.AddHttpClient(_SettingWeb.ClinetName, client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5017");
+    client.BaseAddress = new Uri(_SettingWeb.BaseAddress);
 });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(_SettingWeb.ExpireTimeSpan);
+        options.Cookie.MaxAge = options.ExpireTimeSpan;
+        options.SlidingExpiration = true;
+        options.LoginPath = _SettingWeb.LoginPath;
+        options.LogoutPath = _SettingWeb.LogoutPath;
+        options.Cookie.Name = _SettingWeb.Name;
+        options.AccessDeniedPath = _SettingWeb.AccessDeniedPath;
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -47,6 +63,9 @@ var locatiozationOptions = new RequestLocalizationOptions()
 
 app.UseRequestLocalization(locatiozationOptions);
 
+app.UseHttpsRedirection();
+app.MapRazorPages();
+
 app.UseRouting();
 
 app.MapRazorPages();
@@ -54,7 +73,7 @@ app.MapRazorPages();
 app.UseAuthentication();;
 
 app.UseAuthorization();
-
+app.UseCookiePolicy();
 
 app.MapControllerRoute(
     name: "default",
