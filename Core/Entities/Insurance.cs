@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
-    //[Index(nameof(BoxId))]
     public class Insurance : BaseEntity
     {
         [Display(Name = "نام شرکت بیمه")]

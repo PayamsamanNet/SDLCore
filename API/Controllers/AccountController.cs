@@ -25,15 +25,15 @@ namespace API.Controllers
         private readonly SignInManager<User> _signInManager;
         public AccountController(SignInManager<User> signInManager, IUserAccountRepository userAccountRepository, IMapper mapper, UserManager<User> userManager)
         {
-            _userAccountRepository= userAccountRepository;
-            _mapper= mapper;
+            _userAccountRepository = userAccountRepository;
+            _mapper = mapper;
             _userManager = userManager;
-            _signInManager= signInManager;
+            _signInManager = signInManager;
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> GetToken(UserAccountDto userAccountDto, [FromServices] IJwtRepository jwtRepository) 
+        public async Task<IActionResult> GetToken(UserAccountDto userAccountDto, [FromServices] IJwtRepository jwtRepository)
         {
             var hash = SecurityHelper.GetSha256Hash(userAccountDto.Password);
 
@@ -76,11 +76,11 @@ namespace API.Controllers
         {
             try
             {
-                var User=_mapper.Map<User>(userDto);
-                var Result=await _userManager.CreateAsync(User);
+                var User = _mapper.Map<User>(userDto);
+                var Result = await _userManager.CreateAsync(User);
                 if (Result.Succeeded)
                 {
-                   return Ok(new ResultIdentity { Message= EnumExtensions.GetEnumDescription(ResponseStatus.Success),Status= ResponseStatus.Success });
+                    return Ok(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.Success), Status = ResponseStatus.Success });
                 }
                 else
                 {
@@ -97,30 +97,38 @@ namespace API.Controllers
                 return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.ServerError), Status = ResponseStatus.ServerError });
             }
         }
-
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto, [FromServices] IJwtRepository jwtRepository)
         {
-            var _User = await _userManager.FindByNameAsync(loginDto.UserName);
-            if (_User == null)
+            try
             {
-                return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.NotFound), Status = ResponseStatus.NotFound });
-            }
-            else
-            {
-                var checkPass = await _signInManager.CheckPasswordSignInAsync(_User, loginDto.Password, false);
-                if (checkPass.Succeeded)
+                var _User = await _userManager.FindByNameAsync(loginDto.UserName);
+                if (_User == null)
                 {
-                    var userdto = _mapper.Map<UserDto>(_User);
-                    return Ok(jwtRepository.CreateToken(userdto));
+                    return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.NotFound), Status = ResponseStatus.NotFound });
                 }
-
-
-               
+                else
+                {
+                    //var checkPass =await  _signInManager.CheckPasswordSignInAsync(_User, loginDto.Password, true);
+                    //if (checkPass.Succeeded)
+                    //{
+                    var userdto = _mapper.Map<UserDto>(_User);
+                    var res = jwtRepository.CreateToken(userdto);
+                    return Ok( new ResponseAccount<UserDto>
+                    {
+                        data= userdto,
+                        Roles= res.Roles,
+                        Token=res.Token,
+                        status= res.status
+                    });
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.ServerError), Status = ResponseStatus.ServerError });
 
             }
-
-            return Ok();
         }
     }
 }

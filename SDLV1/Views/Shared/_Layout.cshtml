@@ -3,60 +3,37 @@
 @using Microsoft.Extensions.Options;
 @using SDLV1.Resources;
 
-@inject LocalizationService localizationService
+@*@inject LocalizationService localizationService
 
 @inject IOptions<RequestLocalizationOptions> ioOptions
 
 @{
     ViewData["Title"] = @localizationService.GetLocalizedHtmlString("SDL");
     var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("fa");
-}
+}*@
 
 
 <!DOCTYPE html>
-<html lang="en" dir="@(isRTL ? "RTL" : "LTR")">
+<html lang="en" >
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] </title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/bootsWatchTheme.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Welcome.css">
-
+    <partial name="_Link" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <label class="navbar-brand"> @localizationService.GetLocalizedHtmlString("SDL")</label>
-                <div class="navbar-nav me-auto p-1">
-                    
-                    <partial name="_SettingLanguagePartial" />
-                </div>
-
-               @* <partial name="_LoginPartial" />*@
-            </div>
-        </nav>
-        <partial name="welcome" />
-    </header>
-  
-    <div class="container col-md-12">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            &copy; 2023 - SDL Payam Saman - All rights is reserved  - <a asp-area="" asp-controller="home" asp-action="privacy">Privacy</a>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <partial name="Navbar" />
+        <partial name="Sidebar" />
+        <SideBar></SideBar>
+        <div class="content-wrapper">
+           @RenderBody()
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+        <footer class="main-footer">
+        </footer>
+    </div>
+    <partial name="_Script" />
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

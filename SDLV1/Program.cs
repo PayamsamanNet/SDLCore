@@ -1,22 +1,12 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Data.Context;
-using Microsoft.Extensions.Options;
 using SDLV1.Configuration;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
-using SDLV1.Resources;
-using System.Globalization;
-using System.Reflection;
-using Microsoft.Data.SqlClient;
 using Common.Setting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<SDLDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SDLConnectionString"));
-});
+//builder.Services.AddDbContext<SDLDbContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("SDLConnectionString"));
+//});
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<SDLDbContext>();
@@ -30,10 +20,15 @@ builder.Services.AddRazorPages();
 builder.Services.Configure<SettingWeb>(builder.Configuration.GetSection("SettingWeb"));
 SettingWeb? _SettingWeb = builder.Configuration.GetSection("SettingWeb").Get<SettingWeb>();
 
-builder.Services.AddHttpClient(_SettingWeb.ClinetName, client =>
+
+
+builder.Services.AddHttpClient("WebClinet", client =>
 {
     client.BaseAddress = new Uri(_SettingWeb.BaseAddress);
 });
+
+
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -77,6 +72,6 @@ app.UseCookiePolicy();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

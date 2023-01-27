@@ -48,7 +48,6 @@ namespace Common.Pagination
                 NextPage = 1;
                 TotalPages = 1;
             }
-
         }
         public int PageNumber { get; set; }
         public int PageSize { get; } = 10;

@@ -19,13 +19,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add(new AuthorizeFilter());
-});
+//builder.Services.AddControllers(options =>
+//{
+//    options.Filters.Add(new AuthorizeFilter());
+//});
 //builder.Services.AddIdentity<SystemUser, Role>().AddEntityFrameworkStores<SDLDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
 
-//builder.Services.AddControllers();
+builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

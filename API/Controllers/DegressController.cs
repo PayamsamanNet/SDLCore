@@ -30,7 +30,7 @@ namespace Common.Temp
                 return BadRequest(new ServiceResult(ResponseStatus.ServerError));
             }
         }
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try

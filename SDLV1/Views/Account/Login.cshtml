@@ -1,0 +1,51 @@
+﻿@model Data.Dto.LoginDto
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="~/css/Account.css" />
+<style>
+    .div-form {
+        height: fit-content;
+        background-color: #e7e7e7;
+        margin-left: 32%;
+        margin-right: 31%;
+        margin-top: 8%;
+        border: none;
+        border-radius: 12px;
+        direction: rtl;
+        padding: 40px;
+    }
+    .btn-login{
+        background-color: #6573e3;
+        margin-top: 27px;
+        width: 100%;
+        color: white;
+    }
+
+    .text-login{
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="container div-mainform">
+    <form method="post">
+        <div class="div-form">
+            <div class="col-md-12">
+                <label asp-for="UserName" class="text-login"></label>
+                <input class="form-control" type="text" asp-for="UserName" />
+                <span class="text-danger" asp-validation-for="UserName"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Password" class="text-login"></label>
+                <input class="form-control" type="text" asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-login" value="ورود به سامانه " />
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>

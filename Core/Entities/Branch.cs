@@ -26,8 +26,6 @@ namespace Core.Entities
         public Guid BranchManagerCode { get; set; }
         [ForeignKey(nameof(BranchManagerCode))]
         public virtual BranchManager BranchManager { get; set; }
-
-
         public Guid DegreeId { get; set; }
         public Guid BranchAddressId { get; set; }
         [ForeignKey(nameof(BranchAddressId))]
