@@ -1,15 +1,13 @@
 using Common.ApiResult;
 using Common.Setting;
 using Data.Dto;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 
-namespace SDLV1.Pages.Degree
+namespace SDLV1.Pages.RegionCode
 {
-    [Authorize()]
     public class IndexModel : PageModel
     {
         private IHttpClientFactory _httpClientFactory;
@@ -19,7 +17,7 @@ namespace SDLV1.Pages.Degree
             _httpClientFactory = httpClientFactory;
             _SettingWeb = options.Value;
         }
-        public List<DegreeDto> DegreeDtos { get; set; }
+        public List<RegionCodeDto> RegionCodes { get; set; }
         public async Task<IActionResult> OnGet()
         {
             try
@@ -27,11 +25,11 @@ namespace SDLV1.Pages.Degree
                 var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                 var token = User.FindFirst(_SettingWeb.TokenName).Value;
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                var Result = Client.GetAsync("api/Degress/GetAll").Result;
+                var Result = Client.GetAsync("api/RegionCodes/GetAll").Result;
                 if (Result.IsSuccessStatusCode)
                 {
-                    var Model = Result.Content.ReadFromJsonAsync<List<DegreeDto>>();
-                    DegreeDtos = Model.Result;
+                    var Model = Result.Content.ReadFromJsonAsync<List<RegionCodeDto>>();
+                    RegionCodes = Model.Result;
                     return Page();
                 }
                 else
@@ -53,7 +51,6 @@ namespace SDLV1.Pages.Degree
         }
 
 
-
         public IActionResult OnPostDelete(string Id)
         {
             try
@@ -61,10 +58,9 @@ namespace SDLV1.Pages.Degree
                 var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                 var token = User.FindFirst(_SettingWeb.TokenName).Value;
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                var Result = Client.DeleteAsync("api/Degress/Delete?Id=" + Id + "").Result;
+                var Result = Client.DeleteAsync("api/RegionCodes/Delete?Id=" + Id + "").Result;
                 if (Result.IsSuccessStatusCode)
                 {
-                   
                     return RedirectToPage("Index");
                 }
                 else
@@ -77,12 +73,12 @@ namespace SDLV1.Pages.Degree
                     {
                         var Error = Result.Content.ReadFromJsonAsync<ResponceApi>();
                         ModelState.AddModelError("DeleteError", Error.Result.Message);
-                        
+
                         return Page();
                     }
                     else
                     {
-                        
+
                         return RedirectToAction("ErrorPage", "Home");
                     }
 
@@ -91,7 +87,7 @@ namespace SDLV1.Pages.Degree
             }
             catch (Exception)
             {
-               return RedirectToAction("ErrorPage", "Home");
+                return RedirectToAction("ErrorPage", "Home");
             }
         }
     }

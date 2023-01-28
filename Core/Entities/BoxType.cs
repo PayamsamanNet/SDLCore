@@ -10,8 +10,6 @@ namespace Core.Entities
         public int Height { get; set; }
         public int Width { get; set; }
         public int Depth { get; set; }
-
-
         public decimal MonthlyPriceRatio { get; set; }
         public decimal TrustPriceRatio { get; set; }
         public decimal BlockedPriceRatio { get; set; }

@@ -1,0 +1,116 @@
+﻿@page
+@model SDLV1.Pages.BoxTypes.CreateModel
+@{
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>افزودن نوع صندوق</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("CreateError")</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form method="post" asp-page="Create">
+                        <div class="card-body card-custom">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.Name"></label>
+                                    <input asp-for="BoxType.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.Name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.Capacity"></label>
+                                    <input asp-for="BoxType.Capacity" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.Capacity"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.Height "></label>
+                                    <input asp-for="BoxType.Height " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.Height "></span>
+                                </div>
+                            </div>
+                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.Width"></label>
+                                    <input asp-for="BoxType.Width" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.Width  "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.Depth"></label>
+                                    <input asp-for="BoxType.Depth" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.Depth"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.MonthlyPriceRatio "></label>
+                                    <input asp-for="BoxType.MonthlyPriceRatio " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.MonthlyPriceRatio "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.TrustPriceRatio"></label>
+                                    <input asp-for="BoxType.TrustPriceRatio" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.TrustPriceRatio"></span>
+                                </div>
+                            </div>
+                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.BlockedPriceRatio "></label>
+                                    <input asp-for="BoxType.BlockedPriceRatio " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.BlockedPriceRatio "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.RunningPrice"></label>
+                                    <input asp-for="BoxType.RunningPrice" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.RunningPrice"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.ShortDatePrice "></label>
+                                    <input asp-for="BoxType.ShortDatePrice " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.ShortDatePrice "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="BoxType.LongDatePrice"></label>
+                                    <input asp-for="BoxType.LongDatePrice" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BoxType.LongDatePrice"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

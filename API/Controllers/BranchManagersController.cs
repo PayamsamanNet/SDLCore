@@ -31,7 +31,7 @@ namespace Common.Temp
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try

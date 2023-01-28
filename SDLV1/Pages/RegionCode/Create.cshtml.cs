@@ -8,60 +8,24 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace SDLV1.Pages.Degree
+namespace SDLV1.Pages.RegionCode
 {
-    public class EditModel : PageModel
+    public class CreateModel : PageModel
     {
-
         private IHttpClientFactory _httpClientFactory;
         private SettingWeb _SettingWeb;
-        public EditModel(IHttpClientFactory httpClientFactory, IOptions<SettingWeb> options)
+        public CreateModel(IHttpClientFactory httpClientFactory, IOptions<SettingWeb> options)
         {
             _httpClientFactory = httpClientFactory;
             _SettingWeb = options.Value;
         }
 
         [BindProperty]
-        public DegreeDto DegreeDto { get; set; }
-        public async Task<IActionResult> OnGet(string Id)
+        public RegionCodeDto RegionCode { get; set; }
+        public void OnGet()
         {
-			try
-			{
-                var Client=_httpClientFactory.CreateClient(_SettingWeb.ClinetName);
-                var token = User.FindFirst(_SettingWeb.TokenName).Value;
-                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                var Result = Client.GetAsync("api/Degress/GetById?Id=" + Id + "").Result;
-                if (Result.IsSuccessStatusCode)
-                {
-                    DegreeDto = Result.Content.ReadFromJsonAsync<DegreeDto>().Result;
-                    return Page();
-                }
-                else
-                {
-                    if (Result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                    {
-
-                        return RedirectToAction("SignOut", "Account");
-                    }
-                    else if (Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
-                    {
-                        var Error = Result.Content.ReadFromJsonAsync<ResponceApi>();
-                        ModelState.AddModelError("CreateError", Error.Result.Message);
-                        return Page();
-                    }
-                    else
-                    {
-                        return RedirectToAction("ErrorPage", "Home");
-                    }
-                }
-
-            }
-			catch (Exception)
-			{
-
-				throw;
-			}
         }
+
         public async Task<IActionResult> OnPost()
         {
             try
@@ -75,9 +39,9 @@ namespace SDLV1.Pages.Degree
                     var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                     var token = User.FindFirst(_SettingWeb.TokenName).Value;
                     Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                    var Js = JsonConvert.SerializeObject(DegreeDto);
+                    var Js = JsonConvert.SerializeObject(RegionCode);
                     var Content = new StringContent(Js, Encoding.UTF8, "application/json");
-                    var Result = Client.PutAsync("api/Degress/Update", Content).Result;
+                    var Result = Client.PostAsync("api/RegionCodes/Create", Content).Result;
                     if (Result.IsSuccessStatusCode)
                     {
                         return RedirectToPage("Index");
@@ -92,7 +56,7 @@ namespace SDLV1.Pages.Degree
                         else if (Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
                         {
                             var Error = Result.Content.ReadFromJsonAsync<ResponceApi>();
-                            ModelState.AddModelError("EditError", Error.Result.Message);
+                            ModelState.AddModelError("CreateError", Error.Result.Message);
                             return Page();
                         }
                         else

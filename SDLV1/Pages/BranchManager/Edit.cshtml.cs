@@ -1,18 +1,18 @@
 using Common.ApiResult;
-using Common.Setting;
 using Data.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using Common.Setting;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 using System.Text;
 
-namespace SDLV1.Pages.Degree
+namespace SDLV1.Pages.BranchManager
 {
     public class EditModel : PageModel
     {
-
         private IHttpClientFactory _httpClientFactory;
         private SettingWeb _SettingWeb;
         public EditModel(IHttpClientFactory httpClientFactory, IOptions<SettingWeb> options)
@@ -20,20 +20,20 @@ namespace SDLV1.Pages.Degree
             _httpClientFactory = httpClientFactory;
             _SettingWeb = options.Value;
         }
-
         [BindProperty]
-        public DegreeDto DegreeDto { get; set; }
+
+        public BranchManagerDto BranchManager { get; set; } 
         public async Task<IActionResult> OnGet(string Id)
         {
-			try
-			{
-                var Client=_httpClientFactory.CreateClient(_SettingWeb.ClinetName);
+            try
+            {
+                var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                 var token = User.FindFirst(_SettingWeb.TokenName).Value;
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                var Result = Client.GetAsync("api/Degress/GetById?Id=" + Id + "").Result;
+                var Result = Client.GetAsync("api/BranchManagers/GetById?Id=" + Id + "").Result;
                 if (Result.IsSuccessStatusCode)
                 {
-                    DegreeDto = Result.Content.ReadFromJsonAsync<DegreeDto>().Result;
+                    BranchManager = Result.Content.ReadFromJsonAsync<BranchManagerDto>().Result;
                     return Page();
                 }
                 else
@@ -46,7 +46,7 @@ namespace SDLV1.Pages.Degree
                     else if (Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
                     {
                         var Error = Result.Content.ReadFromJsonAsync<ResponceApi>();
-                        ModelState.AddModelError("CreateError", Error.Result.Message);
+                        ModelState.AddModelError("EditError", Error.Result.Message);
                         return Page();
                     }
                     else
@@ -56,11 +56,13 @@ namespace SDLV1.Pages.Degree
                 }
 
             }
-			catch (Exception)
-			{
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "Home");
+            }
 
-				throw;
-			}
+
+
         }
         public async Task<IActionResult> OnPost()
         {
@@ -75,9 +77,9 @@ namespace SDLV1.Pages.Degree
                     var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                     var token = User.FindFirst(_SettingWeb.TokenName).Value;
                     Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                    var Js = JsonConvert.SerializeObject(DegreeDto);
+                    var Js = JsonConvert.SerializeObject(BranchManager);
                     var Content = new StringContent(Js, Encoding.UTF8, "application/json");
-                    var Result = Client.PutAsync("api/Degress/Update", Content).Result;
+                    var Result = Client.PutAsync("api/BranchManagers/Update", Content).Result;
                     if (Result.IsSuccessStatusCode)
                     {
                         return RedirectToPage("Index");

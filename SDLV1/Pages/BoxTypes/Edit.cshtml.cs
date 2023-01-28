@@ -8,11 +8,10 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace SDLV1.Pages.Degree
+namespace SDLV1.Pages.BoxTypes
 {
     public class EditModel : PageModel
     {
-
         private IHttpClientFactory _httpClientFactory;
         private SettingWeb _SettingWeb;
         public EditModel(IHttpClientFactory httpClientFactory, IOptions<SettingWeb> options)
@@ -20,20 +19,19 @@ namespace SDLV1.Pages.Degree
             _httpClientFactory = httpClientFactory;
             _SettingWeb = options.Value;
         }
-
         [BindProperty]
-        public DegreeDto DegreeDto { get; set; }
+        public BoxTypeDto BoxType { get; set; }
         public async Task<IActionResult> OnGet(string Id)
         {
-			try
-			{
-                var Client=_httpClientFactory.CreateClient(_SettingWeb.ClinetName);
+            try
+            {
+                var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                 var token = User.FindFirst(_SettingWeb.TokenName).Value;
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                var Result = Client.GetAsync("api/Degress/GetById?Id=" + Id + "").Result;
+                var Result = Client.GetAsync("api/BoxTypes/GetById?Id=" + Id + "").Result;
                 if (Result.IsSuccessStatusCode)
                 {
-                    DegreeDto = Result.Content.ReadFromJsonAsync<DegreeDto>().Result;
+                    BoxType = Result.Content.ReadFromJsonAsync<BoxTypeDto>().Result;
                     return Page();
                 }
                 else
@@ -56,12 +54,15 @@ namespace SDLV1.Pages.Degree
                 }
 
             }
-			catch (Exception)
-			{
+            catch (Exception)
+            {
 
-				throw;
-			}
+                throw;
+            }
+
         }
+
+
         public async Task<IActionResult> OnPost()
         {
             try
@@ -75,9 +76,9 @@ namespace SDLV1.Pages.Degree
                     var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                     var token = User.FindFirst(_SettingWeb.TokenName).Value;
                     Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
-                    var Js = JsonConvert.SerializeObject(DegreeDto);
-                    var Content = new StringContent(Js, Encoding.UTF8, "application/json");
-                    var Result = Client.PutAsync("api/Degress/Update", Content).Result;
+                    var Json = JsonConvert.SerializeObject(BoxType);
+                    var Content = new StringContent(Json, Encoding.UTF8, "application/json");
+                    var Result = Client.PutAsync("api/BoxTypes/Update", Content).Result;
                     if (Result.IsSuccessStatusCode)
                     {
                         return RedirectToPage("Index");
@@ -109,5 +110,7 @@ namespace SDLV1.Pages.Degree
 
 
         }
+
+
     }
 }

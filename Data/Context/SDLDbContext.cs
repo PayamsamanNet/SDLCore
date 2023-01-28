@@ -18,10 +18,13 @@ namespace Data.Context
             var Assmebly = typeof(IEntity).Assembly;
             modelBuilder.RegisterAllEntities<IEntity>(Assmebly);
             modelBuilder.RegisterEntityTypeConfiguration(Assmebly);
+            modelBuilder.AddRestrictDeleteBehaviorConvention();
             modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(p => new { p.ProviderKey, p.LoginProvider });
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(p => new { p.UserId, p.RoleId });
             modelBuilder.Entity<IdentityUserToken<string>>().HasKey(p => new { p.UserId, p.LoginProvider, p.Name });
             //modelBuilder.Entity<UserAccount>().Ignore(x => x.EmailConfirmed);
+
+           
         }
     }
 }
