@@ -9,8 +9,14 @@ namespace Data.Dto
         [Display(Name ="کد ناحیه  ")]
         [Required(ErrorMessage ="وارد کردن {0}الزامی است ")]
         public string AreaCode { get; set; }
+
+
+
+
         [Display(Name = "  نام ناحیه ")]
         [Required(ErrorMessage = "وارد کردن {0}الزامی است ")]
         public string AreaName { get; set; }
+
+
     }
 }

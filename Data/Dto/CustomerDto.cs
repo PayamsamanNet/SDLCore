@@ -8,22 +8,16 @@ namespace Data.Dto
 {
     public class CustomerDto /*: BaseEntity*/
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         [MaxLength(16)]
         public string IdCard { get; set; }
         public string IbanId { get; set; }
 
         public Guid BranchId { get; set; }
-
-        public Guid FromBranchId { get; set; }
-
+        public Guid? FromBranchId { get; set; }
         public string? AccountDescription { get; set; }
-
         public DateTime CreateDate { get; set; } = DateTime.Now;
-
-
-
         public Guid BankId { get; set; }
 
         [ForeignKey(nameof(BankId))]
@@ -31,17 +25,15 @@ namespace Data.Dto
 
         public Guid AddressId { get; set; }
         [ForeignKey(nameof(AddressId))]
-        public virtual Address Address { get; set; }
+        public Address Address { get; set; }
 
         public Guid CustomerTypeId { get; set; }
         [ForeignKey(nameof(CustomerTypeId))]
         public CustomerType CustomerType { get; set; }
 
-
         public Guid ForeignCustomerId { get; set; }
         [ForeignKey(nameof(ForeignCustomerId))]
         public ForeignCustomer? ForeignCustomer { get; set; }
-
 
         public Guid LegalCustomerId { get; set; }
         [ForeignKey(nameof(LegalCustomerId))]
@@ -51,5 +43,6 @@ namespace Data.Dto
         [ForeignKey(nameof(RealCustomerId))]
         public RealCustomer? RealCustomer { get; set; }
 
+        public string TypeCustomer { get; set; }
     }
 }
