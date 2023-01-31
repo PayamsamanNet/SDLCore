@@ -1,3 +1,4 @@
+using Common.Utilities;
 using Data.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,6 +9,8 @@ namespace SDLV1.Pages.Customers
     {
         [BindProperty]
         public CustomerDto Customer { get; set; }
+
+        public List<EnumModel> Models { get; set; }
         public async Task<IActionResult> OnGet()
         {
 
