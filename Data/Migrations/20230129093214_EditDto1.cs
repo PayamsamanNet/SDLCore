@@ -5,24 +5,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class Branch7 : Migration
+    public partial class EditDto1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Branch_Bank_BankId",
-                table: "Branch");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Branch_BankId",
-                table: "Branch");
-
-            migrationBuilder.DropColumn(
-                name: "BankId",
-                table: "Branch");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<Guid>(
                 name: "BankId",
@@ -43,6 +28,21 @@ namespace Data.Migrations
                 principalTable: "Bank",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Branch_Bank_BankId",
+                table: "Branch");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Branch_BankId",
+                table: "Branch");
+
+            migrationBuilder.DropColumn(
+                name: "BankId",
+                table: "Branch");
         }
     }
 }

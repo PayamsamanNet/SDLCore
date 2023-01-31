@@ -6,8 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Data.Dto
 {
 
-    public class LegalCustomerDto : BaseEntity
+    public class LegalCustomerDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         [MaxLength(11)]
         //      [Key, ForeignKey(nameof(Customer))]
         public Guid CompanyId { get; set; }

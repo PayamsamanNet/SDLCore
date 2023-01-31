@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Data.Dto
 {
     [Index(nameof(AddressId))]
-    public class RepositoryDto : BaseEntity
+    public class RepositoryDto /*: BaseEntity*/
     {
-
+        public Guid Id { get; set; }
         public Guid BankId { get; set; }
         [ForeignKey(nameof(BankId))]
         public virtual Bank Bank { get; set; }

@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    public class LawyerDto : BaseEntity
+    public class LawyerDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         public Guid? CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
         public CustomerDto Customer { get; set; }

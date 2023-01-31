@@ -8,11 +8,6 @@ namespace Core.Entities
 
     public class LegalCustomer : BaseEntity
     {
-        [MaxLength(11)]
-        //      [Key, ForeignKey(nameof(Customer))]
-        public Guid CompanyId { get; set; }
-        [ForeignKey(nameof(CompanyId))]
-        public Customer Customer { get; set; }
         public string CompanyName { get; set; }
         public string RegisterNumber { get; set; }
         public string OfficialGazetteNumber { get; set; }

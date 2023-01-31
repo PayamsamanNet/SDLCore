@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Data.Dto
 {
     // [Index(nameof(RepositoryId), nameof(BranchId))]
-    public class RepositoryToBranchDto : BaseEntity
+    public class RepositoryToBranchDto /*: BaseEntity*/
     {
-
+        public Guid Id { get; set; }
         public Guid RepositoryId { get; set; }
         [ForeignKey(nameof(RepositoryId))]
         public virtual RepositoryDto Repository { get; set; }

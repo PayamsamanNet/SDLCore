@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Data.Dto
 {
-    public class UserAccountDto : BaseEntity
+    public class UserAccountDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
+
         [Display(Name = "نام کاربری")]
         
         public string UserName { get; set; }

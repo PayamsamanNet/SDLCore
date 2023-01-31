@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Data.Dto
 {
-    public class BranchManagerDto : BaseEntity
+    public class BranchManagerDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
+
         [Display(Name ="نام ")]
         [Required(ErrorMessage ="وارد کردن {0}الزامی است ")]
         public string BranchManagerCode { get; set; }

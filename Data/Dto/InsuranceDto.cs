@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace Data.Dto
 {
     //[Index(nameof(BoxId))]
-    public class InsuranceDto : BaseEntity
+    public class InsuranceDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         [Display(Name = "نام شرکت بیمه")]
         [Required(ErrorMessage = "وارد کردن نام شرکت بیمه اجباری است ")]
         public string InsuranceCompanyName { get; set; }

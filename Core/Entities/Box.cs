@@ -12,7 +12,7 @@ namespace Core.Entities
         public String NumStr { get; set; }
 
 
-        public Guid RepositoryId { get; set; }
+        
 
         public Guid ColumnId { get; set; }
         [ForeignKey(nameof(ColumnId))]
@@ -30,7 +30,9 @@ namespace Core.Entities
         public int Row { get; set; }
         public bool IsVip { get; set; }
 
-        //public Guid? InsuranceId { get; set; } 
+        public Guid RepositoryId { get; set; }
+        [ForeignKey(nameof(RepositoryId))]
+        public Repository Repository { get; set; }
 
 
     }

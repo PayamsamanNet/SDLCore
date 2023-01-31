@@ -5,17 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    [Index(nameof(BankId), nameof(DegreeId))]
-    public class BranchDto : BaseEntity
+    //[Index(nameof(BankId), nameof(DegreeId))]
+    public class BranchDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
 
 
-        public Guid BankId { get; set; }
+        //public Guid BankId { get; set; }
         //[ForeignKey(nameof(BankId))]
         //public virtual Bank Bank { get; set; }
-
+        public Bank Bank { get; set; }
         public string Manager { get; set; }
         public string Deputy { get; set; }
 

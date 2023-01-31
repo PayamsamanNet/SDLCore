@@ -4,6 +4,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
 
 namespace Data.Context
 {
@@ -22,9 +23,10 @@ namespace Data.Context
             modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(p => new { p.ProviderKey, p.LoginProvider });
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(p => new { p.UserId, p.RoleId });
             modelBuilder.Entity<IdentityUserToken<string>>().HasKey(p => new { p.UserId, p.LoginProvider, p.Name });
-            //modelBuilder.Entity<UserAccount>().Ignore(x => x.EmailConfirmed);
-
            
+   
+
+
         }
     }
 }

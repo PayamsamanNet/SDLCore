@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    public class AgreementDetailDto : BaseEntity
+    public class AgreementDetailDto /*: BaseEntity*/ 
     {
-
+        public Guid Id { get; set; }
         public Guid ContractId { get; set; }
         [ForeignKey(nameof(ContractId))]
         public AgreementDto Contract { get; set; }

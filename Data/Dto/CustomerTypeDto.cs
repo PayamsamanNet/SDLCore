@@ -2,8 +2,9 @@
 
 namespace Data.Dto
 {
-    public class CustomerTypeDto : BaseEntity
+    public class CustomerTypeDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         public Guid BankId { get; set; }
         public string TypeName { get; set; }
 

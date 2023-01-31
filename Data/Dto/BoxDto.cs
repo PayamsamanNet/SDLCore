@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    [Index(nameof(RepositoryId))]
-    public class BoxDto : BaseEntity
+    public class BoxDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         public int Number { get; set; }
         public string NumStr { get; set; }
 

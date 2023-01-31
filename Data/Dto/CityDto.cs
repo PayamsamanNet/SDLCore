@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    public class CityDto : BaseEntity
+    public class CityDto/* : BaseEntity*/
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         public int CityCode { get; set; }

@@ -330,6 +330,9 @@ namespace Data.Migrations
                     b.Property<Guid>("AreaId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("BankId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("BranchAddressId")
                         .HasColumnType("uniqueidentifier");
 
@@ -361,6 +364,8 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AreaId");
+
+                    b.HasIndex("BankId");
 
                     b.HasIndex("BranchAddressId");
 
@@ -1419,7 +1424,15 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.Repository", "Repository")
+                        .WithMany()
+                        .HasForeignKey("RepositoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("BoxType");
+
+                    b.Navigation("Repository");
 
                     b.Navigation("RepositoryColumn");
                 });
@@ -1429,6 +1442,12 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.RegionCode", "RegionCode")
                         .WithMany()
                         .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Bank", "Bank")
+                        .WithMany()
+                        .HasForeignKey("BankId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1449,6 +1468,8 @@ namespace Data.Migrations
                         .HasForeignKey("DegreeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Bank");
 
                     b.Navigation("BranchAddress");
 

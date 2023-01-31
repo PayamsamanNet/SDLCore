@@ -6,8 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Data.Dto
 {
     [Index(nameof(BranchId))]
-    public class IbanDto : BaseEntity
+    public class IbanDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
         public CustomerDto Customer { get; set; }

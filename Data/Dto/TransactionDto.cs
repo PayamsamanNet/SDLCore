@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    public class TransactionDto : BaseEntity
+    public class TransactionDto /*: BaseEntity*/
     {
-
+        public Guid Id { get; set; }
         public int TransNumber { get; set; }
         public int Extra { get; set; }
         public TransStatus TransStatus { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(SDLDbContext))]
-    [Migration("20230124095534_Add-database2")]
-    partial class Adddatabase2
+    [Migration("20230129091328_EditDto")]
+    partial class EditDto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,20 +329,13 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Area")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("AreaCode")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BankId")
+                    b.Property<Guid>("AreaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BranchAddressId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BranchManagerCode")
+                    b.Property<Guid>("BranchManagerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -369,13 +362,13 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AreaCode");
+                    b.HasIndex("AreaId");
 
                     b.HasIndex("BranchAddressId");
 
-                    b.HasIndex("BranchManagerCode");
+                    b.HasIndex("BranchManagerId");
 
-                    b.HasIndex("BankId", "DegreeId");
+                    b.HasIndex("DegreeId");
 
                     b.ToTable("Branch");
                 });
@@ -1378,7 +1371,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("City");
@@ -1389,13 +1382,13 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Box", "Box")
                         .WithMany()
                         .HasForeignKey("BoxId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.Insurance", "Insurance")
                         .WithMany()
                         .HasForeignKey("InsuranceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Box");
@@ -1408,7 +1401,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Agreement", "Contract")
                         .WithMany()
                         .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Contract");
@@ -1419,16 +1412,24 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.BoxType", "BoxType")
                         .WithMany()
                         .HasForeignKey("BoxTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.RepositoryColumn", "RepositoryColumn")
                         .WithMany()
                         .HasForeignKey("ColumnId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Repository", "Repository")
+                        .WithMany()
+                        .HasForeignKey("RepositoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("BoxType");
+
+                    b.Navigation("Repository");
 
                     b.Navigation("RepositoryColumn");
                 });
@@ -1437,25 +1438,33 @@ namespace Data.Migrations
                 {
                     b.HasOne("Core.Entities.RegionCode", "RegionCode")
                         .WithMany()
-                        .HasForeignKey("AreaCode")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.Address", "BranchAddress")
                         .WithMany()
                         .HasForeignKey("BranchAddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.BranchManager", "BranchManager")
                         .WithMany()
-                        .HasForeignKey("BranchManagerCode")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("BranchManagerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Degree", "Degree")
+                        .WithMany()
+                        .HasForeignKey("DegreeId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("BranchAddress");
 
                     b.Navigation("BranchManager");
+
+                    b.Navigation("Degree");
 
                     b.Navigation("RegionCode");
                 });
@@ -1465,7 +1474,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("State");
@@ -1476,13 +1485,13 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.CustomerType", "CustomerType")
                         .WithMany()
                         .HasForeignKey("CustomerTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.Address", "Address")
@@ -1501,7 +1510,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("ForeignNatioanlID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -1512,7 +1521,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -1523,7 +1532,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -1534,7 +1543,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -1545,7 +1554,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Agreement", "Contract")
                         .WithMany()
                         .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Contract");
@@ -1556,7 +1565,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("NationalId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -1567,13 +1576,13 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.Degree", "Degree")
                         .WithMany()
                         .HasForeignKey("DegreeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Bank");
@@ -1586,7 +1595,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Repository", "Repository")
                         .WithMany()
                         .HasForeignKey("RepositoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Repository");
@@ -1597,13 +1606,13 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.Repository", "Repository")
                         .WithMany()
                         .HasForeignKey("RepositoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Branch");
@@ -1616,13 +1625,13 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Permission", "Permission")
                         .WithMany()
                         .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.Role", "Role")
                         .WithMany("Permissions")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Permission");
@@ -1644,7 +1653,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Agreement", "Contract")
                         .WithMany()
                         .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Contract");
@@ -1655,7 +1664,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1664,7 +1673,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1673,7 +1682,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1682,13 +1691,13 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1697,7 +1706,7 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

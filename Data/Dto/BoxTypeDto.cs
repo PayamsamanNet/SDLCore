@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Data.Dto
 {
-    public class BoxTypeDto : BaseEntity
+    public class BoxTypeDto /*: BaseEntity*/ 
     {
+        public Guid Id { get; set; }
         [Display(Name="عنوان ")]
         [Required(ErrorMessage ="وارد کردن  {0}الزامی است ")]
         public string Name { get; set; }

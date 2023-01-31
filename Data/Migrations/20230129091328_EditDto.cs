@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class Adddatabase2 : Migration
+    public partial class EditDto : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -227,7 +227,7 @@ namespace Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -248,7 +248,7 @@ namespace Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -268,7 +268,7 @@ namespace Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -286,13 +286,13 @@ namespace Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -312,7 +312,7 @@ namespace Data.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -340,13 +340,13 @@ namespace Data.Migrations
                         column: x => x.BankId,
                         principalTable: "Bank",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Repository_Degree_DegreeId",
                         column: x => x.DegreeId,
                         principalTable: "Degree",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -365,13 +365,13 @@ namespace Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RolePermission_Permission_PermissionId",
                         column: x => x.PermissionId,
                         principalTable: "Permission",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -391,7 +391,7 @@ namespace Data.Migrations
                         column: x => x.StateId,
                         principalTable: "State",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -399,13 +399,13 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Number = table.Column<int>(type: "int", nullable: false),
                     ColumnTypes = table.Column<int>(type: "int", nullable: false),
                     FromBoxNumber = table.Column<int>(type: "int", nullable: false),
                     ToBoxNumber = table.Column<int>(type: "int", nullable: false),
                     ColumnStyleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ColumnTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ColumnTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -415,7 +415,7 @@ namespace Data.Migrations
                         column: x => x.RepositoryId,
                         principalTable: "Repository",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -439,7 +439,7 @@ namespace Data.Migrations
                         column: x => x.CityId,
                         principalTable: "City",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -449,13 +449,13 @@ namespace Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Number = table.Column<int>(type: "int", nullable: false),
                     NumStr = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ColumnId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BoxTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BoxState = table.Column<int>(type: "int", nullable: false),
                     Column = table.Column<int>(type: "int", nullable: false),
                     Row = table.Column<int>(type: "int", nullable: false),
-                    IsVip = table.Column<bool>(type: "bit", nullable: false)
+                    IsVip = table.Column<bool>(type: "bit", nullable: false),
+                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -465,13 +465,19 @@ namespace Data.Migrations
                         column: x => x.BoxTypeId,
                         principalTable: "BoxType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Box_Repository_RepositoryId",
+                        column: x => x.RepositoryId,
+                        principalTable: "Repository",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Box_RepositoryColumn_ColumnId",
                         column: x => x.ColumnId,
                         principalTable: "RepositoryColumn",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -481,15 +487,13 @@ namespace Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Manager = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Deputy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AreaCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Area = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BranchManagerCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    isEnable = table.Column<bool>(type: "bit", nullable: false),
+                    AreaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchAddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    isEnable = table.Column<bool>(type: "bit", nullable: false)
+                    BranchManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchAddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -499,19 +503,25 @@ namespace Data.Migrations
                         column: x => x.BranchAddressId,
                         principalTable: "Address",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Branch_BranchManager_BranchManagerCode",
-                        column: x => x.BranchManagerCode,
+                        name: "FK_Branch_BranchManager_BranchManagerId",
+                        column: x => x.BranchManagerId,
                         principalTable: "BranchManager",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Branch_RegionCode_AreaCode",
-                        column: x => x.AreaCode,
+                        name: "FK_Branch_Degree_DegreeId",
+                        column: x => x.DegreeId,
+                        principalTable: "Degree",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Branch_RegionCode_AreaId",
+                        column: x => x.AreaId,
                         principalTable: "RegionCode",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -544,13 +554,13 @@ namespace Data.Migrations
                         column: x => x.BankId,
                         principalTable: "Bank",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Customer_CustomerType_CustomerTypeId",
                         column: x => x.CustomerTypeId,
                         principalTable: "CustomerType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -601,13 +611,13 @@ namespace Data.Migrations
                         column: x => x.BoxId,
                         principalTable: "Box",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Agreement_Insurance_InsuranceId",
                         column: x => x.InsuranceId,
                         principalTable: "Insurance",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -627,13 +637,13 @@ namespace Data.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branch",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RepositoryToBranch_Repository_RepositoryId",
                         column: x => x.RepositoryId,
                         principalTable: "Repository",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -658,7 +668,7 @@ namespace Data.Migrations
                         column: x => x.ForeignNatioanlID,
                         principalTable: "Customer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -681,7 +691,7 @@ namespace Data.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -708,7 +718,7 @@ namespace Data.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -732,7 +742,7 @@ namespace Data.Migrations
                         column: x => x.CompanyId,
                         principalTable: "Customer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -756,7 +766,7 @@ namespace Data.Migrations
                         column: x => x.NationalId,
                         principalTable: "Customer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -777,7 +787,7 @@ namespace Data.Migrations
                         column: x => x.ContractId,
                         principalTable: "Agreement",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -806,7 +816,7 @@ namespace Data.Migrations
                         column: x => x.ContractId,
                         principalTable: "Agreement",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -861,7 +871,7 @@ namespace Data.Migrations
                         column: x => x.ContractId,
                         principalTable: "Agreement",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -944,14 +954,9 @@ namespace Data.Migrations
                 column: "RepositoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_AreaCode",
+                name: "IX_Branch_AreaId",
                 table: "Branch",
-                column: "AreaCode");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Branch_BankId_DegreeId",
-                table: "Branch",
-                columns: new[] { "BankId", "DegreeId" });
+                column: "AreaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Branch_BranchAddressId",
@@ -959,9 +964,14 @@ namespace Data.Migrations
                 column: "BranchAddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_BranchManagerCode",
+                name: "IX_Branch_BranchManagerId",
                 table: "Branch",
-                column: "BranchManagerCode");
+                column: "BranchManagerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Branch_DegreeId",
+                table: "Branch",
+                column: "DegreeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_StateId",

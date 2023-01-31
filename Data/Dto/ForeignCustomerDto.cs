@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Data.Dto
 {
 
-    public class ForeignCustomerDto : BaseEntity
+    public class ForeignCustomerDto /*: BaseEntity*/
     {
-
+        public Guid Id { get; set; }
         [MaxLength(12)]
         public Guid ForeignNatioanlID { get; set; }
         [ForeignKey(nameof(ForeignNatioanlID))]

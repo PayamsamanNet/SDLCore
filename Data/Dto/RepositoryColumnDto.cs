@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    public class RepositoryColumnDto : BaseEntity
+    public class RepositoryColumnDto /*: BaseEntity*/
     {
-
+        public Guid Id { get; set; }
         public Guid RepositoryId { get; set; }
         [ForeignKey(nameof(RepositoryId))]
         public virtual RepositoryDto Repository { get; set; }

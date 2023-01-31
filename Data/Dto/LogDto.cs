@@ -5,9 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    [Index(nameof(BranchId), nameof(RepositoryId))]
-    public class LogDto : BaseEntity
+    //[Index(nameof(BranchId), nameof(RepositoryId))]
+    public class LogDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         public Level Level { get; set; }
         public LogType LogType { get; set; }
         public DateTime Timestamp { get; set; }

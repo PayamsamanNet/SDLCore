@@ -28,13 +28,7 @@
                     <form method="post" asp-page="Edit">
                         <div class="card-body card-custom">
                             <input type="hidden" asp-for="BranchManager.Id" />
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="BranchManager.BranchManagerName"></label>
-                                    <input asp-for="BranchManager.BranchManagerName" class="form-control" />
-                                    <span class="text-danger" asp-validation-for="BranchManager.BranchManagerName"></span>
-                                </div>
-                            </div>
+                           
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="BranchManager.BranchManagerCode"></label>
@@ -42,7 +36,13 @@
                                     <span class="text-danger" asp-validation-for="BranchManager.BranchManagerCode"></span>
                                 </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="BranchManager.BranchManagerName"></label>
+                                    <input asp-for="BranchManager.BranchManagerName" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="BranchManager.BranchManagerName"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>

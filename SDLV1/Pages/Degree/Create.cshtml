@@ -22,35 +22,41 @@
         <div class="col-md-12">
             <p> @Html.ValidationMessage("CreateError")</p>
         </div>
-
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
                     <form method="post" asp-page="Create">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label asp-for="DegreeDto.Name"></label>
-                                <input asp-for="DegreeDto.Name" class="form-control"  />
-                                <span class="text-danger" asp-validation-for="DegreeDto.Name"></span>
+                        <div class="card-body card-custom">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DegreeDto.Name"></label>
+                                    <input asp-for="DegreeDto.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="DegreeDto.Name"></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="DegreeDto.MonthlyPriceRatio"></label>
-                                <input asp-for="DegreeDto.MonthlyPriceRatio" class="form-control" />
-                                <span class="text-danger" asp-validation-for="DegreeDto.MonthlyPriceRatio "></span>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DegreeDto.MonthlyPriceRatio"></label>
+                                    <input asp-for="DegreeDto.MonthlyPriceRatio" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="DegreeDto.MonthlyPriceRatio "></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="DegreeDto.TrustPriceRatio"></label>
-                                <input asp-for="DegreeDto.TrustPriceRatio" class="form-control" />
-                                <span class="text-danger" asp-validation-for="DegreeDto.TrustPriceRatio  "></span>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DegreeDto.TrustPriceRatio"></label>
+                                    <input asp-for="DegreeDto.TrustPriceRatio" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="DegreeDto.TrustPriceRatio  "></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="DegreeDto.IsUsed "></label>
-                                <select class="form-control" asp-for="DegreeDto.IsUsed">
-                                    <option value="True">بله </option>
-                                    <option value="false">خیر </option>
-                                </select>
-                                <span class="text-danger" asp-validation-for="DegreeDto.IsUsed"></span>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="DegreeDto.IsUsed "></label>
+                                    <select class="form-control" asp-for="DegreeDto.IsUsed">
+                                        <option value="True">بله </option>
+                                        <option value="false">خیر </option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="DegreeDto.IsUsed"></span>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">

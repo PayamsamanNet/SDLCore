@@ -3,8 +3,9 @@ using Core.Enum;
 
 namespace Data.Dto
 {
-    public class SmsDto : BaseEntity
+    public class SmsDto /*: BaseEntity*/
     {
+        public Guid Id { get; set; }
         public SmsStatus Status { get; set; }
         public SmsResult Result { get; set; }
         public string Exception { get; set; }

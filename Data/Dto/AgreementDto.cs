@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Dto
 {
-    [Index(nameof(CustomerId), nameof(InsuranceId), nameof(BranchId))]
-    public class AgreementDto : BaseEntity
-    {
 
+    public class AgreementDto/* : BaseEntity*/
+    {
+        public Guid Id { get; set; }
         public string ContractNumber { get; set; }
 
         public Guid CustomerId { get; set; }
