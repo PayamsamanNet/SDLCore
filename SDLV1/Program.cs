@@ -1,6 +1,8 @@
 using SDLV1.Configuration;
 using Common.Setting;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Service.ServiceFile;
+using Service.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<SDLDbContext>(options =>
@@ -16,13 +18,16 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.RegisterLocalization();
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 builder.Services.Configure<SettingWeb>(builder.Configuration.GetSection("SettingWeb"));
 SettingWeb? _SettingWeb = builder.Configuration.GetSection("SettingWeb").Get<SettingWeb>();
 
 
 
-builder.Services.AddHttpClient("WebClinet", client =>
+builder.Services.AddHttpClient(_SettingWeb.ClinetName, client =>
 {
     client.BaseAddress = new Uri(_SettingWeb.BaseAddress);
 });

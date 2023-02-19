@@ -4,6 +4,8 @@
 }
 
 <section class="content-header">
+
+
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -26,8 +28,22 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex">
-                    <h3 class="card-title">لیست </h3>
-                    <a asp-page="Create" class="btn btn-info text-white">
+
+                    @*<h3 class="card-title">لیست </h3>*@
+                    <div class="search-wrapper row">
+                        <form asp-page-handler="searchbox">
+                           
+                            <div class="input-group rounded search-box">
+                                <input type="search" class="form-control rounded" placeholder="جستجو" aria-label="جستجو" aria-describedby="search-addon" />
+                                
+                                    <button class="input-group-text border-0" id="search-addon" type="submit"><i class="fa fa-search"></i></button>
+                                    
+                                
+                            </div>
+                        </form>
+
+                    </div>
+                    <a asp-page="Create" class="btn btn-info text-white me-auto">
                         افزودن
                     </a>
                 </div>

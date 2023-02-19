@@ -21,27 +21,27 @@ namespace Data.Dto
         public Guid BankId { get; set; }
 
         [ForeignKey(nameof(BankId))]
-        public Bank Bank { get; set; }
+        public BankDto Bank { get; set; }
 
         public Guid AddressId { get; set; }
         [ForeignKey(nameof(AddressId))]
-        public Address Address { get; set; }
+        public AddressDto Address { get; set; }
 
         public Guid CustomerTypeId { get; set; }
         [ForeignKey(nameof(CustomerTypeId))]
-        public CustomerType CustomerType { get; set; }
+        public CustomerTypeDto CustomerType { get; set; }
 
         public Guid ForeignCustomerId { get; set; }
         [ForeignKey(nameof(ForeignCustomerId))]
-        public ForeignCustomer? ForeignCustomer { get; set; }
+        public ForeignCustomerDto? ForeignCustomer { get; set; }
 
         public Guid LegalCustomerId { get; set; }
         [ForeignKey(nameof(LegalCustomerId))]
-        public LegalCustomer? LegalCustomer { get; set; }
+        public LegalCustomerDto? LegalCustomer { get; set; }
 
         public Guid RealCustomerId { get; set; }
         [ForeignKey(nameof(RealCustomerId))]
-        public RealCustomer? RealCustomer { get; set; }
+        public RealCustomerDto? RealCustomer { get; set; }
 
         public string TypeCustomer { get; set; }
     }

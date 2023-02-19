@@ -10,9 +10,7 @@ namespace Core.Entities
 {
 	public class Role:IdentityRole,IEntity
 	{
-
 		public string Description { get; set; }
-
 		public List<RolePermission> Permissions { get; set; }
 	}
 }

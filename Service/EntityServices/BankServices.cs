@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.ApiResult;
+using Common.Pagination;
 using Core.Entities;
 using Data.Dto;
 using Data.Interfaces;
@@ -34,6 +35,27 @@ namespace Service.EntityServices
             }
         }
 
+        public async Task<PagedResponse<IEnumerable<BankDto>>> GetByPgination(PagedResponse<BankDto> pagedResponse)
+        {
+            try
+            {
+                var Banks = _bankRepositorybank.Table.OrderBy(s => s.Id).Skip(pagedResponse.StartIndex).Take(pagedResponse.PageSize).ToList();
+                var Total = _bankRepositorybank.TableNoTracking.Count();
+                var ListBankes = _mapper.Map<IEnumerable<BankDto>>(Banks);
+                return new PagedResponse<IEnumerable<BankDto>>(pagedResponse.PageNumber, Total, ListBankes);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+
+
+
+
+
         public async Task<BankDto> GetById(Guid Id)
         {
             try
@@ -53,12 +75,17 @@ namespace Service.EntityServices
             {
               
                 var bank = _mapper.Map<Bank>(bankDto);
-                return await _bankRepositorybank.AddAsync(bank);
+                //int d = 100000;
+                //for (int i = 0; i < d; i++)
+                //{
+                //    await _bankRepositorybank.AddAsync(bank);
+                //}
+                    return await _bankRepositorybank.AddAsync(bank);
             }
             catch (Exception)
             {
-
-                return new ServiceResult(ResponseStatus.ServerError);
+                
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
@@ -75,13 +102,13 @@ namespace Service.EntityServices
                 }
                 else
                 {
-                    return new ServiceResult(ResponseStatus.NotFound);
+                    return new ServiceResult(ResponseStatus.NotFound,null);
                 }
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -95,7 +122,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 

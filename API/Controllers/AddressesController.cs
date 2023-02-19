@@ -2,6 +2,7 @@
 using Common.ApiResult;
 using Data.Dto;
 using Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
 
@@ -9,7 +10,7 @@ namespace Common.Temp
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
-
+    [Authorize]
 
     public class AddressesController : ControllerBase
     {
@@ -29,7 +30,7 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -45,14 +46,14 @@ namespace Common.Temp
                 }
                 else
                 {
-                    return Ok(new ServiceResult(ResponseStatus.NotFound));
+                    return Ok(new ServiceResult(ResponseStatus.NotFound,null));
                 }
 
             }
             catch (Exception)
             {
 
-                return Ok(new ServiceResult(ResponseStatus.ServerError));
+                return Ok(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -65,7 +66,7 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -80,7 +81,7 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -94,7 +95,7 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
 
             }
         }

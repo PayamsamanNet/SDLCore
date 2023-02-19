@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.ApiResult;
+using Common.Pagination;
 using Core.Entities;
 using Data.Dto;
 using Data.Interfaces;
@@ -33,6 +34,29 @@ namespace Service.EntityServices
             }
         }
 
+
+        public async Task<PagedResponse<List<CustomerTypeDto>>> GetByPage(PagedResponse<CustomerTypeDto> pagedResponse)
+        {
+            try
+            {
+                var customertypes= await _customerTypeRepository.Table.OrderBy(s=>s.Id).Skip(pagedResponse.StartIndex).Take(pagedResponse.PageSize).ToListAsync();
+                var Total = _customerTypeRepository.TableNoTracking.Count();
+                var Listcustomertypes = _mapper.Map<List<CustomerTypeDto>>(customertypes);
+                return new PagedResponse<List<CustomerTypeDto>>(pagedResponse.PageNumber, Total, Listcustomertypes);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+
+
+
+
+
+
+
         public async Task<CustomerTypeDto> GetById(Guid Id)
         {
             try
@@ -58,7 +82,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
@@ -75,13 +99,13 @@ namespace Service.EntityServices
                 }
                 else
                 {
-                    return new ServiceResult(ResponseStatus.NotFound);
+                    return new ServiceResult(ResponseStatus.NotFound,null);
                 }
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -95,7 +119,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
     }

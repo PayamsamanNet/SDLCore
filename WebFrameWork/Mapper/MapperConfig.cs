@@ -13,10 +13,7 @@ namespace WebFrameWork.Mapper
             CreateMap<UserDto, User>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
 
-            ///UserAccount
-            CreateMap<UserAccountDto, UserAccount>().ReverseMap();
-            CreateMap<UserAccount, UserAccountDto>().ReverseMap();
-
+           
             ///Address
             CreateMap<AddressDto, Address>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
@@ -197,7 +194,9 @@ namespace WebFrameWork.Mapper
             CreateMap<PagedResponse<Transaction>, PagedResponse<TransactionDto>>().ReverseMap();
             CreateMap<PagedResponse<IEnumerable<Transaction>>, PagedResponse<IEnumerable<TransactionDto>>>().ReverseMap();
 
-
+            //Role 
+            CreateMap<RoleDto, Role>().ReverseMap();
+            CreateMap<Role, RoleDto>().ReverseMap();
         }
     }
 }

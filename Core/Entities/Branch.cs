@@ -12,8 +12,10 @@ namespace Core.Entities
         public string Manager { get; set; }
         public string Deputy { get; set; }
         public bool isEnable { get; set; }
-        public Guid AreaId { get; set; }
-        [ForeignKey(nameof(AreaId))]
+
+
+        public Guid RegionCodeId { get; set; }
+        [ForeignKey(nameof(RegionCodeId))]
         public virtual RegionCode RegionCode { get; set; }
 
         public Guid DegreeId { get; set; }
@@ -32,8 +34,6 @@ namespace Core.Entities
         [ForeignKey(nameof(BankId))]
         public Bank Bank { get; set; }
 
-        //public Guid BankId { get; set; }
-        //[ForeignKey(nameof(BankId))]
-        //public Bank Bank { get; set; }
+ 
     }
 }
