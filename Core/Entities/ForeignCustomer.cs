@@ -8,11 +8,6 @@ namespace Core.Entities
 
     public class ForeignCustomer : BaseEntity
     {
-
-        [MaxLength(12)]
-        public Guid ForeignNatioanlID { get; set; }
-        //[ForeignKey(nameof(ForeignNatioanlID))]
-        //public Customer Customer { get; set; }
         public string PassportNum { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

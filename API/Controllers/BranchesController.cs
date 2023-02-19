@@ -27,11 +27,11 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -43,56 +43,60 @@ namespace Common.Temp
                 }
                 else
                 {
-                    return Ok(new ServiceResult(ResponseStatus.NotFound));
+                    return Ok(new ServiceResult(ResponseStatus.NotFound,null));
                 }
 
             }
             catch (Exception)
             {
 
-                return Ok(new ServiceResult(ResponseStatus.ServerError));
+                return Ok(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(BranchDto branchDto)
+        public async Task<IActionResult> Create(BranchDto branchDto, [FromServices]IAddressRepository addressRepository )
         {
             try
             {
-                return Ok(await _branchServices.Create(branchDto));
+                return Ok(await _branchServices.Create(branchDto, addressRepository));
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(Guid Id)
+        public async Task<IActionResult> Delete(Guid Id, [FromServices] IAddressRepository addressRepository)
         {
             try
             {
-                return Ok(await _branchServices.Delete(Id));
+                return Ok(await _branchServices.Delete(Id, addressRepository));
 
             }
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(BranchDto branchDto)
+        public async Task<IActionResult> Update(BranchDto branchDto, [FromServices] IAddressRepository addressRepository)
         {
             try
             {
-                return Ok(await _branchServices.Update(branchDto));
-
+                var update = await _branchServices.Update(branchDto, addressRepository);
+                if (update.Status == ResponseStatus.Success)
+                {
+                    return Ok(update);
+                }
+                return BadRequest(update);
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
 
             }
         }

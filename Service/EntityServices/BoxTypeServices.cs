@@ -58,7 +58,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
@@ -75,13 +75,13 @@ namespace Service.EntityServices
                 }
                 else
                 {
-                    return new ServiceResult(ResponseStatus.NotFound);
+                    return new ServiceResult(ResponseStatus.NotFound,null);
                 }
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -95,7 +95,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
     }

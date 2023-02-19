@@ -9,9 +9,7 @@ namespace Core.Entities
     public class RealCustomer : BaseEntity
     {
         [MaxLength(10)]
-        public Guid NationalId { get; set; }
-        //[ForeignKey(nameof(NationalId))]
-        //public Customer Customer { get; set; }
+        public string NationalCode { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string FatherName { get; set; }

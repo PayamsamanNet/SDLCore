@@ -22,10 +22,6 @@ namespace Core.Entities
         public bool CanOpenBox { get; set; }
 
         public bool? LawyerStatus { get; set; }
-
-        //public bool? IsFromContract { get; set; }
-        //public Guid? ReplacmentPersonWithLawyerID { get; set; }
-
-        //public string ReplacmentPersonWithLawyerNationalCode { get; set; }
+        
     }
 }

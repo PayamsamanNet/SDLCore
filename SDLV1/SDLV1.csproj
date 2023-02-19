@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\Chart.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\Chart.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\Chart.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />
@@ -24,6 +36,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebFrameWork\WebFrameWork.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Insurances\" />
   </ItemGroup>
 
 </Project>

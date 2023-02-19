@@ -25,151 +25,235 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
-                    <form method="post" asp-page="Create">
+                    @*<form method="post" asp-page="Create">*@
                         <div class="card-body card-custom">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> نوع مشتری </label>
-                                    <select class="form-control" id="Customertype" asp-for="Customer.TypeCustomer" onchange="ChangeType()">
+                                    <select class="form-control" id="Customertype" name="CustomerType" asp-for="Customer.TypeCustomer"  onchange="ChangeType()">
                                         <option value="RealCustomer">حقیقی </option>
                                         <option value="ForeignNatioan">خارجی  </option>
                                         <option value="LegalCustomer">حقوقی </option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 RealCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.RealCustomer.Name"></label>
-                                    <input asp-for="Customer.RealCustomer.Name" class="form-control" />
-                                    <span asp-validation-for="Customer.RealCustomer.Name" class="text-danger"></span>
+                        <form method="post" class="RealCustomer" asp-page-handler="RealCustomer">
+                            <div class="row ">
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.RealCustomer.NationalCode"></label>
+                                        <input asp-for="Customer.RealCustomer.NationalCode" class="form-control" />
+                                        <span asp-validation-for="Customer.RealCustomer.NationalCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.RealCustomer.Name"></label>
+                                        <input asp-for="Customer.RealCustomer.Name" class="form-control" />
+                                        <span asp-validation-for="Customer.RealCustomer.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.RealCustomer.Surname"></label>
+                                        <input asp-for="Customer.RealCustomer.Surname" class="form-control" />
+                                        <span asp-validation-for="Customer.RealCustomer.Surname" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.RealCustomer.FatherName"></label>
+                                        <input asp-for="Customer.RealCustomer.FatherName" class="form-control" />
+                                        <span asp-validation-for="Customer.RealCustomer.FatherName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.RealCustomer.BirthPlace"></label>
+                                        <input asp-for="Customer.RealCustomer.BirthPlace" class="form-control" />
+                                        <span asp-validation-for="Customer.RealCustomer.BirthPlace" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.RealCustomer.BirthDate"></label>
+                                        <input asp-for="Customer.RealCustomer.BirthDate" class="form-control" />
+                                        <span asp-validation-for="Customer.RealCustomer.BirthDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.RealCustomer.Gender"></label>
+                                        <input asp-for="Customer.RealCustomer.Gender" class="form-control" />
+                                        <span asp-validation-for="Customer.RealCustomer.Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="RealCustomer.CustomerTypeId"></label>
+                                        <input asp-for="RealCustomer.CustomerTypeId" class="form-control" />
+                                        <span asp-validation-for="RealCustomer.CustomerTypeId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="RealCustomer.BankId"></label>
+                                        <input asp-for="RealCustomer.BankId" class="form-control" />
+                                        <span asp-validation-for="RealCustomer.BankId " class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="RealCustomer.BranchId"></label>
+                                        <input asp-for="RealCustomer.BranchId" class="form-control" />
+                                        <span asp-validation-for="RealCustomer.BranchId   " class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="RealCustomer.IbanId"></label>
+                                        <input asp-for="RealCustomer.IbanId" class="form-control" />
+                                        <span asp-validation-for="RealCustomer.IbanId    " class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 RealCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="RealCustomer.IdCard"></label>
+                                        <input asp-for="RealCustomer.IdCard" class="form-control" />
+                                        <span asp-validation-for="RealCustomer.IdCard" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
                                 </div>
                             </div>
-                            <div class="col-md-6 RealCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.RealCustomer.Surname"></label>
-                                    <input asp-for="Customer.RealCustomer.Surname" class="form-control" />
-                                    <span asp-validation-for="Customer.RealCustomer.Surname" class="text-danger"></span>
+                            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <form method="post" class="LegalCustomer" asp-page-handler="LegalCustomer">
+                            <div class="row ">
+                                <div class="col-md-6 LegalCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.LegalCustomer.CompanyName"></label>
+                                        <input asp-for="Customer.LegalCustomer.CompanyName" class="form-control" />
+                                        <span asp-validation-for="Customer.LegalCustomer.CompanyName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 LegalCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.LegalCustomer.RegisterNumber"></label>
+                                        <input asp-for="Customer.LegalCustomer.RegisterNumber" class="form-control" />
+                                        <span asp-validation-for="Customer.LegalCustomer.RegisterNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 LegalCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.LegalCustomer.OfficialGazetteNumber"></label>
+                                        <input asp-for="Customer.LegalCustomer.OfficialGazetteNumber" class="form-control" />
+                                        <span asp-validation-for="Customer.LegalCustomer.OfficialGazetteNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 LegalCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.LegalCustomer.OfficialGazetteDate"></label>
+                                        <input asp-for="Customer.LegalCustomer.OfficialGazetteDate" class="form-control" />
+                                        <span asp-validation-for="Customer.LegalCustomer.OfficialGazetteDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 LegalCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.LegalCustomer.lastVisitDate"></label>
+                                        <input asp-for="Customer.LegalCustomer.lastVisitDate" class="form-control" />
+                                        <span asp-validation-for="Customer.LegalCustomer.lastVisitDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 LegalCustomer">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.LegalCustomer.CompanyType"></label>
+                                        <input asp-for="Customer.LegalCustomer.CompanyType" class="form-control" />
+                                        <span asp-validation-for="Customer.LegalCustomer.CompanyType" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
                                 </div>
                             </div>
-                            <div class="col-md-6 RealCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.RealCustomer.FatherName"></label>
-                                    <input asp-for="Customer.RealCustomer.FatherName" class="form-control" />
-                                    <span asp-validation-for="Customer.RealCustomer.FatherName" class="text-danger"></span>
+                        </form>
+                        <form method="post" class="ForeignNatioan" asp-page-handler="ForeignNatioan">
+                            <div class="row ">
+                                <div class="col-md-6 ForeignNatioan">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.ForeignCustomer.PassportNum "></label>
+                                        <input asp-for="Customer.ForeignCustomer.PassportNum" class="form-control" />
+                                        <span asp-validation-for="Customer.ForeignCustomer.PassportNum" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ForeignNatioan">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.ForeignCustomer.Name"></label>
+                                        <input asp-for="Customer.ForeignCustomer.Name" class="form-control" />
+                                        <span asp-validation-for="Customer.ForeignCustomer.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ForeignNatioan">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.ForeignCustomer.Surname "></label>
+                                        <input asp-for="Customer.ForeignCustomer.Surname " class="form-control" />
+                                        <span asp-validation-for="Customer.ForeignCustomer.Surname " class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ForeignNatioan">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.ForeignCustomer.FatherName "></label>
+                                        <input asp-for="Customer.ForeignCustomer.FatherName " class="form-control" />
+                                        <span asp-validation-for="Customer.ForeignCustomer.FatherName " class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ForeignNatioan">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.ForeignCustomer.BirthPlace"></label>
+                                        <input asp-for="Customer.ForeignCustomer.BirthPlace" class="form-control" />
+                                        <span asp-validation-for="Customer.ForeignCustomer.BirthPlace" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ForeignNatioan">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.ForeignCustomer.BirthDate "></label>
+                                        <input asp-for="Customer.ForeignCustomer.BirthDate " class="form-control" />
+                                        <span asp-validation-for="Customer.ForeignCustomer.BirthDate " class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ForeignNatioan">
+                                    <div class="form-group">
+                                        <label asp-for="Customer.ForeignCustomer.Gender  "></label>
+                                        <input asp-for="Customer.ForeignCustomer.Gender  " class="form-control" />
+                                        <span asp-validation-for="Customer.ForeignCustomer.Gender  " class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
                                 </div>
                             </div>
-                            <div class="col-md-6 RealCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.RealCustomer.BirthPlace"></label>
-                                    <input asp-for="Customer.RealCustomer.BirthPlace" class="form-control" />
-                                    <span asp-validation-for="Customer.RealCustomer.BirthPlace" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 RealCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.RealCustomer.Gender"></label>
-                                    <input asp-for="Customer.RealCustomer.Gender" class="form-control" />
-                                    <span asp-validation-for="Customer.RealCustomer.Gender" class="text-danger"></span>
-                                </div>
-                            </div>
-                           @* ////////////////////////*@
-                            <div class="col-md-6 LegalCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.LegalCustomer.CompanyName"></label>
-                                    <input asp-for="Customer.LegalCustomer.CompanyName" class="form-control" />
-                                    <span asp-validation-for="Customer.LegalCustomer.CompanyName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 LegalCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.LegalCustomer.RegisterNumber"></label>
-                                    <input asp-for="Customer.LegalCustomer.RegisterNumber" class="form-control" />
-                                    <span asp-validation-for="Customer.LegalCustomer.RegisterNumber" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 LegalCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.LegalCustomer.OfficialGazetteNumber"></label>
-                                    <input asp-for="Customer.LegalCustomer.OfficialGazetteNumber" class="form-control" />
-                                    <span asp-validation-for="Customer.LegalCustomer.OfficialGazetteNumber" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 LegalCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.LegalCustomer.OfficialGazetteDate"></label>
-                                    <input asp-for="Customer.LegalCustomer.OfficialGazetteDate" class="form-control" />
-                                    <span asp-validation-for="Customer.LegalCustomer.OfficialGazetteDate" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 LegalCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.LegalCustomer.lastVisitDate"></label>
-                                    <input asp-for="Customer.LegalCustomer.lastVisitDate" class="form-control" />
-                                    <span asp-validation-for="Customer.LegalCustomer.lastVisitDate" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 LegalCustomer">
-                                <div class="form-group">
-                                    <label asp-for="Customer.LegalCustomer.CompanyType"></label>
-                                    <input asp-for="Customer.LegalCustomer.CompanyType" class="form-control" />
-                                    <span asp-validation-for="Customer.LegalCustomer.CompanyType" class="text-danger"></span>
-                                </div>
-                            </div> 
-                            
-                            <div class="col-md-6 ForeignNatioan">
-                                <div class="form-group">
-                                    <label asp-for="Customer.ForeignCustomer.PassportNum "></label>
-                                    <input asp-for="Customer.ForeignCustomer.PassportNum" class="form-control" />
-                                    <span asp-validation-for="Customer.ForeignCustomer.PassportNum" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ForeignNatioan">
-                                <div class="form-group">
-                                    <label asp-for="Customer.ForeignCustomer.Name"></label>
-                                    <input asp-for="Customer.ForeignCustomer.Name" class="form-control" />
-                                    <span asp-validation-for="Customer.ForeignCustomer.Name" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ForeignNatioan">
-                                <div class="form-group">
-                                    <label asp-for="Customer.ForeignCustomer.Surname "></label>
-                                    <input asp-for="Customer.ForeignCustomer.Surname " class="form-control" />
-                                    <span asp-validation-for="Customer.ForeignCustomer.Surname " class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ForeignNatioan">
-                                <div class="form-group">
-                                    <label asp-for="Customer.ForeignCustomer.FatherName "></label>
-                                    <input asp-for="Customer.ForeignCustomer.FatherName " class="form-control" />
-                                    <span asp-validation-for="Customer.ForeignCustomer.FatherName " class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ForeignNatioan">
-                                <div class="form-group">
-                                    <label asp-for="Customer.ForeignCustomer.BirthPlace"></label>
-                                    <input asp-for="Customer.ForeignCustomer.BirthPlace" class="form-control" />
-                                    <span asp-validation-for="Customer.ForeignCustomer.BirthPlace" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ForeignNatioan">
-                                <div class="form-group">
-                                    <label asp-for="Customer.ForeignCustomer.BirthDate "></label>
-                                    <input asp-for="Customer.ForeignCustomer.BirthDate " class="form-control" />
-                                    <span asp-validation-for="Customer.ForeignCustomer.BirthDate " class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 ForeignNatioan">
-                                <div class="form-group">
-                                    <label asp-for="Customer.ForeignCustomer.Gender  "></label>
-                                    <input asp-for="Customer.ForeignCustomer.Gender  " class="form-control" />
-                                    <span asp-validation-for="Customer.ForeignCustomer.Gender  " class="text-danger"></span>
-                                </div>
-                            </div>
+                        </form>
+
+                           
                         </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
-                        </div>
-                    </form>
+                       
+                    @*</form>*@
                 </div>
             </div>
         </div>
@@ -182,6 +266,9 @@
         ChangeType();
     })
     function ChangeType() {
+        
+
+
         var type = $("#Customertype").val();
         if (type == "RealCustomer") {
             $(".RealCustomer").show();

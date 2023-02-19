@@ -3,6 +3,7 @@ using Common.ApiResult;
 using Core.Entities;
 using Data.Dto;
 using Data.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Service.EntityServices
@@ -19,11 +20,11 @@ namespace Service.EntityServices
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<BranchDto>> GetAll()
+        public async Task<List<BranchDto>> GetAll()
         {
             try
             {
-                var branch = await _branchRepository.Entities.ToArrayAsync();
+                var branch = await _branchRepository.Entities.Include(f => f.Bank).Include(d => d.BranchManager).ToListAsync();
                 return _mapper.Map<List<BranchDto>>(branch);
 
             }
@@ -38,7 +39,8 @@ namespace Service.EntityServices
         {
             try
             {
-                var branch = await _branchRepository.GetByIdAsync(Id);
+                var branch = await _branchRepository.Table.Include(d => d.BranchAddress).
+                    FirstOrDefaultAsync(e=>e.Id == Id);
                 return _mapper.Map<BranchDto>(branch);
             }
             catch (Exception)
@@ -48,55 +50,87 @@ namespace Service.EntityServices
             }
         }
 
-        public async Task<ServiceResult> Create(BranchDto branchDto)
+        public async Task<ServiceResult> Create(BranchDto branchDto, [FromServices] IAddressRepository addressRepository)
         {
             try
             {
-               
-                var branch = _mapper.Map<Branch>(branchDto);
-                return await _branchRepository.AddAsync(branch);
+                var adress = _mapper.Map<AddressDto, Address>(branchDto.BranchAddress);
+                var AddSaveAddress = await addressRepository.SaveAndReturnId(adress);
+                if (AddSaveAddress != null)
+                {
+                    branchDto.BranchAddressId = AddSaveAddress.Id;
+                    branchDto.BranchManager = null;
+                    branchDto.Bank = null;
+                    branchDto.Degree = null;
+                    branchDto.RegionCode = null;
+                    branchDto.BranchAddress = null;
+                    var branch = _mapper.Map<Branch>(branchDto);
+                    return await _branchRepository.AddAsync(branch);
+                }
+                return null;
+
+
+
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
 
-        public async Task<ServiceResult> Delete(Guid Id)
+        public async Task<ServiceResult> Delete(Guid Id, [FromServices] IAddressRepository addressRepository)
         {
             try
             {
-                var ExistBranch = await _branchRepository.Entities.AnyAsync(d => d.Id == Id);
-                if (ExistBranch)
+                var ExistBranch = await _branchRepository.Table.FirstOrDefaultAsync(s => s.Id == Id);
+                if (ExistBranch != null)
                 {
-                    var branch = _mapper.Map<Branch>(new BranchDto { Id = Id });
-                    return await _branchRepository.DeleteAsync(branch);
+                   
+                    var result = await _branchRepository.DeleteAsync(ExistBranch);
+                    if (result.Status == ResponseStatus.Success)
+                    {
+                        return await addressRepository.DeleteAsync(new Address { Id= ExistBranch.BranchAddressId});
+                    }
+                    return new ServiceResult(ResponseStatus.NotFound,null);
+
                 }
                 else
                 {
-                    return new ServiceResult(ResponseStatus.NotFound);
+                    return new ServiceResult(ResponseStatus.NotFound,null);
                 }
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
-        public async Task<ServiceResult> Update(BranchDto branchDto)
+        public async Task<ServiceResult> Update(BranchDto branchDto , [FromServices] IAddressRepository addressRepository)
         {
             try
             {
+                var Address = _mapper.Map<AddressDto, Address>(branchDto.BranchAddress);
+                var updateAddress = await addressRepository.UpdateAsync(Address);
+                if (updateAddress.Status != ResponseStatus.Success)
+                {
+                    return new ServiceResult(ResponseStatus.BadRequest,null);
+                }
                 var branch = _mapper.Map<Branch>(branchDto);
+                branchDto.BranchAddressId = Address.Id;
+                branchDto.BranchManager = null;
+                branchDto.Bank = null;
+                branchDto.Degree = null;
+                branchDto.RegionCode = null;
+                branchDto.BranchAddress = null;
                 return await _branchRepository.UpdateAsync(branch);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
     }
