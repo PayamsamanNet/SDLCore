@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.ApiResult;
+using Common.Pagination;
 using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +28,27 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpPost]
+        public async Task<IActionResult> GetByPagination(PagedResponse<BankDto> pagedResponse)
+        {
+            try
+            {
+                return Ok(await _bankServices.GetByPgination(pagedResponse));
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
+            }
+        }
+
+
+
+        [HttpGet]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -43,14 +60,14 @@ namespace Common.Temp
                 }
                 else
                 {
-                    return Ok(new ServiceResult(ResponseStatus.NotFound));
+                    return Ok(new ServiceResult(ResponseStatus.NotFound,null));
                 }
 
             }
             catch (Exception)
             {
 
-                return Ok(new ServiceResult(ResponseStatus.ServerError));
+                return Ok(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -63,7 +80,7 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -78,7 +95,7 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -92,7 +109,7 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
 
             }
         }

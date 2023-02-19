@@ -10,8 +10,8 @@ namespace Core.Enum
         [Description("آقا")]
         Man = 2,
 
-        [Description("اجاره رفته")]
-        Compnay = 3
+        //[Description("شرکتی ")]
+        //Compnay = 3
 
     }
 }

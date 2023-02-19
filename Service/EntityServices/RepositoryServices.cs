@@ -22,7 +22,7 @@ namespace Service.EntityServices
         {
             try
             {
-                var repository = await _repositoryRepository.Entities.ToArrayAsync();
+                var repository = await _repositoryRepository.Entities.Include(d=>d.Bank).Include(f=>f.Degree).ToListAsync();
                 return _mapper.Map<List<RepositoryDto>>(repository);
 
             }
@@ -37,7 +37,8 @@ namespace Service.EntityServices
         {
             try
             {
-                var repository = await _repositoryRepository.GetByIdAsync(Id);
+                //var repository = await _repositoryRepository.GetByIdAsync(Id);
+                var repository = await _repositoryRepository.Table.Include(d=>d.Address).FirstOrDefaultAsync(s=>s.Id == Id);
                 return _mapper.Map<RepositoryDto>(repository);
             }
             catch (Exception)
@@ -58,7 +59,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
@@ -75,13 +76,13 @@ namespace Service.EntityServices
                 }
                 else
                 {
-                    return new ServiceResult(ResponseStatus.NotFound);
+                    return new ServiceResult(ResponseStatus.NotFound,null);
                 }
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -95,7 +96,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
     }

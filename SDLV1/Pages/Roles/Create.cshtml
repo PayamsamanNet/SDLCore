@@ -1,0 +1,62 @@
+﻿@page
+@model SDLV1.Pages.Roles.CreateModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>افزودن نقش </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("CreateError")</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form method="post" asp-page="Create">
+                        <div class="card-body card-custom">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Role.Name"></label>
+                                    <input asp-for="Role.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Role.Name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Role.NormalizedName"></label>
+                                    <input asp-for="Role.NormalizedName" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Role.NormalizedName"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Role.Description"></label>
+                                    <input asp-for="Role.Description" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Role.Description"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

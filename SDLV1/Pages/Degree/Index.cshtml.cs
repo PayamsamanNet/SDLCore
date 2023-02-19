@@ -52,7 +52,10 @@ namespace SDLV1.Pages.Degree
             }
         }
 
-
+        public async Task<IActionResult> OnPostsearchbox()
+        {
+            return Page();
+        }
 
         public IActionResult OnPostDelete(string Id)
         {

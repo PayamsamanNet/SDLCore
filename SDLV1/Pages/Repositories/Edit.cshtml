@@ -1,0 +1,165 @@
+﻿@page
+@using Data.Dto;
+@model SDLV1.Pages.Repositories.EditModel
+@{
+
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>افزودن مخزن  </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("EditError")</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form enctype="multipart/form-data" method="post" asp-page="Edit">
+                        <input type="hidden" asp-for="RepositoryModel.Id" />
+                        <div class="card-body card-custom">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Name"></label>
+                                    <input asp-for="RepositoryModel.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Code"></label>
+                                    <input asp-for="RepositoryModel.Code" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Code"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.ManagerName "></label>
+                                    <input asp-for="RepositoryModel.ManagerName " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.ManagerName "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 row">
+                                <div class=" col-md-5">
+                                    <div class="form-group">
+                                        <label asp-for="RepositoryModel.TopPlanImage"></label>
+                                        <input name="File" type="file" class="form-control" />
+                                        <span class="text-danger" asp-validation-for="RepositoryModel.TopPlanImage"></span>
+                                    </div>
+                                </div>
+                                <div class=" col-md-7">
+                                    <img style="width:26%;height:95px;" src="~/File/Repositories/@Model.RepositoryModel.TopPlanImage" />
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.TopPlanDetails"></label>
+                                    <input asp-for="RepositoryModel.TopPlanDetails" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.TopPlanDetails"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.BankId"></label>
+                                    <select class="form-control " asp-for="RepositoryModel.BankId">
+                                        @foreach (var item in Model.Banks as List<BankDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.BankId"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.DegreeId"></label>
+                                    <select class="form-control " asp-for="RepositoryModel.DegreeId">
+                                        @foreach (var item in Model.Degrees as List<DegreeDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.DegreeId"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Address.CityId"></label>
+                                    <select class="form-control " asp-for="RepositoryModel.Address.CityId">
+                                        @foreach (var item in Model.Cities as List<CityDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Address.CityId"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Address.PostalAddress"></label>
+                                    <input asp-for="RepositoryModel.Address.PostalAddress" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Address.PostalAddress"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Address.TellPrefix "></label>
+                                    <input asp-for="RepositoryModel.Address.TellPrefix " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Address.TellPrefix "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Address.Tell"></label>
+                                    <input asp-for="RepositoryModel.Address.Tell" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Address.Tell"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Address.Mobile "></label>
+                                    <input asp-for="RepositoryModel.Address.Mobile " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Address.Mobile "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Address.PostalCode  "></label>
+                                    <input asp-for="RepositoryModel.Address.PostalCode  " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Address.PostalCode  "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="RepositoryModel.Address.Email"></label>
+                                    <input asp-for="RepositoryModel.Address.Email" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="RepositoryModel.Address.Email"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
