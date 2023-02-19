@@ -29,7 +29,7 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -45,14 +45,14 @@ namespace Common.Temp
                 }
                 else
                 {
-                    return Ok(new ServiceResult(ResponseStatus.NotFound));
+                    return Ok(new ServiceResult(ResponseStatus.NotFound,null));
                 }
 
             }
             catch (Exception)
             {
 
-                return Ok(new ServiceResult(ResponseStatus.ServerError));
+                return Ok(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -65,7 +65,7 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -80,7 +80,7 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -94,7 +94,7 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
 
             }
         }

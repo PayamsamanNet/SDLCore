@@ -30,11 +30,11 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -46,14 +46,14 @@ namespace Common.Temp
                 }
                 else
                 {
-                    return Ok(new ServiceResult(ResponseStatus.NotFound));
+                    return Ok(new ServiceResult(ResponseStatus.NotFound,null));
                 }
 
             }
             catch (Exception)
             {
 
-                return Ok(new ServiceResult(ResponseStatus.ServerError));
+                return Ok(new ServiceResult(ResponseStatus.ServerError,"متن جهت تست می باشد "));
             }
         }
 
@@ -67,7 +67,7 @@ namespace Common.Temp
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -81,7 +81,7 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return Ok(new ServiceResult(ResponseStatus.ServerError));
+                return Ok(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 
@@ -95,7 +95,7 @@ namespace Common.Temp
             catch (Exception)
             {
 
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError));
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
 

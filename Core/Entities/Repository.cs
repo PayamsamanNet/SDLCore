@@ -31,13 +31,5 @@ namespace Core.Entities
         public Guid? DegreeId { get; set; }
         [ForeignKey(nameof(DegreeId))]
         public virtual Degree Degree { get; set; }
-
-
-
-
-
-
-
-
     }
 }

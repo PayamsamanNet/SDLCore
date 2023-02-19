@@ -7,31 +7,14 @@ namespace Core.Entities
 {
     public class Customer : BaseEntity
     {
-        [MaxLength(12)]
+        [MaxLength(16)]
         public string IdCard { get; set; }
-
-       
-
         public string IbanId { get; set; }
-
         public Guid BranchId { get; set; }
-
-        public Guid FromBranchId { get; set; }
-
         public string? AccountDescription { get; set; }
-
         public DateTime CreateDate { get; set; } = DateTime.Now;
-
-       
-        public Guid? AddressId { get; set; }
-
-        [ForeignKey(nameof(AddressId))]
-        public virtual Address Address { get; set; }
-
-
-
+      
         public Guid BankId { get; set; }
-
         [ForeignKey(nameof(BankId))]
         public Bank Bank { get; set; }
 
@@ -43,6 +26,10 @@ namespace Core.Entities
         public Guid ForeignCustomerId { get; set; }
         [ForeignKey(nameof(ForeignCustomerId))]
         public ForeignCustomer? ForeignCustomer { get; set; }
+
+        public Guid? AddressId { get; set; }
+        [ForeignKey(nameof(AddressId))]
+        public virtual Address Address { get; set; }
 
 
         public Guid LegalCustomerId { get; set; }

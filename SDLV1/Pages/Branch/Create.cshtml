@@ -1,5 +1,185 @@
 ﻿@page
+@using Data.Dto;
 @model SDLV1.Pages.Branch.CreateModel
 @{
 }
-   
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>افزودن شعبه </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("CreateError")</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form method="post" asp-page="Create">
+                        <div class="card-body card-custom">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.Name"></label>
+                                    <input asp-for="Branch.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.Name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.Code"></label>
+                                    <input asp-for="Branch.Code" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.Code"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.Manager"></label>
+                                    <input asp-for="Branch.Manager" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.Manager"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.Deputy"></label>
+                                    <input asp-for="Branch.Deputy" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.Deputy"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.RegionCodeId"></label>
+                                    <select class="form-control " asp-for="Branch.RegionCodeId">
+                                        @foreach (var item in Model.Regions as List<RegionCodeDto>)
+                                        {
+                                            <option value="@item.Id">@item.AreaName</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Branch.RegionCodeId"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchManagerId "></label>
+                                    <select class="form-control " asp-for="Branch.BranchManagerId ">
+                                        @foreach (var item in Model.BranchManagers as List<BranchManagerDto>)
+                                        {
+                                            <option value="@item.Id">@item.BranchManagerName</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Branch.BranchManagerId "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BankId  "></label>
+                                    <select class="form-control " asp-for="Branch.BankId">
+                                        @foreach (var item in Model.Banks as List<BankDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Branch.BankId"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.DegreeId   "></label>
+                                    <select class="form-control " asp-for="Branch.DegreeId ">
+                                        @foreach (var item in Model.Degrees as List<DegreeDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Branch.DegreeId "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.isEnable"></label>
+                                    <select class="form-control " asp-for="Branch.isEnable">
+                                        <option value="True">فعال </option>
+                                        <option value="False"> غیر فعال </option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Branch.isEnable "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchAddress.CityId"></label>
+                                    <select class="form-control " asp-for="Branch.BranchAddress.CityId">
+                                        @foreach (var item in Model.Cities as List<CityDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Branch.BranchAddress.CityId"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchAddress.PostalAddress"></label>
+                                    <input asp-for="Branch.BranchAddress.PostalAddress" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.BranchAddress.PostalAddress"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchAddress.TellPrefix "></label>
+                                    <input asp-for="Branch.BranchAddress.TellPrefix " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.BranchAddress.TellPrefix "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchAddress.Tell"></label>
+                                    <input asp-for="Branch.BranchAddress.Tell" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.BranchAddress.Tell"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchAddress.Mobile "></label>
+                                    <input asp-for="Branch.BranchAddress.Mobile " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.BranchAddress.Mobile "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchAddress.PostalCode  "></label>
+                                    <input asp-for="Branch.BranchAddress.PostalCode  " class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.BranchAddress.PostalCode  "></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Branch.BranchAddress.Email"></label>
+                                    <input asp-for="Branch.BranchAddress.Email" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Branch.BranchAddress.Email"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

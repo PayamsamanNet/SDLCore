@@ -9,9 +9,16 @@ namespace Common.ApiResult
 {
     public class ServiceResult
     {
-        public ServiceResult( ResponseStatus statuscode)
+        public ServiceResult(ResponseStatus statuscode,string? message)
         {
-            Message = EnumExtensions.GetEnumDescription(statuscode);
+            if (message == null || message == "")
+            {
+                Message = EnumExtensions.GetEnumDescription(statuscode);
+            }
+            else
+            {
+                Message = message;
+            }
             Status = statuscode;
         }
         public string Message { get; set; }
