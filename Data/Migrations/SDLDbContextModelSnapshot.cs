@@ -31,6 +31,9 @@ namespace Data.Migrations
                     b.Property<Guid>("CityId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -123,6 +126,9 @@ namespace Data.Migrations
                     b.Property<int>("CustomerRole")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -206,6 +212,9 @@ namespace Data.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsLawyer")
                         .HasColumnType("bit");
 
@@ -221,6 +230,9 @@ namespace Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -248,6 +260,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("ColumnId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsVip")
                         .HasColumnType("bit");
@@ -288,6 +303,9 @@ namespace Data.Migrations
                     b.Property<double>("Capacity")
                         .HasColumnType("float");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Depth")
                         .HasColumnType("int");
 
@@ -327,9 +345,6 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AreaId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("BankId")
                         .HasColumnType("uniqueidentifier");
 
@@ -342,6 +357,9 @@ namespace Data.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("DegreeId")
                         .HasColumnType("uniqueidentifier");
@@ -358,12 +376,13 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("RegionCodeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("isEnable")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AreaId");
 
                     b.HasIndex("BankId");
 
@@ -372,6 +391,8 @@ namespace Data.Migrations
                     b.HasIndex("BranchManagerId");
 
                     b.HasIndex("DegreeId");
+
+                    b.HasIndex("RegionCodeId");
 
                     b.ToTable("Branch");
                 });
@@ -390,6 +411,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("BranchManager");
@@ -403,6 +427,9 @@ namespace Data.Migrations
 
                     b.Property<int>("CityCode")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -427,6 +454,10 @@ namespace Data.Migrations
                     b.Property<string>("AccountDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("AddressId")
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("BankId")
                         .HasColumnType("uniqueidentifier");
 
@@ -439,36 +470,40 @@ namespace Data.Migrations
                     b.Property<Guid>("CustomerTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FromBranchId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("HomeAddressId")
+                    b.Property<Guid>("ForeignCustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IbanId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdCard")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
-                    b.Property<Guid?>("LastCustomerTypeId")
+                    b.Property<Guid>("LegalCustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WorkAddressId")
+                    b.Property<Guid>("RealCustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("BankId");
 
                     b.HasIndex("CustomerTypeId");
 
-                    b.HasIndex("WorkAddressId");
+                    b.HasIndex("ForeignCustomerId");
 
-                    b.HasIndex("IbanId", "BranchId", "FromBranchId", "HomeAddressId", "WorkAddressId", "CustomerTypeId", "LastCustomerTypeId");
+                    b.HasIndex("LegalCustomerId");
+
+                    b.HasIndex("RealCustomerId");
 
                     b.ToTable("Customer");
                 });
@@ -484,6 +519,9 @@ namespace Data.Migrations
 
                     b.Property<decimal>("BlockedPriceRatio")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("EntrancePackagePrice")
                         .HasColumnType("int");
@@ -503,6 +541,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BankId");
+
                     b.ToTable("CustomerType");
                 });
 
@@ -514,6 +554,9 @@ namespace Data.Migrations
 
                     b.Property<decimal>("BlockedPriceRatio")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
@@ -546,13 +589,12 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FatherName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ForeignNatioanlID")
-                        .HasMaxLength(12)
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
@@ -570,8 +612,6 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ForeignNatioanlID");
 
                     b.ToTable("ForeignCustomer");
                 });
@@ -592,6 +632,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("IbanNumber")
                         .IsRequired()
@@ -624,6 +667,9 @@ namespace Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfOperation")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
@@ -670,6 +716,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool?>("LawyerStatus")
                         .HasColumnType("bit");
 
@@ -711,16 +760,15 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasMaxLength(11)
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CompanyType")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("OfficialGazetteDate")
                         .HasColumnType("datetime2");
@@ -737,8 +785,6 @@ namespace Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("LegalCustomer");
                 });
@@ -758,6 +804,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("ContractId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Exception")
                         .IsRequired()
@@ -810,6 +859,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("SubCode")
                         .HasColumnType("int");
 
@@ -832,12 +884,16 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("BirthDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BirthPlace")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FatherName")
                         .IsRequired()
@@ -850,17 +906,16 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("NationalId")
+                    b.Property<string>("NationalCode")
+                        .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("NationalId");
 
                     b.ToTable("RealCustomer");
                 });
@@ -878,6 +933,9 @@ namespace Data.Migrations
                     b.Property<string>("AreaName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -899,6 +957,9 @@ namespace Data.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DegreeId")
                         .IsRequired()
@@ -955,6 +1016,9 @@ namespace Data.Migrations
                     b.Property<int>("ColumnTypes")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("FromBoxNumber")
                         .HasColumnType("int");
 
@@ -982,6 +1046,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsAllowed")
                         .HasColumnType("bit");
@@ -1035,6 +1102,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("PermissionId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1059,6 +1129,9 @@ namespace Data.Migrations
 
                     b.Property<Guid?>("ContractId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Exception")
                         .IsRequired()
@@ -1109,6 +1182,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1139,6 +1215,9 @@ namespace Data.Migrations
 
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfPayment")
                         .HasColumnType("datetime2");
@@ -1173,6 +1252,9 @@ namespace Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("BranchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -1191,6 +1273,9 @@ namespace Data.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("LastLoginDate")
                         .HasColumnType("datetime2");
 
@@ -1203,6 +1288,12 @@ namespace Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NationalCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -1221,6 +1312,9 @@ namespace Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("RepositoryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -1233,6 +1327,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -1240,6 +1336,8 @@ namespace Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("RepositoryId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -1249,6 +1347,9 @@ namespace Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -1439,12 +1540,6 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Branch", b =>
                 {
-                    b.HasOne("Core.Entities.RegionCode", "RegionCode")
-                        .WithMany()
-                        .HasForeignKey("AreaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
@@ -1466,6 +1561,12 @@ namespace Data.Migrations
                     b.HasOne("Core.Entities.Degree", "Degree")
                         .WithMany()
                         .HasForeignKey("DegreeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.RegionCode", "RegionCode")
+                        .WithMany()
+                        .HasForeignKey("RegionCodeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1493,6 +1594,12 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Customer", b =>
                 {
+                    b.HasOne("Core.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
@@ -1505,26 +1612,46 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Address", "Address")
+                    b.HasOne("Core.Entities.ForeignCustomer", "ForeignCustomer")
                         .WithMany()
-                        .HasForeignKey("WorkAddressId");
+                        .HasForeignKey("ForeignCustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.LegalCustomer", "LegalCustomer")
+                        .WithMany()
+                        .HasForeignKey("LegalCustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.RealCustomer", "RealCustomer")
+                        .WithMany()
+                        .HasForeignKey("RealCustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Address");
 
                     b.Navigation("Bank");
 
                     b.Navigation("CustomerType");
+
+                    b.Navigation("ForeignCustomer");
+
+                    b.Navigation("LegalCustomer");
+
+                    b.Navigation("RealCustomer");
                 });
 
-            modelBuilder.Entity("Core.Entities.ForeignCustomer", b =>
+            modelBuilder.Entity("Core.Entities.CustomerType", b =>
                 {
-                    b.HasOne("Core.Entities.Customer", "Customer")
+                    b.HasOne("Core.Entities.Bank", "Bank")
                         .WithMany()
-                        .HasForeignKey("ForeignNatioanlID")
+                        .HasForeignKey("BankId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("Bank");
                 });
 
             modelBuilder.Entity("Core.Entities.Iban", b =>
@@ -1549,17 +1676,6 @@ namespace Data.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Core.Entities.LegalCustomer", b =>
-                {
-                    b.HasOne("Core.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("Core.Entities.Log", b =>
                 {
                     b.HasOne("Core.Entities.Agreement", "Contract")
@@ -1571,19 +1687,14 @@ namespace Data.Migrations
                     b.Navigation("Contract");
                 });
 
-            modelBuilder.Entity("Core.Entities.RealCustomer", b =>
+            modelBuilder.Entity("Core.Entities.Repository", b =>
                 {
-                    b.HasOne("Core.Entities.Customer", "Customer")
+                    b.HasOne("Core.Entities.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("NationalId")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("Core.Entities.Repository", b =>
-                {
                     b.HasOne("Core.Entities.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
@@ -1595,6 +1706,8 @@ namespace Data.Migrations
                         .HasForeignKey("DegreeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("Bank");
 
@@ -1668,6 +1781,21 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Contract");
+                });
+
+            modelBuilder.Entity("Core.Entities.User", b =>
+                {
+                    b.HasOne("Core.Entities.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
+                    b.HasOne("Core.Entities.Repository", "Repository")
+                        .WithMany()
+                        .HasForeignKey("RepositoryId");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Repository");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

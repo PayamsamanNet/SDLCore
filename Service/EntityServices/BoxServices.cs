@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.ApiResult;
+using Common.Pagination;
 using Core.Entities;
 using Data.Dto;
 using Data.Interfaces;
@@ -33,6 +34,11 @@ namespace Service.EntityServices
             }
         }
 
+
+
+
+
+
         public async Task<BoxDto> GetById(Guid Id)
         {
             try
@@ -58,7 +64,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
@@ -75,13 +81,13 @@ namespace Service.EntityServices
                 }
                 else
                 {
-                    return new ServiceResult(ResponseStatus.NotFound);
+                    return new ServiceResult(ResponseStatus.NotFound,null);
                 }
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -95,7 +101,7 @@ namespace Service.EntityServices
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
     }

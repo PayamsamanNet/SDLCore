@@ -38,8 +38,9 @@ namespace WebFrameWork.Configuration
             services.AddScoped<ISmsRepository, SmsRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
-            services.AddScoped<IUserAccountRepository, UserAccountRepository>();
+            
             services.AddScoped<IJwtRepository, JwtRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
         public static void RegisterJwtService(this IServiceCollection services, SecuritySetting _siteSetting)
         {

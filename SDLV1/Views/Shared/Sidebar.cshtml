@@ -18,7 +18,7 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link m-0 submenu">
                             <i class="nav-icon  fa fa-circle"></i>
                             <p>
                                 درجه
@@ -27,7 +27,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a asp-page="/Degree/Index" class="nav-link">
+                                <a asp-page="/Degree/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست  </p>
                                 </a>
@@ -36,7 +36,7 @@
                     </li>
 
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link m-0 submenu">
                             <i class="nav-icon  fa fa-circle"></i>
                             <p>
                                 نوع صندوق 
@@ -45,7 +45,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a asp-page="/BoxTypes/Index" class="nav-link">
+                                <a asp-page="/BoxTypes/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست  </p>
                                 </a>
@@ -53,7 +53,7 @@
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link m-0 submenu">
                             <i class="nav-icon fa fa-circle"></i>
                             <p>
                                 ناحیه 
@@ -62,7 +62,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a asp-page="/RegionCode/Index" class="nav-link">
+                                <a asp-page="/RegionCode/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست  </p>
                                 </a>
@@ -71,7 +71,7 @@
                     </li>
 
                      <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link m-0 submenu">
                             <i class="nav-icon fa fa-circle"></i>
                             <p>
                                 شعبه 
@@ -80,21 +80,60 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a asp-page="/BranchManager/Index" class="nav-link">
+                                <a asp-page="/BranchManager/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>مدیریت شعبات   </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a asp-page="/BranchManager/Index" class="nav-link">
+                                <a asp-page="/Branch/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p> شعبات   </p>
                                 </a>
                             </li>
                              <li class="nav-item">
-                                <a asp-page="/Customers/Create" class="nav-link">
+                                <a asp-page="/Customers/Create" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p> مشتری    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Bank/Index" class="nav-link m-0 under-menu">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p> بانک     </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Repositories/Index" class="nav-link m-0 under-menu">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p> مخزن      </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Users/Index" class="nav-link m-0 under-menu">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p> کاربران      </p>
+                                </a>
+                            </li>
+
+                            
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link m-0 submenu">
+                            <i class="nav-icon fa fa-circle"></i>
+                            <p>
+                                اطلاعات پایه 
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a asp-page="/Roles/Index" class="nav-link m-0 under-menu">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>نقش    </p>
                                 </a>
                             </li>
                         </ul>
@@ -104,13 +143,11 @@
 
 
 
-
-
-
+                    
 
 
                     <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link m-0 submenu">
                             <i class="nav-icon fa fa-circle"></i>
                             <p>
                                 بیمه
@@ -120,7 +157,7 @@
                         <ul class="nav nav-treeview">
                            
                             <li class="nav-item">
-                                <a asp-page="/Insurance/Index" class="nav-link">
+                                <a asp-page="/Insurance/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست  </p>
                                 </a>

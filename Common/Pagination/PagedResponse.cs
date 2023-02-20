@@ -36,7 +36,8 @@ namespace Common.Pagination
             PageSize = 10;
             FirstPage = 1;
             LastPage = totalRecords / PageSize;
-            TotalPages = totalRecords / PageSize;
+            //TotalPages = totalRecords / PageSize;
+            TotalPages = countPages(totalRecords, PageSize);
             TotalRecords = totalRecords;
             Data = data;
             NumberReturned = 10;
@@ -60,5 +61,10 @@ namespace Common.Pagination
         public int NumberReturned { get; }
         public int PreviousPage { get; }
         public TData Data { get; set; }
+
+        public int countPages(int totalRecords, int recordsPerPage)
+        {
+            return ((totalRecords - 1) / recordsPerPage) + 1;
+        }
     }
 }

@@ -3,49 +3,32 @@
     Layout = null;
 }
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link href="~/css/Account.css" />
-<style>
-    .div-form {
-        height: fit-content;
-        background-color: #e7e7e7;
-        margin-left: 32%;
-        margin-right: 31%;
-        margin-top: 8%;
-        border: none;
-        border-radius: 12px;
-        direction: rtl;
-        padding: 40px;
-    }
-    .btn-login{
-        background-color: #6573e3;
-        margin-top: 27px;
-        width: 100%;
-        color: white;
-    }
+<link rel="stylesheet" href="~/css/Account.css" />
+<div class="login-wrapper">
+    <div class="container div-mainform">
+        <form method="post" class="login-form">
+            <div class="logo-wrapper mb-5">
 
-    .text-login{
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-</style>
-<div class="container div-mainform">
-    <form method="post">
-        <div class="div-form">
-            <div class="col-md-12">
-                <label asp-for="UserName" class="text-login"></label>
-                <input class="form-control" type="text" asp-for="UserName" />
-                <span class="text-danger" asp-validation-for="UserName"></span>
+                <img class="logo-img" src="~/img/sdlimg-web/pslogo.png" />
             </div>
-            <div class="col-md-12">
-                <label asp-for="Password" class="text-login"></label>
-                <input class="form-control" type="text" asp-for="Password" />
-                <span asp-validation-for="Password"></span>
+            <div class="div-form">
+                <div class="col-md-12 mb-3">
+                    <label asp-for="UserName" class="text-login mb-1"></label>
+                    <input class="form-control" type="text" asp-for="UserName" />
+                    <span class="text-danger" asp-validation-for="UserName"></span>
+                </div>
+                <div class="col-md-12">
+                    <label asp-for="Password" class="text-login mb-1"></label>
+                    <input class="form-control" type="text" asp-for="Password" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div class="col-md-12 mt-5 btn-login-wrapper">
+                    <input type="submit" class="btn btn-login" value="ورود به سامانه " />
+                </div>
             </div>
-            <div class="col-md-12">
-                <input type="submit" class="btn btn-login" value="ورود به سامانه " />
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
 </div>
 
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>

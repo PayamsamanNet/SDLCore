@@ -59,3 +59,28 @@ body {
     transform: translateX(0);
 }
 
+.nav-sidebar {
+    box-shadow: inset -1px -1px 6px 2px #262830, inset -1px -1px 6px 0px #111316;
+    background-color: #212529;
+    border-radius: 10px;
+}
+
+    .nav-sidebar > .nav-item {
+        margin-bottom: 0;
+        box-shadow: inset -1px -1px 6px 2px #262830, inset -1px -1px 6px 0px #111316;
+        border-radius: 10px;
+       
+    }
+
+
+
+.under-menu {
+    font-size:14px;
+    font-weight:normal !important;
+}
+
+.search-box{
+    direction:ltr;
+}
+
+

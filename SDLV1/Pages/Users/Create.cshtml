@@ -1,0 +1,157 @@
+﻿@page
+@using Common.Utilities;
+@using Data.Dto;
+@model SDLV1.Pages.Users.CreateModel
+@{
+
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>افزودن کاربر  </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("CreateError")</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form method="post" asp-page="Create">
+                        <div class="card-body card-custom">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.Name"></label>
+                                    <input asp-for="UserDto.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.Name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.Family"></label>
+                                    <input asp-for="UserDto.Family" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.Family"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.NationalCode"></label>
+                                    <input asp-for="UserDto.NationalCode" max="10" min="10" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.NationalCode"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.UserName"></label>
+                                    <input asp-for="UserDto.UserName" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.UserName"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.Email"></label>
+                                    <input asp-for="UserDto.Email" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.Email"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.PhoneNumber"></label>
+                                    <input asp-for="UserDto.PhoneNumber" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.PhoneNumber"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.PasswordHash"></label>
+                                    <input asp-for="UserDto.PasswordHash" required class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.PasswordHash"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.RePassword"></label>
+                                    <input asp-for="UserDto.RePassword" required class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.RePassword"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.Gender"></label>
+                                    <select asp-for="UserDto.Gender " class="form-control">
+                                        @foreach (var item in Model.Genders as List<EnumModel>)
+                                        {
+                                            <option value="@item.Id">@item.Description</option>
+                                        }
+                                    </select>
+
+                                    <span class="text-danger" asp-validation-for="UserDto.Gender"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.BranchId"></label>
+                                    <select asp-for="UserDto.BranchId " class="form-control">
+                                        <option value=""> انتخاب کنید </option>
+                                        @foreach (var item in Model.Branches as List<BranchDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+
+                                    <span class="text-danger" asp-validation-for="UserDto.BranchId"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.RepositoryId"></label>
+                                    <select asp-for="UserDto.RepositoryId " class="form-control">
+                                        <option value=""> انتخاب کنید </option>
+                                        @foreach (var item in Model.Repositories as List<RepositoryDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="UserDto.RepositoryId"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.RoleId"></label>
+                                    <select asp-for="UserDto.RoleId " class="form-control">
+                                        <option value=""> انتخاب کنید </option>
+                                        @foreach (var item in Model.Roles as List<RoleDto>)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="UserDto.RoleId"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

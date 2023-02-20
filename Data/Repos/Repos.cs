@@ -13,7 +13,6 @@ namespace Data.Repos
         protected readonly SDLDbContext DbContext;
         public virtual IQueryable<TEntity> Table => Entities;
         public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
-
         #endregion
 
         #region DbSet
@@ -45,12 +44,12 @@ namespace Data.Repos
                 }
                 Entities.Add(entity);
                 DbContext.SaveChanges();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -61,12 +60,12 @@ namespace Data.Repos
             {
                 Entities.AddRange(entities);
                 DbContext.SaveChanges();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
@@ -74,25 +73,25 @@ namespace Data.Repos
         {
             try
             {
-                Guid vv = new Guid();
+                Guid newid = new Guid();
                 var typeId = entity.GetType().GetProperty("Id").PropertyType.Name;
                 if (typeId == "Guid")
                 {
-                    entity.GetType().GetProperty("Id").SetValue(entity, vv);
+                    entity.GetType().GetProperty("Id").SetValue(entity, newid);
                 }
                 await Entities.AddAsync(entity);
                 await DbContext.SaveChangesAsync();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception ex)
             {
                 if (ex.InnerException != null)
                 {
-                    return new ServiceResult(ResponseStatus.BadRequest);
+                    return new ServiceResult(ResponseStatus.BadRequest,null);
                 }
                 else
                 {
-                    return new ServiceResult(ResponseStatus.ServerError);
+                    return new ServiceResult(ResponseStatus.ServerError,null);
                 }
 
             }
@@ -104,12 +103,12 @@ namespace Data.Repos
             {
                 await Entities.AddRangeAsync(entities);
                 await DbContext.SaveChangesAsync();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -124,12 +123,12 @@ namespace Data.Repos
             {
                 Entities.Remove(entity);
                 DbContext.SaveChanges();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -139,11 +138,11 @@ namespace Data.Repos
             {
                 Entities.RemoveRange(entities);
                 DbContext.SaveChanges();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
 
             }
         }
@@ -154,12 +153,12 @@ namespace Data.Repos
             {
                 Entities.Remove(entity);
                 await DbContext.SaveChangesAsync();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -169,12 +168,12 @@ namespace Data.Repos
             {
                 Entities.RemoveRange(entities);
                 await DbContext.SaveChangesAsync();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -187,13 +186,13 @@ namespace Data.Repos
             {
                 Entities.Update(entity);
                 DbContext.SaveChanges();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
 
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -203,12 +202,12 @@ namespace Data.Repos
             {
                 Entities.UpdateRange(entities);
                 DbContext.SaveChanges();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
 
         }
@@ -219,12 +218,12 @@ namespace Data.Repos
             {
                 Entities.Update(entity);
                 await DbContext.SaveChangesAsync();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -235,12 +234,12 @@ namespace Data.Repos
             {
                 Entities.UpdateRange(entities);
                 await DbContext.SaveChangesAsync();
-                return new ServiceResult(ResponseStatus.Success);
+                return new ServiceResult(ResponseStatus.Success,null);
             }
             catch (Exception)
             {
 
-                return new ServiceResult(ResponseStatus.ServerError);
+                return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }
 
@@ -270,7 +269,6 @@ namespace Data.Repos
                 Entities.Attach(entity);
             }
         }
-
         public virtual void Detach(TEntity entity)
         {
             var entry = DbContext.Entry(entity);
