@@ -73,7 +73,9 @@ namespace Data.Dto
 
 
 
-        public string CodeReset { get; set; }
+        public string? CodeReset { get; set; }
+
+        public bool IsChangePassword { get; set; }=false;
              
     }
 }

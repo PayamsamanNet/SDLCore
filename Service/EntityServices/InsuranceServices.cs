@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common.ApiResult;
+using Common.Utilities;
 using Core.Entities;
 using Data.Dto;
 using Data.Interfaces;
@@ -53,11 +54,12 @@ namespace Service.EntityServices
             {
                 
                 var insurance = _mapper.Map<Insurance>(insuranceDto);
+                insurance.StartDate = ConvertDate.ToMiladi(insuranceDto.StartDate);
+                insurance.EndDate = ConvertDate.ToMiladi(insuranceDto.EndDate);
                 return await _insuranceRepository.AddAsync(insurance);
             }
             catch (Exception)
             {
-
                 return new ServiceResult(ResponseStatus.ServerError,null);
             }
 

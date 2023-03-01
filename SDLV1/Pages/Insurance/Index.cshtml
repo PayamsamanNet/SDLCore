@@ -37,42 +37,31 @@
                                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=" عنوان: activate to sort column ascending" aria-sort="descending"> عنوان</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="قیمت ماهانه: activate to sort column ascending">قیمت ماهانه</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=" قیمت: activate to sort column ascending">قیمت </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="قیمت مسدود شده: activate to sort column ascending">قیمت مسدود شده</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="استفاده شده: activate to sort column ascending">استفاده شده</th>
+                                            <th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=" نام شرکت بیمه: activate to sort column ascending" aria-sort="descending"> نام شرکت بیمه</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=" سقف تعهد یبمه: activate to sort column ascending"> سقف تعهد یبمه</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=" قیمت: activate to sort column ascending">ازمبلغ </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="قیمت مسدود شده: activate to sort column ascending">تا مبلغ</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="دستورات: activate to sort column ascending">دستورات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var item in Model.Insurances)
                                         {
-                                           @* <tr role="row" class="odd">
-                                                <td class="sorting_1">@item.Name</td>
-                                                <td>@item.MonthlyPriceRatio</td>
-                                                <td>@item.TrustPriceRatio</td>
-                                                <td>@item.BlockedPriceRatio</td>
-                                                @if (item.IsUsed == true)
-                                                {
-                                                    <td><i class="fa fa-check-circle icon-check"></i></td>
-                                                }
-                                                else
-                                                {
-                                                    <td><i class="fa fa-remove icon-notcheck"></i> </td>
-                                                }
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">@item.InsuranceCompanyName</td>
+                                                <td>@item.SwearCeiling</td>
+                                                <td>@item.FromAmount</td>
+                                                <td>@item.UntilAmount</td>
                                                 <td>
                                                     <a asp-page="Edit" asp-route-Id="@item.Id" class=" fa fa-pencil icon-Actions">
 
                                                     </a>
-                                                    <a class=" fa fa-trash icon-Actions">
+                                                    <a onclick="Delete('@item.Id')" class=" fa fa-trash icon-Actions">
 
                                                     </a>
                                                 </td>
 
-
-
-                                            </tr>*@
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -86,3 +75,27 @@
         </div>
         <!-- /.row -->
 </section>
+
+<script>
+    function Delete(Id) {
+        $("#Id-Delete").val(Id);
+        $("#exampleModal").modal("show");
+    }
+</script>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">آیا از حذف این مورد اطمینان دارید ؟ </h1>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" id="Id-Delete" name="Id" />
+                    <button type="submit" class="btn btn-danger float-start">تایید اطلاعات  </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

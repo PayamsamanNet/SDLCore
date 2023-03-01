@@ -107,6 +107,10 @@ namespace SDLV1.Pages.Users
                     UserDto.PasswordHash = OldPassword;
                     UserDto.RePassword = OldPassword;
                 }
+                else
+                {
+                    UserDto.IsChangePassword = true;
+                }
                 if (!ModelState.IsValid)
                 {  
                     Genders = EnumExtensions.GetEnumlist<GenderType>();

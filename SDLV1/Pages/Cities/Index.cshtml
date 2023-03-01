@@ -1,0 +1,94 @@
+﻿@page
+@model SDLV1.Pages.Cities.IndexModel
+@{
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>لیست  شهرها   </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("DeleteError")</p>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex">
+                    <h3 class="card-title">لیست </h3>
+                    <a asp-page="Create" class="btn btn-info text-white">
+                        افزودن
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=" عنوان: activate to sort column ascending" aria-sort="descending"> نام</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="قیمت ماهانه: activate to sort column ascending">کد </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="قیمت ماهانه: activate to sort column ascending">استان </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="دستورات: activate to sort column ascending">دستورات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Cities)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1">@item.Name</td>
+                                                <td>@item.CityCode </td>
+                                                <td>@item.State.Name </td>
+                                                <td>
+                                                    <a asp-page="Edit" asp-route-Id="@item.Id" class=" fa fa-pencil icon-Actions">
+
+                                                    </a>
+                                                    <a onclick="Delete('@item.Id')" class=" fa fa-trash icon-Actions">
+
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<script>
+    function Delete(Id) {
+        $("#Id-Delete").val(Id);
+        $("#exampleModal").modal("show");
+    }
+</script>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">آیا از حذف این مورد اطمینان دارید ؟ </h1>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" id="Id-Delete" name="Id" />
+                    <button type="submit" class="btn btn-danger float-start">تایید اطلاعات  </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

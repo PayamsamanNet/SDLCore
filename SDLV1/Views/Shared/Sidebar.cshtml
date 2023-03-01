@@ -70,6 +70,24 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link m-0 submenu">
+                            <i class="nav-icon fa fa-circle"></i>
+                            <p>
+                                شهر 
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-page="/Cities/Index" class="nav-link m-0 under-menu">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>لیست</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                      <li class="nav-item has-treeview">
                         <a href="#" class="nav-link m-0 submenu">
                             <i class="nav-icon fa fa-circle"></i>
@@ -82,7 +100,7 @@
                             <li class="nav-item">
                                 <a asp-page="/BranchManager/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
-                                    <p>مدیریت شعبات   </p>
+                                    <p>مدیریت شعبات </p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -95,6 +113,12 @@
                                 <a asp-page="/Customers/Create" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p> مشتری    </p>
+                                </a>
+                            </li>
+                              <li class="nav-item">
+                                <a asp-page="/State/Index" class="nav-link m-0 under-menu">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p> استان    </p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -143,8 +167,7 @@
 
 
 
-                    
-
+                  
 
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link m-0 submenu">
@@ -158,6 +181,25 @@
                            
                             <li class="nav-item">
                                 <a asp-page="/Insurance/Index" class="nav-link m-0 under-menu">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>لیست  </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                     <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link m-0 submenu">
+                            <i class="nav-icon fa fa-circle"></i>
+                            <p>
+                               مجوز
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           
+                            <li class="nav-item">
+                                <a asp-page="/Permission/Index" class="nav-link m-0 under-menu">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست  </p>
                                 </a>

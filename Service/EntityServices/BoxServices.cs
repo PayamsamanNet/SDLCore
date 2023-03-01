@@ -35,7 +35,36 @@ namespace Service.EntityServices
         }
 
 
+        public async Task<PagedResponse<IEnumerable<BoxDto>>> GetByPgination(PagedResponse<BoxDto> pagedResponse)
+        {
+            try
+            {
+                var qurey = _boxRepository.Table.AsQueryable();
+                var Total = qurey.Count();
+                if (pagedResponse.Data.Number != 0)
+                {
+                    qurey= qurey.Where(x => x.Number == pagedResponse.Data.Number);
+                    qurey.Count();
+                }
+                if (pagedResponse.Data.RepositoryId != Guid.Empty)
+                {
+                    qurey = qurey.Where(x => x.RepositoryId == pagedResponse.Data.RepositoryId);
+                    qurey.Count();
+                }
 
+                
+
+
+                var Boxes = qurey.OrderBy(s => s.Id).Skip(pagedResponse.StartIndex).Take(pagedResponse.PageSize).ToList();
+
+                var ListBoxes = _mapper.Map<IEnumerable<BoxDto>>(Boxes);
+                return new PagedResponse<IEnumerable<BoxDto>>(pagedResponse.PageNumber, Total, ListBoxes);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
 
 
@@ -100,7 +129,6 @@ namespace Service.EntityServices
             }
             catch (Exception)
             {
-
                 return new ServiceResult(ResponseStatus.ServerError,null);
             }
         }

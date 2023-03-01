@@ -39,8 +39,17 @@ namespace Service.EntityServices
         {
             try
             {
-                var Banks = _bankRepositorybank.Table.OrderBy(s => s.Id).Skip(pagedResponse.StartIndex).Take(pagedResponse.PageSize).ToList();
-                var Total = _bankRepositorybank.TableNoTracking.Count();
+                var qurey = _bankRepositorybank.Table.AsQueryable();
+                var Total = qurey.Count();
+                //if (!string.IsNullOrEmpty(pagedResponse.Data.Name))
+                //{
+                //    qurey= qurey.Where(x => x.Name.Contains(pagedResponse.Data.Name));
+                //    Total = qurey.Count();
+                //}
+
+
+                var Banks = qurey.OrderBy(s => s.Id).Skip(pagedResponse.StartIndex).Take(pagedResponse.PageSize).ToList();
+                
                 var ListBankes = _mapper.Map<IEnumerable<BankDto>>(Banks);
                 return new PagedResponse<IEnumerable<BankDto>>(pagedResponse.PageNumber, Total, ListBankes);
             }

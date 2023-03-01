@@ -22,7 +22,7 @@ namespace Service.EntityServices
         {
             try
             {
-                var city = await _cityRepository.Entities.ToArrayAsync();
+                var city = await _cityRepository.Entities.Include(v=>v.State).ToListAsync();
                 return _mapper.Map<List<CityDto>>(city);
 
             }

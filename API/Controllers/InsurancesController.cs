@@ -32,7 +32,7 @@ namespace Common.Temp
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -60,7 +60,16 @@ namespace Common.Temp
         {
             try
             {
-                return Ok(await _insuranceServices.Create(insuranceDto));
+                var result = await _insuranceServices.Create(insuranceDto);
+                if (result.Status == ResponseStatus.Success)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+              
             }
             catch (Exception)
             {

@@ -1,0 +1,71 @@
+﻿@page
+@using Data.Dto
+@model SDLV1.Pages.Cities.EditModel
+@{
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>ویرایش شهر</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("CreateError")</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form method="post" asp-page="Edit">
+                        <div class="card-body card-custom">
+                            <input type="hidden" asp-for="City.Id" />
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="City.Name"></label>
+                                    <input asp-for="City.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="City.Name"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="City.CityCode"></label>
+                                    <input asp-for="City.CityCode" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="City.CityCode"></span>
+                                </div>
+                            </div>
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="City.StateId"></label>
+                                   <select class="form-control" asp-for="City.StateId" >
+                                       @foreach (var item in Model.States as List<StateDto>) 
+                                        {
+                                            <option value="@item.Id"> @item.Name</option>
+                                        }
+                                   </select>
+                                    <span class="text-danger" asp-validation-for="City.StateId"></span>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

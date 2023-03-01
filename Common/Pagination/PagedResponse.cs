@@ -36,7 +36,6 @@ namespace Common.Pagination
             PageSize = 10;
             FirstPage = 1;
             LastPage = totalRecords / PageSize;
-            //TotalPages = totalRecords / PageSize;
             TotalPages = countPages(totalRecords, PageSize);
             TotalRecords = totalRecords;
             Data = data;

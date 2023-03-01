@@ -62,14 +62,18 @@ namespace API.Controllers
         {
             try
             {
+
                 var _User = _mapper.Map<UserDto, User>(userDto);
                 _User.SecurityStamp = Guid.NewGuid().ToString();
                 var exists = await _userRepository.Entities.FirstOrDefaultAsync(d=>d.Id == userDto.Id);
 
                 if (exists != null)
                 {
-                    _userRepository.Attach(exists);
-                    var Result = await _userManager.UpdateAsync(_User);
+                    exists.Name = userDto.Name;
+                    exists.Email = userDto.Email;
+                    exists.LockoutEnd = userDto.LockoutEnd;
+
+                    var Result = await _userManager.UpdateAsync(exists);
                     if (Result.Succeeded)
                     {
                         return Ok(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.Success), Status = ResponseStatus.Success });

@@ -1,0 +1,108 @@
+﻿@page
+@model SDLV1.Pages.Insurance.CreateModel
+@{
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>افزودن بیمه </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("CreateError")</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form method="post" asp-page="Create">
+                        <div class="card-body card-custom">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Insurance.InsuranceCompanyName"></label>
+                                    <input asp-for="Insurance.InsuranceCompanyName" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Insurance.InsuranceCompanyName"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Insurance.InsuranceCompanyNameService"></label>
+                                    <input asp-for="Insurance.InsuranceCompanyNameService" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Insurance.InsuranceCompanyNameService"></span>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Insurance.SwearCeiling"></label>
+                                    <input asp-for="Insurance.SwearCeiling" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Insurance.SwearCeiling"></span>
+                                </div>
+                            </div>
+                                 <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Insurance.StartDate"></label>
+                                <input asp-for="Insurance.StartDate" class="form-control elementClass" />
+                                <span class="text-danger" asp-validation-for="Insurance.StartDate"></span>
+                            </div>
+                            </div>
+                              <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Insurance.EndDate"></label>
+                                <input asp-for="Insurance.EndDate" class="form-control elementClass" />
+                                <span class="text-danger" asp-validation-for="Insurance.EndDate"></span>
+                            </div>
+                             </div>
+                               <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Insurance.PremiumRates"></label>
+                                <input asp-for="Insurance.PremiumRates" class="form-control" />
+                                <span class="text-danger" asp-validation-for="Insurance.PremiumRates"></span>
+                            </div>
+                             </div>
+                              <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Insurance.Amount"></label>
+                                <input asp-for="Insurance.Amount" class="form-control" />
+                                <span class="text-danger" asp-validation-for="Insurance.Amount"></span>
+                            </div>
+                             </div>
+                               <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Insurance.FromAmount"></label>
+                                <input asp-for="Insurance.FromAmount" class="form-control" />
+                                <span class="text-danger" asp-validation-for="Insurance.FromAmount"></span>
+                            </div>
+  </div>
+   <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Insurance.UntilAmount"></label>
+                                <input asp-for="Insurance.UntilAmount" class="form-control" />
+                                <span class="text-danger" asp-validation-for="Insurance.UntilAmount"></span>
+                            </div>
+
+                        </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>

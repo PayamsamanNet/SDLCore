@@ -79,25 +79,35 @@ namespace API.Controllers
         {
             try
             {
-
-                var Role = _Mapper.Map<RoleDto, Role>(role);
-                //var Result = await _roleManager.UpdateAsync(Role);
-                var Result = await _roleManager.UpdateAsync(Role);
-                if (Result.Succeeded)
+                var existrole =  await _roleManager.FindByIdAsync(role.Id);
+                if (existrole != null)
                 {
-                    return Ok(new ServiceResult(ResponseStatus.Success,null));
+                    existrole.NormalizedName = role.NormalizedName;
+                    existrole.Description = role.Description;
+                    existrole.Name = role.Name;
+                    existrole.ConcurrencyStamp = Guid.NewGuid().ToString();
+                    var Result = await _roleManager.UpdateAsync(existrole);
+                    if (Result.Succeeded)
+                    {
+                        return Ok(new ServiceResult(ResponseStatus.Success, null));
+                    }
+                    else
+                    {
+                        string Message = "";
+                        foreach (var item in Result.Errors)
+                        {
+                            Message = Message + " " + item.Description.ToString();
+                        }
+                        return BadRequest(new ResponceApi
+                        {
+                            Message = Message,
+                        });
+                    }
+
                 }
                 else
                 {
-                    string Message = "";
-                    foreach (var item in Result.Errors)
-                    {
-                        Message = Message + " " + item.Description.ToString();
-                    }
-                    return BadRequest(new ResponceApi
-                    {
-                        Message = Message,
-                    });
+                    return BadRequest(new ServiceResult(ResponseStatus.NotFound, null));
                 }
             }
             catch (Exception)
