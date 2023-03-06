@@ -86,7 +86,7 @@ namespace SDLV1.Pages.Insurance
                     Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
                     var Js = JsonConvert.SerializeObject(Insurance);
                     var Content = new StringContent(Js, Encoding.UTF8, "application/json");
-                    var Result = Client.PutAsync("api/Insurance/Update", Content).Result;
+                    var Result = Client.PutAsync("api/Insurances/Update", Content).Result;
                     if (Result.IsSuccessStatusCode)
                     {
                         return RedirectToPage("Index");

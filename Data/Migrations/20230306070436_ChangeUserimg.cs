@@ -4,22 +4,21 @@
 
 namespace Data.Migrations
 {
-    public partial class ChangeUser3 : Migration
+    public partial class ChangeUserimg : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsActive",
+            migrationBuilder.AddColumn<string>(
+                name: "ImageUser",
                 table: "AspNetUsers",
-                type: "bit",
-                nullable: false,
-                defaultValue: false);
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsActive",
+                name: "ImageUser",
                 table: "AspNetUsers");
         }
     }

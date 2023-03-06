@@ -54,7 +54,8 @@ namespace Data.Dto
         public string NationalCode { get; set; }
         [Display(Name = "وضعیت ")]
         public bool IsActive { get; set; }
-
+        [Display(Name = "تصویر کاربر ")]
+        public string? ImageUser { get; set; }
 
         [Display(Name = " نقش کاربر")]
         public string? RoleId { get; set; }

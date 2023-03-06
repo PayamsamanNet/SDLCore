@@ -21,8 +21,8 @@ namespace Core.Entities
         public Branch? Branch { get; set; }
         public string NationalCode { get; set; }
         public bool IsActive { get; set; }
-
-        public List<Role> Roles { get; set; }
+        public string? ImageUser { get; set; } 
+       
     }
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

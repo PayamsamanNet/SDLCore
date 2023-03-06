@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace SDLV1.Controllers
 {
@@ -58,7 +59,13 @@ namespace SDLV1.Controllers
                                 var Cliam = new Claim(ClaimTypes.Role, item);
                                 Cliams.Add(Cliam);
                             }
-                            Cliams.Add(new Claim(ClaimTypes.Name, login.UserName));
+
+                            //var ImageUser = new ClaimsIdentityOptions().SecurityStampClaimType;
+
+
+                            Cliams.Add(new Claim(ClaimTypes.Name, Model.Result.data.Name +""+ Model.Result.data.Family));
+                            Cliams.Add(new Claim(ClaimTypes.NameIdentifier, login.UserName));
+                            Cliams.Add(new Claim("ImageUser", Model.Result.data.ImageUser.ToString()));
                             Cliams.Add(new Claim(_SettingWeb.TokenName, Model.Result.Token));
                             var Identity = new ClaimsIdentity(Cliams, CookieAuthenticationDefaults.AuthenticationScheme);
                             var perencipal = new ClaimsPrincipal(Identity);

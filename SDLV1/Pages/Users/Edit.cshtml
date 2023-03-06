@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
-                    <form method="post" asp-page="Edit">
+                    <form method="post" asp-page="Edit" enctype="multipart/form-data">
                         <div class="card-body card-custom">
                             <input asp-for="UserDto.Id" type="hidden" />
                             <div class="col-md-6">
@@ -62,6 +62,13 @@
                                     <label asp-for="UserDto.Email"></label>
                                     <input asp-for="UserDto.Email" class="form-control" />
                                     <span class="text-danger" asp-validation-for="UserDto.Email"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserDto.ImageUser"></label>
+                                    <input name="File" type="file" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="UserDto.ImageUser"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">

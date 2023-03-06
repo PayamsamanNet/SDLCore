@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Service.EntityServices;
+using Service.ServiceFile;
 using System;
 
 namespace API.Controllers
@@ -16,16 +18,20 @@ namespace API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly IFileService _fileService;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        public UsersController(SignInManager<User> signInManager, IUserRepository userRepository, IMapper mapper, UserManager<User> userManager)
+        private readonly RoleManager<Role> _role;
+        public UsersController(SignInManager<User> signInManager, IUserRepository userRepository, IMapper mapper, UserManager<User> userManager, IFileService fileService, RoleManager<Role> role)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
+            _fileService = fileService;
+            _role = role;
         }
 
         
@@ -40,6 +46,9 @@ namespace API.Controllers
                 var Result = await _userManager.CreateAsync(_User, userDto.PasswordHash);
                 if (Result.Succeeded)
                 {
+                    
+                    var role=await _role.FindByIdAsync(userDto.RoleId);
+                     await _userManager.AddToRoleAsync(_User, role.Name);
                     return Ok(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.Success), Status = ResponseStatus.Success });
                 }
                 else
@@ -62,7 +71,6 @@ namespace API.Controllers
         {
             try
             {
-
                 var _User = _mapper.Map<UserDto, User>(userDto);
                 _User.SecurityStamp = Guid.NewGuid().ToString();
                 var exists = await _userRepository.Entities.FirstOrDefaultAsync(d=>d.Id == userDto.Id);
@@ -72,7 +80,6 @@ namespace API.Controllers
                     exists.Name = userDto.Name;
                     exists.Email = userDto.Email;
                     exists.LockoutEnd = userDto.LockoutEnd;
-
                     var Result = await _userManager.UpdateAsync(exists);
                     if (Result.Succeeded)
                     {
@@ -92,13 +99,46 @@ namespace API.Controllers
                 {
                     return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.ServerError), Status = ResponseStatus.ServerError });
                 }
-
             }
             catch (Exception)
             {
                 return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.ServerError), Status = ResponseStatus.ServerError });
             }
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            try
+            {
+
+                var user = await _userManager.FindByIdAsync(Id.ToString());
+                if (user == null)
+                {
+                    return BadRequest(new ServiceResult(ResponseStatus.NotFoundUser, null));
+                }
+                var result = await _userManager.DeleteAsync(user);
+                _fileService.Delete(user.ImageUser,"Users");
+                
+
+                if (result.Succeeded)
+                {
+                    return Ok(new ServiceResult(ResponseStatus.Success, null));
+                }
+                else
+                {
+                    return BadRequest(new ServiceResult(ResponseStatus.BadRequest, "در حذف کاربر خطایی رخ داده است"));
+                }
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
+            }
+        }
+
+
+
         [HttpGet]
         public async Task<IActionResult> GetById(string Id)
         {
@@ -153,22 +193,6 @@ namespace API.Controllers
         {
             try
             {
-
-            
-
-                //var ddd = await _userManager.Users.ToListAsync();
-                //    var ff=_userManager.GetUsersInRoleAsync().
-
-                
-
-              var eee= await _userRepository.GetAll();
-
-                var User = await _userManager.Users.Include(d=>d.Roles).ToListAsync();
-                foreach (var item in User)
-                {
-                    var Roles = _userManager.GetRolesAsync(item).Result;
-                }
-
                 var Users = await _userRepository.Entities.Include(s => s.Branch).Include(s => s.Repository).ToListAsync();
                 return Ok(_mapper.Map<List<UserDto>>(Users));
             }

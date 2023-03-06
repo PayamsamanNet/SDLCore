@@ -62,7 +62,7 @@ namespace Common.Utilities
                 List<ListActions> Actions = new List<ListActions>();
                 foreach (var action in Items)
                 {
-                    var name = action.CustomAttributes.GetType().DeclaringMethod.GetCustomAttribute(typeof(DisplayAttribute));
+                    var name = action.GetCustomAttribute(typeof(DisplayAttribute), false);
 
                     Actions.Add(new ListActions
                     {

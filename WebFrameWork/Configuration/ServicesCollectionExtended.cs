@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Service.Authentication;
+using Service.ServiceFile;
 using System.Text;
 
 namespace WebFrameWork.Configuration
@@ -41,6 +42,7 @@ namespace WebFrameWork.Configuration
             services.AddScoped<IJwtRepository, JwtRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPermissionRepository, PermissionRepository>();
+            services.AddScoped<IFileService, FileService>();
         }
         public static void RegisterJwtService(this IServiceCollection services, SecuritySetting _siteSetting)
         {

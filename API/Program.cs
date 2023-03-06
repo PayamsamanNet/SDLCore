@@ -14,17 +14,13 @@ using Core.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 //builder.Services.AddControllers(options =>
 //{
 //    options.Filters.Add(new AuthorizeFilter());
 //});
-//builder.Services.AddIdentity<SystemUser, Role>().AddEntityFrameworkStores<SDLDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(MapperConfig));
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.Configure<SecuritySetting>(builder.Configuration.GetSection("Security"));
 SecuritySetting? _siteSetting = builder.Configuration.GetSection("Security").Get<SecuritySetting>();
@@ -65,6 +61,15 @@ builder.Services.AddDbContext<SDLDbContext>(options =>
 });
 
 builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<SDLDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityError>();
+builder.Services.Configure<IdentityOptions>(option =>
+{
+    option.Password.RequireDigit = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequiredLength = 4;
+    option.Password.RequiredUniqueChars = 0;
+});
 
 builder.Services.RegisterServiesEntities();
 builder.Services.RegisterJwtService(_siteSetting);

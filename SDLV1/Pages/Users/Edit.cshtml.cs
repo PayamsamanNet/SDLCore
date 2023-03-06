@@ -13,6 +13,7 @@ using NuGet.Protocol.Plugins;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Globalization;
+using Service.ServiceFile;
 
 namespace SDLV1.Pages.Users
 {
@@ -20,10 +21,12 @@ namespace SDLV1.Pages.Users
     {
         private IHttpClientFactory _httpClientFactory;
         private SettingWeb _SettingWeb;
-        public EditModel(IHttpClientFactory httpClientFactory,IOptions<SettingWeb> options)
+        private readonly IFileService _fileService;
+        public EditModel(IHttpClientFactory httpClientFactory,IOptions<SettingWeb> options, IFileService fileService)
         {
             _httpClientFactory = httpClientFactory;
             _SettingWeb = options.Value;
+            _fileService = fileService;
         }
         [BindProperty]
         public UserDto UserDto { get; set; }
@@ -39,6 +42,7 @@ namespace SDLV1.Pages.Users
         public static List<RoleDto> RolesStatic { get; set; }
 
         public static string OldPassword { get; set; }
+        public static string Oldfile { get; set; }
         public List<EnumModel> Genders { get; set; }
         public async Task<IActionResult> OnGet(string Id)
         {
@@ -56,6 +60,7 @@ namespace SDLV1.Pages.Users
                     Genders = EnumExtensions.GetEnumlist<GenderType>();
                     UserDto = Result.Content.ReadFromJsonAsync<UserDto>().Result;
                     OldPassword = UserDto.PasswordHash;
+                    Oldfile = UserDto.ImageUser;
                     UserDto.PasswordHash = "";
                     Repositories = ResultRepo.Content.ReadFromJsonAsync<List<RepositoryDto>>().Result;
                     RepositoriesStatic = Repositories;
@@ -98,7 +103,7 @@ namespace SDLV1.Pages.Users
 
 
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(IFormFile File)
         {
             try
             {
@@ -131,6 +136,11 @@ namespace SDLV1.Pages.Users
 
                 else
                 {
+                    if (File != null)
+                    {
+                        var resultDeletefile = _fileService.Delete(Oldfile, "Users");
+                        UserDto.ImageUser = _fileService.Save(File, "Users");
+                    }
                     var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                     var token = User.FindFirst(_SettingWeb.TokenName).Value;
                     Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);

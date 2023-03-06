@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(SDLDbContext))]
-    [Migration("20230213111733_ChangeUser1")]
-    partial class ChangeUser1
+    [Migration("20230306055652_ChangeUser17")]
+    partial class ChangeUser17
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("CityId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -125,6 +128,9 @@ namespace Data.Migrations
                     b.Property<int>("CustomerRole")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -208,6 +214,9 @@ namespace Data.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsLawyer")
                         .HasColumnType("bit");
 
@@ -223,6 +232,9 @@ namespace Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -250,6 +262,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("ColumnId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsVip")
                         .HasColumnType("bit");
@@ -289,6 +304,9 @@ namespace Data.Migrations
 
                     b.Property<double>("Capacity")
                         .HasColumnType("float");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Depth")
                         .HasColumnType("int");
@@ -342,6 +360,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("DegreeId")
                         .HasColumnType("uniqueidentifier");
 
@@ -392,6 +413,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("BranchManager");
@@ -405,6 +429,9 @@ namespace Data.Migrations
 
                     b.Property<int>("CityCode")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -444,6 +471,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("CustomerTypeId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("ForeignCustomerId")
                         .HasColumnType("uniqueidentifier");
@@ -492,6 +522,9 @@ namespace Data.Migrations
                     b.Property<decimal>("BlockedPriceRatio")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EntrancePackagePrice")
                         .HasColumnType("int");
 
@@ -524,6 +557,9 @@ namespace Data.Migrations
                     b.Property<decimal>("BlockedPriceRatio")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
 
@@ -554,6 +590,9 @@ namespace Data.Migrations
                     b.Property<string>("BirthPlace")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FatherName")
                         .IsRequired()
@@ -596,6 +635,9 @@ namespace Data.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("IbanNumber")
                         .IsRequired()
                         .HasMaxLength(24)
@@ -626,7 +668,7 @@ namespace Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("DateOfOperation")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
@@ -672,6 +714,9 @@ namespace Data.Migrations
                     b.Property<Guid?>("CustomerId")
                         .IsRequired()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool?>("LawyerStatus")
                         .HasColumnType("bit");
@@ -721,6 +766,9 @@ namespace Data.Migrations
                     b.Property<int>("CompanyType")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("OfficialGazetteDate")
                         .HasColumnType("datetime2");
 
@@ -755,6 +803,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("ContractId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Exception")
                         .IsRequired()
@@ -807,6 +858,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("SubCode")
                         .HasColumnType("int");
 
@@ -836,6 +890,9 @@ namespace Data.Migrations
                     b.Property<string>("BirthPlace")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FatherName")
                         .IsRequired()
@@ -876,6 +933,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("RegionCode");
@@ -896,6 +956,9 @@ namespace Data.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DegreeId")
                         .IsRequired()
@@ -952,6 +1015,9 @@ namespace Data.Migrations
                     b.Property<int>("ColumnTypes")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("FromBoxNumber")
                         .HasColumnType("int");
 
@@ -979,6 +1045,9 @@ namespace Data.Migrations
 
                     b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsAllowed")
                         .HasColumnType("bit");
@@ -1032,6 +1101,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("PermissionId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1056,6 +1128,9 @@ namespace Data.Migrations
 
                     b.Property<Guid?>("ContractId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Exception")
                         .IsRequired()
@@ -1106,6 +1181,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1136,6 +1214,9 @@ namespace Data.Migrations
 
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfPayment")
                         .HasColumnType("datetime2");
@@ -1191,6 +1272,9 @@ namespace Data.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("LastLoginDate")
                         .HasColumnType("datetime2");
 
@@ -1203,6 +1287,12 @@ namespace Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NationalCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -1256,6 +1346,9 @@ namespace Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateOfOperation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
                         .IsRequired()

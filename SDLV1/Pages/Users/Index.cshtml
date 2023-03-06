@@ -61,14 +61,16 @@
                                                 {
                                                     <td><i class="fa fa-remove icon-notcheck"></i> </td>
                                                 }
-                                                @if (item.Branch != null)
-                                                {
-                                                    <td>@item.Branch.Name</td>
-                                                }
-                                               @* if (@item.Repository != null)
-                                                {
-                                                <td>@item.Repository.Name</td>
-                                                }*@
+                                                <td>
+                                                    @if (item.Branch != null)
+                                                    {
+                                                        @item.Branch.Name
+                                                    }
+                                                    @if (item.Repository != null)
+                                                    {
+                                                        @item.Repository.Name
+                                                    }
+                                                </td>
                                                 <td>
                                                     <a asp-page="Edit" asp-route-Id="@item.Id" class=" fa fa-pencil icon-Actions">
 

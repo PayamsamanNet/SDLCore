@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Service.ServiceFile;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -16,10 +17,12 @@ namespace SDLV1.Pages.Users
     {
         private IHttpClientFactory _httpClientFactory;
         private SettingWeb _SettingWeb;
-        public CreateModel(IHttpClientFactory httpClientFactory, IOptions<SettingWeb> options)
+        private readonly IFileService _fileService;
+        public CreateModel(IHttpClientFactory httpClientFactory, IOptions<SettingWeb> options, IFileService fileService)
         {
             _httpClientFactory = httpClientFactory;
             _SettingWeb = options.Value;
+            _fileService = fileService;
         }
 
 
@@ -85,7 +88,7 @@ namespace SDLV1.Pages.Users
 
 
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPost(IFormFile File)
         {
             try
             {
@@ -109,6 +112,8 @@ namespace SDLV1.Pages.Users
 
                 else
                 {
+                    var NameFile = _fileService.Save(File,"Users");
+                    UserDto.ImageUser = NameFile;
                     var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
                     var token = User.FindFirst(_SettingWeb.TokenName).Value;
                     Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
@@ -123,7 +128,6 @@ namespace SDLV1.Pages.Users
                     {
                         if (Result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                         {
-
                             return RedirectToAction("SignOut", "Account");
                         }
                         else if (Result.StatusCode == System.Net.HttpStatusCode.BadRequest)

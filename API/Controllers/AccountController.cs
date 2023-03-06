@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Common;
 using Service.Authentication;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -61,11 +62,14 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-       
+        [DisplayName("ورود کاربر ")]
         public async Task<IActionResult> Login(LoginDto loginDto, [FromServices] IJwtRepository jwtRepository)
         {
             try
             {
+                var asm = typeof(AccountController).Assembly;
+                var rsr = OthersExtensions.
+
                 var _User = await _userManager.FindByNameAsync(loginDto.UserName);
                 if (_User == null)
                 {

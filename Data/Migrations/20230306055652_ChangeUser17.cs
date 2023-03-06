@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class EditDto : Migration
+    public partial class ChangeUser17 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,40 +25,12 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Family = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    LastLoginDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Bank",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +52,8 @@ namespace Data.Migrations
                     BlockedPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     RunningPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ShortDatePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    LongDatePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true)
+                    LongDatePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,29 +66,12 @@ namespace Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BranchManagerCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BranchManagerName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BranchManagerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BranchManager", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CustomerType",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MonthlyPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TrustPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BlockedPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    EntranceRatio = table.Column<int>(type: "int", nullable: false),
-                    EntrancePackagePrice = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CustomerType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,11 +83,31 @@ namespace Data.Migrations
                     MonthlyPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TrustPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BlockedPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsUsed = table.Column<bool>(type: "bit", nullable: false)
+                    IsUsed = table.Column<bool>(type: "bit", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Degree", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ForeignCustomer",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PassportNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ForeignCustomer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,17 +118,35 @@ namespace Data.Migrations
                     InsuranceCompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InsuranceCompanyNameService = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SwearCeiling = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PremiumRates = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     FromAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    UntilAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    UntilAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Insurance", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LegalCustomer",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegisterNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OfficialGazetteNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OfficialGazetteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    lastVisitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CompanyType = table.Column<int>(type: "int", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LegalCustomer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -163,11 +157,31 @@ namespace Data.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubCode = table.Column<int>(type: "int", nullable: true)
+                    SubCode = table.Column<int>(type: "int", nullable: true),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Permission", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RealCustomer",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NationalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RealCustomer", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,7 +190,8 @@ namespace Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AreaCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AreaName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AreaName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,7 +204,8 @@ namespace Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StateCode = table.Column<int>(type: "int", nullable: false)
+                    StateCode = table.Column<int>(type: "int", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -202,7 +218,8 @@ namespace Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -226,6 +243,402 @@ namespace Data.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomerType",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TypeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MonthlyPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TrustPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BlockedPriceRatio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    EntranceRatio = table.Column<int>(type: "int", nullable: false),
+                    EntrancePackagePrice = table.Column<int>(type: "int", nullable: false),
+                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerType", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CustomerType_Bank_BankId",
+                        column: x => x.BankId,
+                        principalTable: "Bank",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RolePermission",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolePermission", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RolePermission_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RolePermission_Permission_PermissionId",
+                        column: x => x.PermissionId,
+                        principalTable: "Permission",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "City",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityCode = table.Column<int>(type: "int", nullable: false),
+                    StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_City_State_StateId",
+                        column: x => x.StateId,
+                        principalTable: "State",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PostalAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TellPrefix = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tell = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mobile = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Address_City_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Branch",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Manager = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Deputy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isEnable = table.Column<bool>(type: "bit", nullable: false),
+                    RegionCodeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchAddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Branch", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Branch_Address_BranchAddressId",
+                        column: x => x.BranchAddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Branch_Bank_BankId",
+                        column: x => x.BankId,
+                        principalTable: "Bank",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Branch_BranchManager_BranchManagerId",
+                        column: x => x.BranchManagerId,
+                        principalTable: "BranchManager",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Branch_Degree_DegreeId",
+                        column: x => x.DegreeId,
+                        principalTable: "Degree",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Branch_RegionCode_RegionCodeId",
+                        column: x => x.RegionCodeId,
+                        principalTable: "RegionCode",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customer",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdCard = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    IbanId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AccountDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ForeignCustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LegalCustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RealCustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Customer_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_Bank_BankId",
+                        column: x => x.BankId,
+                        principalTable: "Bank",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_CustomerType_CustomerTypeId",
+                        column: x => x.CustomerTypeId,
+                        principalTable: "CustomerType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_ForeignCustomer_ForeignCustomerId",
+                        column: x => x.ForeignCustomerId,
+                        principalTable: "ForeignCustomer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_LegalCustomer_LegalCustomerId",
+                        column: x => x.LegalCustomerId,
+                        principalTable: "LegalCustomer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_RealCustomer_RealCustomerId",
+                        column: x => x.RealCustomerId,
+                        principalTable: "RealCustomer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Repository",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ManagerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TopPlanImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TopPlanDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InstallationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OpeningDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    OperationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Repository", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Repository_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Repository_Bank_BankId",
+                        column: x => x.BankId,
+                        principalTable: "Bank",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Repository_Degree_DegreeId",
+                        column: x => x.DegreeId,
+                        principalTable: "Degree",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Iban",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AccountNum = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    IbanNumber = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsMain = table.Column<bool>(type: "bit", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Iban", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Iban_Customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lawyer",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MandateNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MandateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MandateStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MandateEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MandateScanImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MifareCardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MifareRegistrationId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CanOpenBox = table.Column<bool>(type: "bit", nullable: false),
+                    LawyerStatus = table.Column<bool>(type: "bit", nullable: true),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lawyer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lawyer_Customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Family = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    LastLoginDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    NationalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Branch_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branch",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Repository_RepositoryId",
+                        column: x => x.RepositoryId,
+                        principalTable: "Repository",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RepositoryColumn",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Number = table.Column<int>(type: "int", nullable: false),
+                    ColumnTypes = table.Column<int>(type: "int", nullable: false),
+                    FromBoxNumber = table.Column<int>(type: "int", nullable: false),
+                    ToBoxNumber = table.Column<int>(type: "int", nullable: false),
+                    ColumnStyleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ColumnTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RepositoryColumn", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RepositoryColumn_Repository_RepositoryId",
+                        column: x => x.RepositoryId,
+                        principalTable: "Repository",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RepositoryToBranch",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsAllowed = table.Column<bool>(type: "bit", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RepositoryToBranch", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RepositoryToBranch_Branch_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branch",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RepositoryToBranch_Repository_RepositoryId",
+                        column: x => x.RepositoryId,
+                        principalTable: "Repository",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -316,133 +729,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Repository",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ManagerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TopPlanImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TopPlanDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InstallationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    OpeningDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    OperationDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Repository", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Repository_Bank_BankId",
-                        column: x => x.BankId,
-                        principalTable: "Bank",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Repository_Degree_DegreeId",
-                        column: x => x.DegreeId,
-                        principalTable: "Degree",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RolePermission",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PermissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RolePermission", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RolePermission_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_RolePermission_Permission_PermissionId",
-                        column: x => x.PermissionId,
-                        principalTable: "Permission",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "City",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityCode = table.Column<int>(type: "int", nullable: false),
-                    StateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_City", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_City_State_StateId",
-                        column: x => x.StateId,
-                        principalTable: "State",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RepositoryColumn",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Number = table.Column<int>(type: "int", nullable: false),
-                    ColumnTypes = table.Column<int>(type: "int", nullable: false),
-                    FromBoxNumber = table.Column<int>(type: "int", nullable: false),
-                    ToBoxNumber = table.Column<int>(type: "int", nullable: false),
-                    ColumnStyleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ColumnTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RepositoryColumn", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RepositoryColumn_Repository_RepositoryId",
-                        column: x => x.RepositoryId,
-                        principalTable: "Repository",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PostalAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TellPrefix = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tell = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Mobile = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Address", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Address_City_CityId",
-                        column: x => x.CityId,
-                        principalTable: "City",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Box",
                 columns: table => new
                 {
@@ -455,7 +741,8 @@ namespace Data.Migrations
                     Column = table.Column<int>(type: "int", nullable: false),
                     Row = table.Column<int>(type: "int", nullable: false),
                     IsVip = table.Column<bool>(type: "bit", nullable: false),
-                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -476,89 +763,6 @@ namespace Data.Migrations
                         name: "FK_Box_RepositoryColumn_ColumnId",
                         column: x => x.ColumnId,
                         principalTable: "RepositoryColumn",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Branch",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Manager = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Deputy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isEnable = table.Column<bool>(type: "bit", nullable: false),
-                    AreaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DegreeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchManagerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchAddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Branch", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Branch_Address_BranchAddressId",
-                        column: x => x.BranchAddressId,
-                        principalTable: "Address",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Branch_BranchManager_BranchManagerId",
-                        column: x => x.BranchManagerId,
-                        principalTable: "BranchManager",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Branch_Degree_DegreeId",
-                        column: x => x.DegreeId,
-                        principalTable: "Degree",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Branch_RegionCode_AreaId",
-                        column: x => x.AreaId,
-                        principalTable: "RegionCode",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customer",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdCard = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    BankId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IbanId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FromBranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AccountDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HomeAddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    WorkAddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CustomerTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LastCustomerTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Customer_Address_WorkAddressId",
-                        column: x => x.WorkAddressId,
-                        principalTable: "Address",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Customer_Bank_BankId",
-                        column: x => x.BankId,
-                        principalTable: "Bank",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Customer_CustomerType_CustomerTypeId",
-                        column: x => x.CustomerTypeId,
-                        principalTable: "CustomerType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -601,7 +805,8 @@ namespace Data.Migrations
                     LastContractStep = table.Column<int>(type: "int", nullable: true),
                     ContractBlockType = table.Column<int>(type: "int", nullable: true),
                     WholeEntrance = table.Column<int>(type: "int", nullable: true),
-                    UsedEntrance = table.Column<int>(type: "int", nullable: true)
+                    UsedEntrance = table.Column<int>(type: "int", nullable: true),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -621,155 +826,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RepositoryToBranch",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IsAllowed = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RepositoryToBranch", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RepositoryToBranch_Branch_BranchId",
-                        column: x => x.BranchId,
-                        principalTable: "Branch",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_RepositoryToBranch_Repository_RepositoryId",
-                        column: x => x.RepositoryId,
-                        principalTable: "Repository",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ForeignCustomer",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ForeignNatioanlID = table.Column<Guid>(type: "uniqueidentifier", maxLength: 12, nullable: false),
-                    PassportNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Gender = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ForeignCustomer", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ForeignCustomer_Customer_ForeignNatioanlID",
-                        column: x => x.ForeignNatioanlID,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Iban",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AccountNum = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    IbanNumber = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IsMain = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Iban", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Iban_Customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Lawyer",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MandateNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MandateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MandateStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MandateEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MandateScanImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MifareCardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MifareRegistrationId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CanOpenBox = table.Column<bool>(type: "bit", nullable: false),
-                    LawyerStatus = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lawyer", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Lawyer_Customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LegalCustomer",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", maxLength: 11, nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegisterNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OfficialGazetteNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OfficialGazetteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    lastVisitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CompanyType = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LegalCustomer", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LegalCustomer_Customer_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RealCustomer",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NationalId = table.Column<Guid>(type: "uniqueidentifier", maxLength: 10, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Gender = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RealCustomer", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RealCustomer_Customer_NationalId",
-                        column: x => x.NationalId,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AgreementDetail",
                 columns: table => new
                 {
@@ -777,7 +833,8 @@ namespace Data.Migrations
                     ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerContractRole = table.Column<int>(type: "int", nullable: false),
-                    IsLawyer = table.Column<bool>(type: "bit", nullable: false)
+                    IsLawyer = table.Column<bool>(type: "bit", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -806,7 +863,8 @@ namespace Data.Migrations
                     Extra = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     RepositoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -835,7 +893,8 @@ namespace Data.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ToNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ToNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -861,7 +920,8 @@ namespace Data.Migrations
                     AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateOfOperation = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -932,6 +992,16 @@ namespace Data.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_BranchId",
+                table: "AspNetUsers",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_RepositoryId",
+                table: "AspNetUsers",
+                column: "RepositoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -954,9 +1024,9 @@ namespace Data.Migrations
                 column: "RepositoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_AreaId",
+                name: "IX_Branch_BankId",
                 table: "Branch",
-                column: "AreaId");
+                column: "BankId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Branch_BranchAddressId",
@@ -974,9 +1044,19 @@ namespace Data.Migrations
                 column: "DegreeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Branch_RegionCodeId",
+                table: "Branch",
+                column: "RegionCodeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_City_StateId",
                 table: "City",
                 column: "StateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customer_AddressId",
+                table: "Customer",
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_BankId",
@@ -989,19 +1069,24 @@ namespace Data.Migrations
                 column: "CustomerTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_IbanId_BranchId_FromBranchId_HomeAddressId_WorkAddressId_CustomerTypeId_LastCustomerTypeId",
+                name: "IX_Customer_ForeignCustomerId",
                 table: "Customer",
-                columns: new[] { "IbanId", "BranchId", "FromBranchId", "HomeAddressId", "WorkAddressId", "CustomerTypeId", "LastCustomerTypeId" });
+                column: "ForeignCustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_WorkAddressId",
+                name: "IX_Customer_LegalCustomerId",
                 table: "Customer",
-                column: "WorkAddressId");
+                column: "LegalCustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForeignCustomer_ForeignNatioanlID",
-                table: "ForeignCustomer",
-                column: "ForeignNatioanlID");
+                name: "IX_Customer_RealCustomerId",
+                table: "Customer",
+                column: "RealCustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerType_BankId",
+                table: "CustomerType",
+                column: "BankId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Iban_BranchId",
@@ -1019,11 +1104,6 @@ namespace Data.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LegalCustomer_CompanyId",
-                table: "LegalCustomer",
-                column: "CompanyId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Log_BranchId_RepositoryId",
                 table: "Log",
                 columns: new[] { "BranchId", "RepositoryId" });
@@ -1032,11 +1112,6 @@ namespace Data.Migrations
                 name: "IX_Log_ContractId",
                 table: "Log",
                 column: "ContractId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RealCustomer_NationalId",
-                table: "RealCustomer",
-                column: "NationalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Repository_AddressId",
@@ -1110,22 +1185,13 @@ namespace Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ForeignCustomer");
-
-            migrationBuilder.DropTable(
                 name: "Iban");
 
             migrationBuilder.DropTable(
                 name: "Lawyer");
 
             migrationBuilder.DropTable(
-                name: "LegalCustomer");
-
-            migrationBuilder.DropTable(
                 name: "Log");
-
-            migrationBuilder.DropTable(
-                name: "RealCustomer");
 
             migrationBuilder.DropTable(
                 name: "RepositoryToBranch");
@@ -1149,9 +1215,6 @@ namespace Data.Migrations
                 name: "Customer");
 
             migrationBuilder.DropTable(
-                name: "Branch");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -1161,16 +1224,19 @@ namespace Data.Migrations
                 name: "Agreement");
 
             migrationBuilder.DropTable(
+                name: "Branch");
+
+            migrationBuilder.DropTable(
                 name: "CustomerType");
 
             migrationBuilder.DropTable(
-                name: "Address");
+                name: "ForeignCustomer");
 
             migrationBuilder.DropTable(
-                name: "BranchManager");
+                name: "LegalCustomer");
 
             migrationBuilder.DropTable(
-                name: "RegionCode");
+                name: "RealCustomer");
 
             migrationBuilder.DropTable(
                 name: "Box");
@@ -1179,7 +1245,10 @@ namespace Data.Migrations
                 name: "Insurance");
 
             migrationBuilder.DropTable(
-                name: "City");
+                name: "BranchManager");
+
+            migrationBuilder.DropTable(
+                name: "RegionCode");
 
             migrationBuilder.DropTable(
                 name: "BoxType");
@@ -1188,16 +1257,22 @@ namespace Data.Migrations
                 name: "RepositoryColumn");
 
             migrationBuilder.DropTable(
-                name: "State");
+                name: "Repository");
 
             migrationBuilder.DropTable(
-                name: "Repository");
+                name: "Address");
 
             migrationBuilder.DropTable(
                 name: "Bank");
 
             migrationBuilder.DropTable(
                 name: "Degree");
+
+            migrationBuilder.DropTable(
+                name: "City");
+
+            migrationBuilder.DropTable(
+                name: "State");
         }
     }
 }

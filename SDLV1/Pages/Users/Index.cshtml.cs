@@ -1,8 +1,8 @@
+using Common.ApiResult;
 using Common.Pagination;
 using Common.Setting;
 using Core.Entities;
 using Data.Dto;
-using Data.Migrations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
@@ -54,5 +54,47 @@ namespace SDLV1.Pages.Users
                 return RedirectToAction("ErrorPage", "Home");
             }
         }
+
+
+        public IActionResult OnPostDelete(string Id)
+        {
+            try
+            {
+                var Client = _httpClientFactory.CreateClient(_SettingWeb.ClinetName);
+                var token = User.FindFirst(_SettingWeb.TokenName).Value;
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_SettingWeb.TokenType, token);
+                var Result = Client.DeleteAsync("api/Users/Delete?Id=" + Id + "").Result;
+                if (Result.IsSuccessStatusCode)
+                {
+                    return RedirectToPage("Index");
+                }
+                else
+                {
+                    if (Result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        return RedirectToAction("SignOut", "Account");
+                    }
+                    else if (Result.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    {
+                        var Error = Result.Content.ReadFromJsonAsync<ResponceApi>();
+                        ModelState.AddModelError("DeleteError", Error.Result.Message);
+
+                        return Page();
+                    }
+                    else
+                    {
+
+                        return RedirectToAction("ErrorPage", "Home");
+                    }
+
+
+                }
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ErrorPage", "Home");
+            }
+        }
+
     }
 }
