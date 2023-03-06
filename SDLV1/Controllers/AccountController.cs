@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Security.Claims;
 using System.Text;
+using Common.ApiResult;
 
 namespace SDLV1.Controllers
 {
@@ -74,11 +75,13 @@ namespace SDLV1.Controllers
                     }
                     else
                     {
-
+                        var Error = Result.Content.ReadFromJsonAsync<ResultIdentity>().Result;
+                        ModelState.AddModelError("LoginError", Error.Message.ToString());
+                        
                     }
 
+                    return View(login);
 
-                    return View();
                 }
 
                 

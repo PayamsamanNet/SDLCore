@@ -130,12 +130,8 @@ namespace API.Controllers
                 var CheckUser = await _userManager.FindByNameAsync(UserName);
                 if (CheckUser != null)
                 {
-                    string Code = _userManager.GenerateTwoFactorTokenAsync(CheckUser, "Phone").Result;
-
-
                     var userdto = _mapper.Map<UserDto>(CheckUser);
-                    userdto.CodeReset = Code;
-                    return Ok();
+                    return Ok(userdto);
                 }
                 return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.ServerError), Status = ResponseStatus.ServerError });
 
@@ -153,22 +149,7 @@ namespace API.Controllers
         {
             try
             {
-
-            
-
-                //var ddd = await _userManager.Users.ToListAsync();
-                //    var ff=_userManager.GetUsersInRoleAsync().
-
-                
-
-              var eee= await _userRepository.GetAll();
-
-                var User = await _userManager.Users.Include(d=>d.Roles).ToListAsync();
-                foreach (var item in User)
-                {
-                    var Roles = _userManager.GetRolesAsync(item).Result;
-                }
-
+               
                 var Users = await _userRepository.Entities.Include(s => s.Branch).Include(s => s.Repository).ToListAsync();
                 return Ok(_mapper.Map<List<UserDto>>(Users));
             }

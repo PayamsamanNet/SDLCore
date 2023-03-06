@@ -16,15 +16,9 @@ namespace Core.Entities
         public string Machine { get; set; }
         public string Class { get; set; }
         public string Method { get; set; }
-        public string Extra { get; set; }
-
-        //       public virtual Branch Branch { get; set; }
+        public string Extra { get; set; } 
         public Guid? BranchId { get; set; }
-
-        //       public virtual Repository Repository { get; set; }
         public Guid? RepositoryId { get; set; }
-
-        //  public virtual User User { get; set; }
         public Guid ContractId { get; set; }
         [ForeignKey(nameof(ContractId))]
         public Agreement Contract { get; set; }

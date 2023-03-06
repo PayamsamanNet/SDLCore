@@ -11,22 +11,21 @@ namespace Data.Dto
     public class ChangePassword
     {
         [Display(Name = "رمز عبور جدید ")]
-        [Required(ErrorMessage = "وارد کردن {0}الزامی است ")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         [Display(Name = "تکرار کلمه عبور ")]
-        [Required(ErrorMessage = "وارد کردن {0}الزامی است ")]
         [Compare(nameof(Password),ErrorMessage = "کلمه عبور و تکرار آن مغایرت دارد ")]
-        public string RePassword { get; set; }
-        [Display(Name = "رمز عبور قدیمی ")]
-        [Required(ErrorMessage = "وارد کردن {0}الزامی است ")]
-        public string OldPassword { get; set; }
+        public string? RePassword { get; set; }
+        [Display(Name = "رمز عبور قدیمی ")]  
+        public string? OldPassword { get; set; }
         public bool IsSuccessCode { get; set; }
-        public bool IsSuccess { get; set; }
+        public bool IsSuccessUser { get; set; }
         public bool SendEmail { get; set; }
         public bool SendMobail { get; set; }
-
         [Display(Name = "نام کاربری ")]
         public string? UserName { get; set; }
-
+        public string? Code { get; set; }
+        [Display(Name = "  کد اعتبار سنجی  ")]
+        [Compare(nameof(Code))]
+        public string? UserCode { get; set; }
     }
 }

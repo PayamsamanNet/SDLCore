@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Common;
 using Service.Authentication;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace API.Controllers
 {
@@ -38,8 +40,6 @@ namespace API.Controllers
                 var _User = _mapper.Map<UserDto,User>(userDto);
                 var _Id = Guid.NewGuid();
                 _User.Id = _Id.ToString();
-                //_User.Repository = null;
-                //_User.Branch = null;
                 var Result = await _userManager.CreateAsync(_User, userDto.PasswordHash);
                 if (Result.Succeeded)
                 {
@@ -61,30 +61,39 @@ namespace API.Controllers
             }
         }
         [HttpPost]
+        [Display(Name = "ورود به سامانه ")]
         public async Task<IActionResult> Login(LoginDto loginDto, [FromServices] IJwtRepository jwtRepository)
         {
             try
             {
+                var asm = typeof(AccountController).Assembly;
+               var resr= OthersExtensions.GetAccessProject<ControllerBase>(asm);
+
                 var _User = await _userManager.FindByNameAsync(loginDto.UserName);
                 if (_User == null)
                 {
-                    return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.NotFound), Status = ResponseStatus.NotFound });
+                    return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.NotFoundUser), Status = ResponseStatus.NotFoundUser });
                 }
                 else
                 {
-                    //var checkPass =await  _signInManager.CheckPasswordSignInAsync(_User, loginDto.Password, true);
-                    //if (checkPass.Succeeded)
-                    //{
-                    var userdto = _mapper.Map<UserDto>(_User);
-                    var res = jwtRepository.CreateToken(userdto);
-                    return Ok( new ResponseAccount<UserDto>
+                    var checkPass = await _signInManager.CheckPasswordSignInAsync(_User, loginDto.Password, true);
+
+                    if (checkPass.Succeeded)
                     {
-                        data= userdto,
-                        Roles= res.Roles,
-                        Token=res.Token,
-                        status= res.status
-                    });
-                    //}
+                        var userdto = _mapper.Map<UserDto>(_User);
+                        var res = jwtRepository.CreateToken(userdto);
+                        return Ok(new ResponseAccount<UserDto>
+                        {
+                            data = userdto,
+                            Roles = res.Roles,
+                            Token = res.Token,
+                            status = res.status
+                        });
+                    }
+                    else
+                    {
+                        return BadRequest(new ResultIdentity { Message = EnumExtensions.GetEnumDescription(ResponseStatus.NotFound), Status = ResponseStatus.NotFound });
+                    }
                 }
             }
             catch (Exception ex)

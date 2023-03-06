@@ -10,14 +10,12 @@ namespace Core.Enum
         Login = 1,
         [Description("خروج از سیستم")]
         Logout = 2,
-
         [Description("ثبت شعبه")]
         CreateBranch = 3,
         [Description("ویرایش شعبه")]
         UpdateBranch = 4,
         [Description("حذف شعبه")]
         DeleteBranch = 5,
-
         [Description("ثبت مخزن")]
         CreateRepository = 6,
         [Description("ویرایش مخزن")]
@@ -26,38 +24,32 @@ namespace Core.Enum
         UpdateRepositorySetting = 8,
         [Description("حذف مخزن")]
         DeleteRepository = 9,
-
         [Description("ثبت استان")]
         CreateState = 10,
         [Description("ویرایش استان")]
         UpdateState = 11,
         [Description("حذف استان")]
         DeleteState = 12,
-
         [Description("ثبت شهر")]
         CreateCity = 13,
         [Description("ویرایش شهر")]
         UpdateCity = 14,
         [Description("حذف شهر")]
         DeleteCity = 15,
-
         [Description("ویرایش قالب قرارداد حقیقی")]
         UpdateHaghighiTemplate = 16,
-
         [Description("ویرایش قالب قرارداد ")]
         UpdateTemplate = 160,
         [Description("ویرایش قالب قرارداد حقوقی")]
         UpdateHoghooghiTemplate = 17,
         [Description("ویرایش قالب قرارداد همکار")]
         UpdateHamkarTemplate = 18,
-
         [Description("ثبت نوع صندوق")]
         CreateBoxType = 19,
         [Description("ویرایش نوع صندوق")]
         UpdateBoxType = 20,
         [Description("حذف نوع صندوق")]
         DeleteBoxType = 21,
-
         [Description("ثبت صندوق در مخزن")]
         AddBoxInRepository = 22,
         [Description("ویرایش چیدمان صندوق ها در مخزن")]
