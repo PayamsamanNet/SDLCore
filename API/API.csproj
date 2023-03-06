@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SDLV1\SDLV1.csproj" />
     <ProjectReference Include="..\WebFrameWork\WebFrameWork.csproj" />
   </ItemGroup>
 

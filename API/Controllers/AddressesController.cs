@@ -5,8 +5,6 @@ using Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
 namespace Common.Temp
 {
@@ -23,7 +21,6 @@ namespace Common.Temp
         }
 
         [HttpGet]
-        [Display(Name = "ورود به سامانه ")]
         public async Task<IActionResult> GetAll()
         {
             try

@@ -12,8 +12,8 @@ namespace Common.ApiResult
         NotFound = 3,
         [Description("در سیستم خطایی رخ داد! مجددا تلاش کنید ")]
         ServerError = 4,
-        [Description("کاربری با اطلاعات وارد شده وجود ندارد  ")]
-        NotFoundUser = 5,
+        [Description("کاربری با مشخصات وارد شده وجود ندارد  ")]
+        NotFoundUser =5
     }
 
 }

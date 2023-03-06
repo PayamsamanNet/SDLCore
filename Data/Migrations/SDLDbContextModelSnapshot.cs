@@ -666,6 +666,9 @@ namespace Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateOfOperation")
                         .HasColumnType("datetime2");
 
@@ -1083,17 +1086,12 @@ namespace Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -1746,13 +1744,6 @@ namespace Data.Migrations
                     b.Navigation("Repository");
                 });
 
-            modelBuilder.Entity("Core.Entities.Role", b =>
-                {
-                    b.HasOne("Core.Entities.User", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("Core.Entities.RolePermission", b =>
                 {
                     b.HasOne("Core.Entities.Permission", "Permission")
@@ -1861,11 +1852,6 @@ namespace Data.Migrations
             modelBuilder.Entity("Core.Entities.Role", b =>
                 {
                     b.Navigation("Permissions");
-                });
-
-            modelBuilder.Entity("Core.Entities.User", b =>
-                {
-                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

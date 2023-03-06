@@ -61,14 +61,11 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        [Display(Name = "ورود به سامانه ")]
+       
         public async Task<IActionResult> Login(LoginDto loginDto, [FromServices] IJwtRepository jwtRepository)
         {
             try
             {
-                var asm = typeof(AccountController).Assembly;
-               var resr= OthersExtensions.GetAccessProject<ControllerBase>(asm);
-
                 var _User = await _userManager.FindByNameAsync(loginDto.UserName);
                 if (_User == null)
                 {

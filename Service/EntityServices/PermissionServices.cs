@@ -39,12 +39,12 @@ namespace Service.EntityServices
             }
         }
 
-        public async Task<InsuranceDto> GetById(Guid Id)
+        public async Task<PermissionDto> GetById(Guid Id)
         {
             try
             {
                 var permission = await _permissionRepository.GetByIdAsync(Id);
-                return _mapper.Map<InsuranceDto>(permission);
+                return _mapper.Map<PermissionDto>(permission);
             }
             catch (Exception)
             {
@@ -62,7 +62,7 @@ namespace Service.EntityServices
                
                 return await _permissionRepository.AddAsync(permission);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new ServiceResult(ResponseStatus.ServerError, null);
             }
