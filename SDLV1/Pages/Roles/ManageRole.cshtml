@@ -1,6 +1,7 @@
 ﻿@page
 @model SDLV1.Pages.Roles.ManageRoleModel
 @{
+    var OldPer = "";
 }
 
 <div class="row">
@@ -12,10 +13,11 @@
         if (item.IsChecked == true)
         {
             Checked = "checked";
+            OldPer ="/"+ OldPer + item.Id.ToString();
         }
         <div class="col-md-12 p-4">
             <div class="form-check form-switch">
-                <input class="form-check-input " @Checked type="checkbox" role="switch" onclick="AddPermission('@item.Id')" id="flexSwitchCheckDefault">
+                <input class="form-check-input @item.Code " data-Id="@item.Id" type="checkbox" role="switch" Id="@item.Code" onclick="AddPermissionMain('@item.Code')" id="flexSwitchCheckDefault" @Checked>
                 <label class="form-check-label me-3" for="flexSwitchCheckDefault">@item.Title </label>
             </div>
         </div>
@@ -26,9 +28,10 @@
                 if (_item.IsChecked == true)
                 {
                     _Checked = "checked";
+                    OldPer = "/" + OldPer + _item.Id.ToString();
                 }
                 <div class="form-check form-switch col-md-2">
-                    <input class="form-check-input" @_Checked type="checkbox" onclick="AddPermission('@item.Id')" role="switch" id="flexSwitchCheckDefault">
+                    <input class="form-check-input @item.Code  @_item.Code" data-Main="@item.Code" Id="@_item.Code" data-Id="@item.Id" type="checkbox" onclick="AddPermissionUnderMenu('@_item.Code')" role="switch" id="flexSwitchCheckDefault" @_Checked>
                     <label class="form-check-label me-3" for="flexSwitchCheckDefault">@_item.Title </label>
                 </div>
             }
@@ -36,12 +39,27 @@
         <hr />
     }
     <form asp-page="ManageRole" method="post" >
-        <input type="hidden" value="@" />
+        <input type="hidden" value="@OldPer" id="OldPermission"/>
     </form>
 </div>
 
 <script>
-    function AddPermission(Id){
-        
+    function AddPermissionMain(Code) {
+        var check = $("#" + Code + "").prop('checked');
+        if (check) {
+            $("." + Code + "").prop("checked", true);
+       }else{
+            $("." + Code + "").prop("checked", false);
+       }
+    }
+    function AddPermissionUnderMenu(code) {
+        var _check = $("#" + Code + "").prop('checked');
+        var Main = $("#" + Code + "").attr("data-Main");
+        if (check) {
+         
+            console.log(Main);
+        } else {
+            console.log(Main);
+        }
     }
 </script>
