@@ -42,6 +42,7 @@ namespace WebFrameWork.Configuration
             services.AddScoped<IJwtRepository, JwtRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPermissionRepository, PermissionRepository>();
+            services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
             services.AddScoped<IFileService, FileService>();
         }
         public static void RegisterJwtService(this IServiceCollection services, SecuritySetting _siteSetting)

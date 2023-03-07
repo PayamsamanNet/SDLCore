@@ -4,6 +4,7 @@ using Common.Utilities;
 using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Service.EntityServices;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
@@ -80,7 +81,7 @@ namespace API.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));   
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
             }
         }
 
@@ -126,7 +127,8 @@ namespace API.Controllers
                 {
                     return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
                 }
-                else{
+                else
+                {
                     return Ok(Result);
                 }
             }
@@ -135,6 +137,56 @@ namespace API.Controllers
                 return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetRoleByPerMission(string RoleId, [FromServices] IRolePermissionRepository rolePermission)
+        {
+            try
+            {
+                var List = await _permissionServices.GetAll();
+                var RolePermission =await rolePermission.Table.Where(s => s.RoleId == RoleId).ToListAsync();
+                List<PermissionDto> permissions= new List<PermissionDto>();
+                foreach (var item in List)
+                {
+                    var Exsit = RolePermission.Any(d => d.PermissionId == item.Id && d.RoleId == RoleId);
+                    if (Exsit)
+                    {
+                        permissions.Add(new PermissionDto
+                        {
+                            Title = item.Title,
+                            Code = item.Code,
+                            Id = item.Id,
+                            IsChecked = true,
+                            SubCode = item.SubCode,
+                            IsMenu = item.IsMenu,
+                            Url = item.Url,
+                        });
+                    }
+                    else
+                    {
+                        permissions.Add(new PermissionDto
+                        {
+                            Title = item.Title,
+                            Code = item.Code,
+                            Id = item.Id,
+                            IsChecked = false,
+                            SubCode = item.SubCode,
+                            IsMenu = item.IsMenu,
+                            Url = item.Url,
+                        });
+                    }
+
+                }
+
+                return Ok(permissions);
+
+            }
+            catch (Exception)
+            {
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
+            }
+        }
+
+
 
     }
 }

@@ -1,0 +1,47 @@
+﻿@page
+@model SDLV1.Pages.Roles.ManageRoleModel
+@{
+}
+
+<div class="row">
+
+    @foreach (var item in Model.Permissions.Where(S => S.IsMenu == true))
+    {
+        var UnderMenu = Model.Permissions.Where(s => s.SubCode == item.SubCode && s.IsMenu == false).ToList();
+        var Checked = "";
+        if (item.IsChecked == true)
+        {
+            Checked = "checked";
+        }
+        <div class="col-md-12 p-4">
+            <div class="form-check form-switch">
+                <input class="form-check-input " @Checked type="checkbox" role="switch" onclick="AddPermission('@item.Id')" id="flexSwitchCheckDefault">
+                <label class="form-check-label me-3" for="flexSwitchCheckDefault">@item.Title </label>
+            </div>
+        </div>
+        <div class="col-md-12 row pe-5">
+            @foreach (var _item in UnderMenu)
+            {
+                var _Checked = "";
+                if (_item.IsChecked == true)
+                {
+                    _Checked = "checked";
+                }
+                <div class="form-check form-switch col-md-2">
+                    <input class="form-check-input" @_Checked type="checkbox" onclick="AddPermission('@item.Id')" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label me-3" for="flexSwitchCheckDefault">@_item.Title </label>
+                </div>
+            }
+        </div>
+        <hr />
+    }
+    <form asp-page="ManageRole" method="post" >
+        <input type="hidden" value="@" />
+    </form>
+</div>
+
+<script>
+    function AddPermission(Id){
+        
+    }
+</script>

@@ -28,10 +28,6 @@ namespace SDLV1.Pages.Permission
 
         public List<ControllerModel> Controllers { get; set; }
         public static List<ControllerModel> StaticControllers { get; set; }
-
-
-
-
         public async Task<IActionResult> OnGet()
         {
             try
@@ -86,8 +82,7 @@ namespace SDLV1.Pages.Permission
                         model.Code = num;
                         model.Title = StaticControllers.FirstOrDefault(s => s.Number == num).Title;
                         model.Url = Permission.Url;
-                        model.IsMenu = true;
-                        
+                        model.IsMenu = true;   
                     }
                     else
                     {
@@ -107,7 +102,6 @@ namespace SDLV1.Pages.Permission
                     var Result = Client.PostAsync("api/Permission/Create", Content).Result;
                     if (Result.IsSuccessStatusCode)
                     {
-
                         return RedirectToPage("Index");
                     }
                     else
@@ -125,7 +119,6 @@ namespace SDLV1.Pages.Permission
                         }
                         else
                         {
-
                             return RedirectToAction("ErrorPage", "Home");
                         }
                     }

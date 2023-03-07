@@ -23,5 +23,6 @@ namespace Data.Dto
         public int? SubCode { get; set; }
 
         public int Code { get; set; }
+        public bool IsChecked { get; set; }
     }
 }
