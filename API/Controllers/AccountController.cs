@@ -20,6 +20,7 @@ namespace API.Controllers
     [Route("api/[controller]/[Action]")]
     [ApiController]
     [AllowAnonymous]
+    [Display(Name = "حساب  ")]
     public class AccountController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -34,6 +35,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Display(Name = "ثبت نام  ")]
         public async Task<IActionResult> RegisterUser(UserDto userDto)
         {
             try
@@ -62,13 +64,12 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        [DisplayName("ورود کاربر ")]
+        [Display(Name = "ورود به سامانه  ")]
         public async Task<IActionResult> Login(LoginDto loginDto, [FromServices] IJwtRepository jwtRepository)
         {
             try
             {
-                var asm = typeof(AccountController).Assembly;
-                var rsr = OthersExtensions.
+               
 
                 var _User = await _userManager.FindByNameAsync(loginDto.UserName);
                 if (_User == null)

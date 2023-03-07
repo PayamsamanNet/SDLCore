@@ -11,11 +11,14 @@ using Microsoft.EntityFrameworkCore;
 using Service.EntityServices;
 using Service.ServiceFile;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace API.Controllers
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
+    [Display(Name = "کاربران ")]
     public class UsersController : ControllerBase
     {
         private readonly IFileService _fileService;
@@ -36,6 +39,7 @@ namespace API.Controllers
 
         
         [HttpPost]
+        [Display(Name = "افزودن کاربر ")]
         public  async Task<IActionResult> Create(UserDto userDto)
         {
             try
@@ -67,6 +71,7 @@ namespace API.Controllers
             }
         }
         [HttpPut]
+        [Display(Name = "ویرایش کاربر ")]
         public async Task<IActionResult> Update(UserDto userDto)
         {
             try
@@ -106,6 +111,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
+        [Display(Name = "حذف کاربر  ")]
         public async Task<IActionResult> Delete(Guid Id)
         {
             try
@@ -140,6 +146,7 @@ namespace API.Controllers
 
 
         [HttpGet]
+        [Display(Name = "جستجو کاربر  ")]
         public async Task<IActionResult> GetById(string Id)
         {
             try
@@ -189,6 +196,7 @@ namespace API.Controllers
 
 
         [HttpGet]
+        [Display(Name = "لیست کاربران  ")]
         public async Task<IActionResult> GetAll([FromServices]RoleManager<Role> roleManager)
         {
             try

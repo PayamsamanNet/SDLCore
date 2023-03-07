@@ -22,7 +22,9 @@ body {
     width: 100%;
     HEIGHT: 100%;
 }
-
+.hideCustom{
+    display:none;
+}
 
 @media (max-width: 767px) {
     .carousel-inner .carousel-item > div {

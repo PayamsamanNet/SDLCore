@@ -11,7 +11,8 @@ namespace Core.Entities
     {
         public string Title { get; set; }
         public string Url { get; set; }
-        public string ActionName { get; set; }
         public int? SubCode { get; set; }
+        public bool IsMenu { get; set; }
+        public int Code { get; set; }
     }
 }

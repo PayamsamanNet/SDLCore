@@ -24,7 +24,6 @@ namespace SDLV1.Pages.Bank
         public void OnGet()
         {
         }
-
         public async Task<IActionResult> OnPost()
         {
             try

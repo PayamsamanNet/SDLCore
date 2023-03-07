@@ -4,12 +4,14 @@ using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace Common.Temp
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
-    
+    [Display(Name = "استان  ")]
     public class StatesController : ControllerBase
     {
 
@@ -22,6 +24,7 @@ namespace Common.Temp
         }
 
         [HttpGet]
+        [Display(Name = "لیست استان  ")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -35,6 +38,7 @@ namespace Common.Temp
         }
 
         [HttpGet]
+        [Display(Name = "جستجو استان  ")]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -58,6 +62,7 @@ namespace Common.Temp
         }
 
         [HttpPost]
+        [Display(Name = "افزودن استان  ")]
         public async Task<IActionResult> Create(StateDto stateDto)
         {
             try
@@ -72,6 +77,7 @@ namespace Common.Temp
         }
 
         [HttpDelete]
+        [Display(Name = "حذف استان  ")]
         public async Task<IActionResult> Delete(Guid Id)
         {
             try
@@ -86,6 +92,7 @@ namespace Common.Temp
         }
 
         [HttpPut]
+        [Display(Name = "ویرایش استان  ")]
         public async Task<IActionResult> Update(StateDto stateDto)
         {
             try

@@ -10,6 +10,7 @@ namespace Common.Utilities.ClassUtilities
     {
         public int Number { get; set; }
         public string Title { get; set; }
+        public string Url { get; set; }
         public bool IsMenu { get; set; } = false;
         public List<ListActions> Actions { get; set; }
     }
@@ -19,6 +20,7 @@ namespace Common.Utilities.ClassUtilities
         public int Number { get; set; }
         public string Title { get; set; }
         public int  NumberMenu { get; set; }
+        public string Url { get; set; }
         private bool IsMenu { get; set; } = false;
     }
 }

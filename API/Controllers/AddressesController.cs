@@ -5,6 +5,8 @@ using Data.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Common.Temp
 {

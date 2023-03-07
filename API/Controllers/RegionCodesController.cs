@@ -4,11 +4,14 @@ using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace Common.Temp
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
+    [Display(Name = "منطقه ")]
     public class RegionCodesController : ControllerBase
     {
         private readonly RegionCodeServices _regionCodeServices;
@@ -17,6 +20,7 @@ namespace Common.Temp
             _regionCodeServices = new RegionCodeServices(regionCodeRepository, mapper);
         }
         [HttpGet]
+        [Display(Name = "لیست منطقه  ")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -31,6 +35,7 @@ namespace Common.Temp
         }
 
         [HttpGet]
+        [Display(Name = "جستجو منطقه  ")]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -54,6 +59,7 @@ namespace Common.Temp
         }
 
         [HttpPost]
+        [Display(Name = "افزودن منطقه  ")]
         public async Task<IActionResult> Create(RegionCodeDto regionCodeDto)
         {
             try
@@ -67,6 +73,7 @@ namespace Common.Temp
         }
 
         [HttpDelete]
+        [Display(Name = "حذف منطقه  ")]
         public async Task<IActionResult> Delete(Guid Id)
         {
             try
@@ -82,6 +89,7 @@ namespace Common.Temp
         }
 
         [HttpPut]
+        [Display(Name = "ویرایش منطقه  ")]
         public async Task<IActionResult> Update(RegionCodeDto regionCodeDto)
         {
             try

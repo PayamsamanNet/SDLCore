@@ -1,16 +1,19 @@
 ﻿using AutoMapper;
 using Common.ApiResult;
+using Common.Utilities;
 using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace API.Controllers
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
-    
-      public class PermissionController : ControllerBase
+    [Display(Name = " دسترسی ها ")]
+    public class PermissionController : ControllerBase
     {
         private readonly PermissionServices _permissionServices;
 
@@ -20,6 +23,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Display(Name = " لیست ")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -34,6 +38,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Display(Name = " جستجو ")]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -57,6 +62,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Display(Name = " افزودن ")]
         public async Task<IActionResult> Create(PermissionDto permissionDto)
         {
             try
@@ -79,6 +85,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
+        [Display(Name = " حذف ")]
         public async Task<IActionResult> Delete(Guid Id)
         {
             try
@@ -94,6 +101,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
+        [Display(Name = " ویرایش ")]
         public async Task<IActionResult> Update(PermissionDto permissionDto)
         {
             try
@@ -105,6 +113,26 @@ namespace API.Controllers
             {
                 return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
 
+            }
+        }
+
+        public async Task<IActionResult> GetAllAcessProject()
+        {
+            try
+            {
+                var asm = typeof(AccountController).Assembly;
+                var Result = OthersExtensions.GetAccessProject<ControllerBase>(asm);
+                if (Result == null)
+                {
+                    return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
+                }
+                else{
+                    return Ok(Result);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
             }
         }
 

@@ -1,12 +1,14 @@
 ﻿using Common.Utilities.ClassUtilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Common.Utilities
 {
@@ -53,27 +55,45 @@ namespace Common.Utilities
             int numberAction = 1;
             foreach (var item in types)
             {
+               
                 number++;
                 ControllerModel model = new ControllerModel();
-                model.Title = item.Name;
+                var NameCon = item.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
+                if (NameCon != null)
+                {
+                    model.Title = NameCon.Name;
+                }
+                else
+                {
+                    model.Title = item.Name;
+                }
                 model.IsMenu = true;
                 model.Number = number;
+                model.Url = $"api/{item.Name}";
                 var Items = item.GetTypeInfo().DeclaredMethods.ToList();
                 List<ListActions> Actions = new List<ListActions>();
                 foreach (var action in Items)
                 {
-                    var name = action.GetCustomAttribute(typeof(DisplayAttribute), false);
-
+                    string Name = "";
+                    var NameAtr = action.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
+                    if (NameAtr == null)
+                    {
+                        Name = action.Name;
+                    }
+                    else
+                    {
+                        Name = NameAtr.Name;
+                    }
                     Actions.Add(new ListActions
                     {
-                        Title = action.Name,
+                        Title = Name,
                         Number = numberAction++,
-                        NumberMenu = model.Number
-                    });
+                        NumberMenu = model.Number,
+                        Url = $"api/{item.Name}/{action.Name}"
+                });
                 }
                 model.Actions = Actions;
                 Result.Add(model);
-
             }
             return Result;
         }

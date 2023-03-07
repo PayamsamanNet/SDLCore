@@ -6,11 +6,14 @@ using Data.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace API.Controllers
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
+    [Display(Name = "مدیریت نقش  ")]
     public class RoleController : ControllerBase
     {
         private readonly RoleManager<Role> _roleManager;
@@ -23,6 +26,7 @@ namespace API.Controllers
 
 
         [HttpGet]
+        [Display(Name = "لیست نقش ها  ")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -37,6 +41,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Display(Name = "افزودن نقش  ")]
         public async Task<IActionResult> Create(RoleDto role)
         {
             try
@@ -75,6 +80,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
+        [Display(Name = "ویرایش نقش  ")]
         public async Task<IActionResult> Update(RoleDto role)
         {
             try
@@ -118,6 +124,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Display(Name = "جستجو نقش  ")]
         public async Task<IActionResult> GetById(string Id)
         {
             try
@@ -130,19 +137,6 @@ namespace API.Controllers
                 return BadRequest(new ServiceResult(ResponseStatus.ServerError,null));
             }
         }
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
        
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

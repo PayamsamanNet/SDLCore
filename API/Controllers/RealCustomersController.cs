@@ -4,21 +4,25 @@ using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace Common.Temp
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
-    public class ReadCustomersController : ControllerBase
+    [Display(Name = "مشتریان حقیقی ")]
+    public class RealCustomersController : ControllerBase
     {
         private readonly RealCustomerServices _realCustomerServices;
 
-        public ReadCustomersController(IRealCustomerRepository realCustomerRepository, IMapper mapper)
+        public RealCustomersController(IRealCustomerRepository realCustomerRepository, IMapper mapper)
         {
             _realCustomerServices = new RealCustomerServices(realCustomerRepository, mapper);
         }
 
         [HttpGet]
+        [Display(Name = " لیست ")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -32,7 +36,8 @@ namespace Common.Temp
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet]
+        [Display(Name = " جستجو ")]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -56,6 +61,7 @@ namespace Common.Temp
         }   
 
         [HttpPost]
+        [Display(Name = " افزودن  ")]
         public async Task<IActionResult> Create(RealCustomerDto realCustomerDto)
             {
         try
@@ -69,6 +75,7 @@ namespace Common.Temp
         }
 
         [HttpDelete]
+        [Display(Name = " حذف ")]
         public async Task<IActionResult> Delete(Guid Id)
         {
             try
@@ -84,6 +91,7 @@ namespace Common.Temp
         }
 
         [HttpPut]
+        [Display(Name = " ویرایش ")]
         public async Task<IActionResult> Update(RealCustomerDto realCustomerDto)
         {
             try

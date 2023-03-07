@@ -4,11 +4,14 @@ using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Service.EntityServices;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace Common.Temp
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
+    [Display(Name = " مخازن  ")]
     public class RepositoriesController : ControllerBase
     {
         private readonly RepositoryServices _repositoryServices;
@@ -19,6 +22,7 @@ namespace Common.Temp
         }
 
         [HttpGet]
+        [Display(Name = "لیست مخازن ")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -33,6 +37,7 @@ namespace Common.Temp
         }
 
         [HttpGet]
+        [Display(Name = "جستجو مخازن ")]
         public async Task<IActionResult> GetById(Guid Id)
         {
             try
@@ -56,6 +61,7 @@ namespace Common.Temp
         }
 
         [HttpPost]
+        [Display(Name = "افزودن مخزن  ")]
         public async Task<IActionResult> Create(RepositoryDto repositoryDto)
         {
             try
@@ -69,6 +75,7 @@ namespace Common.Temp
         }
 
         [HttpDelete]
+        [Display(Name = "حذف مخزن  ")]
         public async Task<IActionResult> Delete(Guid Id)
         {
             try
@@ -84,6 +91,7 @@ namespace Common.Temp
         }
 
         [HttpPut]
+        [Display(Name = "ویرایش مخزن  ")]
         public async Task<IActionResult> Update(RepositoryDto repositoryDto)
         {
             try
