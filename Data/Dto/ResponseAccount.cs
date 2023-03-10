@@ -11,6 +11,7 @@ namespace Data.Dto
     {
         public string Token { get; set; }
         public List<string> Roles { get; set; }
+        public List<AccessDto> Access { get; set; }
         public string Errors { get; set; }
         public ResponseStatus status { get; set; }
     }

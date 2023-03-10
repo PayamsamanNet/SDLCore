@@ -54,15 +54,13 @@ namespace SDLV1.Controllers
                                 var Cliam = new Claim(ClaimTypes.Role, item);
                                 Cliams.Add(Cliam);
                             }
-                            foreach (var item in Model.Result.Roles)
+
+                            string Access = "";
+                            foreach (var item in Model.Result.Access)
                             {
-                                var Cliam = new Claim(ClaimTypes.Role, item);
-                                Cliams.Add(Cliam);
+                                Access=Access+item.ChekCode.ToString()+"/";
                             }
-
-                            //var ImageUser = new ClaimsIdentityOptions().SecurityStampClaimType;
-
-
+                            Cliams.Add(new Claim("Permission", Access));
                             Cliams.Add(new Claim(ClaimTypes.Name, Model.Result.data.Name +""+ Model.Result.data.Family));
                             Cliams.Add(new Claim(ClaimTypes.NameIdentifier, login.UserName));
                             Cliams.Add(new Claim("ImageUser", Model.Result.data.ImageUser.ToString()));
@@ -74,6 +72,12 @@ namespace SDLV1.Controllers
                                 IsPersistent = true,
                                 AllowRefresh = true,
                             };
+
+                            Response.Cookies.Delete(_SettingWeb.Name, new CookieOptions()
+                            {
+                                Secure = true,
+                            });
+
                             await HttpContext.SignInAsync(perencipal, Properties);
                             return RedirectToAction("Index", "Home");
                         }
@@ -95,9 +99,18 @@ namespace SDLV1.Controllers
 
                 throw;
             }
-
-
             
+
+
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
         }
 
     }

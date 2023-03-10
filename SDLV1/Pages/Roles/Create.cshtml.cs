@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Store.Core.Security;
 using System.Net.Http.Headers;
 using System.Text;
 
 namespace SDLV1.Pages.Roles
 {
+    [PermissionChecker("138")]
     public class CreateModel : PageModel
     {
         private readonly IHttpClientFactory _httpClientFactory;

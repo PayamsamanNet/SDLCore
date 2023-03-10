@@ -65,12 +65,10 @@ namespace API.Controllers
         }
         [HttpPost]
         [Display(Name = "ورود به سامانه  ")]
-        public async Task<IActionResult> Login(LoginDto loginDto, [FromServices] IJwtRepository jwtRepository)
+        public async Task<IActionResult> Login(LoginDto loginDto, [FromServices] IJwtRepository jwtRepository, [FromServices] IUserRepository userRepository )
         {
             try
             {
-               
-
                 var _User = await _userManager.FindByNameAsync(loginDto.UserName);
                 if (_User == null)
                 {
@@ -79,7 +77,6 @@ namespace API.Controllers
                 else
                 {
                     var checkPass = await _signInManager.CheckPasswordSignInAsync(_User, loginDto.Password, true);
-
                     if (checkPass.Succeeded)
                     {
                         var userdto = _mapper.Map<UserDto>(_User);
@@ -89,8 +86,9 @@ namespace API.Controllers
                             data = userdto,
                             Roles = res.Roles,
                             Token = res.Token,
-                            status = res.status
-                        });
+                            status = res.status,
+                            Access= await userRepository.GetRoleForUser(_User.Id)
+                    });
                     }
                     else
                     {

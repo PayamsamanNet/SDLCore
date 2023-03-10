@@ -60,7 +60,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Branch.RegionCodeId"></label>
-                                    <select class="form-control " asp-for="Branch.RegionCodeId">
+                                    <select class="form-control select2" asp-for="Branch.RegionCodeId">
                                         @foreach (var item in Model.Regions as List<RegionCodeDto>)
                                         {
                                             <option value="@item.Id">@item.AreaName</option>
@@ -72,7 +72,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Branch.BranchManagerId "></label>
-                                    <select class="form-control " asp-for="Branch.BranchManagerId ">
+                                    <select class="form-control select2" asp-for="Branch.BranchManagerId ">
                                         @foreach (var item in Model.BranchManagers as List<BranchManagerDto>)
                                         {
                                             <option value="@item.Id">@item.BranchManagerName</option>
@@ -84,7 +84,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Branch.BankId  "></label>
-                                    <select class="form-control " asp-for="Branch.BankId">
+                                    <select class="form-control select2" asp-for="Branch.BankId">
                                         @foreach (var item in Model.Banks as List<BankDto>)
                                         {
                                             <option value="@item.Id">@item.Name</option>

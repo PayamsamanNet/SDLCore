@@ -20,6 +20,32 @@ namespace Data.Repos
             _context= dbContext;
         }
 
+        public async Task<List<AccessDto>> GetRoleForUser(string UserId)
+        {
+            try
+            {
+                var Roles = await (from userrole in _context.UserRoles join role in _context.Roles on userrole.UserId equals UserId
+                                   join rolepermission in _context.Set<RolePermission>() on role.Id equals rolepermission.RoleId 
+                                   join permission in _context.Set<Permission>() on rolepermission.PermissionId equals permission.Id
+                                   select new AccessDto
+                                   {
+                                       Name = permission.Title,
+                                       UrlPer=permission.Url,
+                                       RoleName= role.Name,
+                                       RoleNameShow=role.NormalizedName,
+                                       RoleUrl=permission.Url,
+                                       ChekCode=permission.Code
+                                   }).ToListAsync();
+                return Roles;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+
+
         public async Task<List<UserDto>> GetAll()
         {
             try

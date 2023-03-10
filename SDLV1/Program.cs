@@ -3,6 +3,7 @@ using Common.Setting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Service.ServiceFile;
 using Service.EmailService;
+using Microsoft.AspNetCore.CookiePolicy;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<SDLDbContext>(options =>
@@ -45,6 +46,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = _SettingWeb.Name;
         options.AccessDeniedPath = _SettingWeb.AccessDeniedPath;
     });
+
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+    options.HttpOnly = HttpOnlyPolicy.None;
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

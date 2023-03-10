@@ -16,12 +16,12 @@ namespace Service.Authentication
     public class JwtRepository : IJwtRepository
     {
         private readonly SecuritySetting _siteSetting;
-        //private readonly UserManager<User> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public JwtRepository(IOptions<SecuritySetting> options /*UserManager<User> userManager*/)
+        public JwtRepository(IOptions<SecuritySetting> options ,UserManager<User> userManager)
         {
             _siteSetting = options.Value;
-            //_userManager = userManager;
+            _userManager = userManager;
         }
         public ResponseAccount CreateToken(UserDto userDto)
         {
@@ -68,7 +68,7 @@ namespace Service.Authentication
         }
         private IEnumerable<Claim> GetClaims(UserDto userDto)
         {
-            //var roles = _userManager.GetRolesAsync(userAccountDto).Result;
+            //var roles = _userManager.GetRolesAsync().Result;
             var ListCliams = new List<Claim>()
             {
                 new Claim(ClaimTypes.Role,"Admin"),

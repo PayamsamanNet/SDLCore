@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Common.ApiResult;
 using Common.Utilities;
+using Core.Entities;
 using Data.Dto;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -116,7 +117,7 @@ namespace API.Controllers
 
             }
         }
-
+        [HttpGet]
         public async Task<IActionResult> GetAllAcessProject()
         {
             try
@@ -143,8 +144,8 @@ namespace API.Controllers
             try
             {
                 var List = await _permissionServices.GetAll();
-                var RolePermission =await rolePermission.Table.Where(s => s.RoleId == RoleId).ToListAsync();
-                List<PermissionDto> permissions= new List<PermissionDto>();
+                var RolePermission = await rolePermission.Table.Where(s => s.RoleId == RoleId).ToListAsync();
+                List<PermissionDto> permissions = new List<PermissionDto>();
                 foreach (var item in List)
                 {
                     var Exsit = RolePermission.Any(d => d.PermissionId == item.Id && d.RoleId == RoleId);
@@ -185,8 +186,33 @@ namespace API.Controllers
                 return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> AddRolePermission(List<RolePermissionDto> rolePermissions, [FromServices] IMapper mapper, [FromServices] IRolePermissionRepository _rolePermission)
+        {
+            try
+            {
+                var OLdPerMission = await _rolePermission.Table.Where(d => d.RoleId == rolePermissions[0].RoleId).ToListAsync();
+                if (OLdPerMission.Count != 0)
+                {
+                    await _rolePermission.DeleteRangeAsync((IEnumerable<RolePermission>)OLdPerMission);
+                }
+                if (rolePermissions.Count == 1 && rolePermissions[0].PermissionId == Guid.Empty)
+                {
+                    return Ok(new ServiceResult(ResponseStatus.Success, null));
+                }
+                else
+                {
+                    var List = mapper.Map<List<RolePermission>>(rolePermissions);
+                    return Ok(await _rolePermission.AddRangeAsync(List));
+                }
+                
+            }
+            catch (Exception)
+            {
 
-
+                return BadRequest(new ServiceResult(ResponseStatus.ServerError, null));
+            }
+        }
 
     }
 }

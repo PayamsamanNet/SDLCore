@@ -55,45 +55,50 @@ namespace Common.Utilities
             int numberAction = 1;
             foreach (var item in types)
             {
-               
-                number++;
-                ControllerModel model = new ControllerModel();
                 var NameCon = item.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
                 if (NameCon != null)
                 {
-                    model.Title = NameCon.Name;
-                }
-                else
-                {
-                    model.Title = item.Name;
-                }
-                model.IsMenu = true;
-                model.Number = number;
-                model.Url = $"api/{item.Name}";
-                var Items = item.GetTypeInfo().DeclaredMethods.ToList();
-                List<ListActions> Actions = new List<ListActions>();
-                foreach (var action in Items)
-                {
-                    string Name = "";
-                    var NameAtr = action.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
-                    if (NameAtr == null)
+
+                    number++;
+                    ControllerModel model = new ControllerModel();
+
+                    if (NameCon != null)
                     {
-                        Name = action.Name;
+                        model.Title = NameCon.Name;
                     }
                     else
                     {
-                        Name = NameAtr.Name;
+                        model.Title = item.Name;
                     }
-                    Actions.Add(new ListActions
+                    model.IsMenu = true;
+                    model.Number = number;
+                    model.Url = $"api/{item.Name}";
+                    var Items = item.GetTypeInfo().DeclaredMethods.ToList();
+                    List<ListActions> Actions = new List<ListActions>();
+                    foreach (var action in Items)
                     {
-                        Title = Name,
-                        Number = numberAction++,
-                        NumberMenu = model.Number,
-                        Url = $"api/{item.Name}/{action.Name}"
-                });
+                        string Name = "";
+                        var NameAtr = action.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
+                        if (NameAtr != null)
+                        {
+                            Name = NameAtr.Name;
+                            Actions.Add(new ListActions
+                            {
+                                Title = Name,
+                                Number = numberAction++,
+                                NumberMenu = model.Number,
+                                Url = $"api/{item.Name}/{action.Name}"
+                            });
+                        }
+                        else
+                        {
+                           
+                        }    
+                    }
+                    model.Actions = Actions;
+                    Result.Add(model);
                 }
-                model.Actions = Actions;
-                Result.Add(model);
+               
             }
             return Result;
         }

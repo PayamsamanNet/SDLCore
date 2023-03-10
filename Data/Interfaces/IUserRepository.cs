@@ -11,5 +11,6 @@ namespace Data.Interfaces
     public interface IUserRepository:IRepos<User>
     {
         Task<List<UserDto>> GetAll();
+        Task<List<AccessDto>> GetRoleForUser(string UserId);
     }
 }

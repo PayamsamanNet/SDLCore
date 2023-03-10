@@ -51,15 +51,17 @@
                                                 <td>@item.NormalizedName</td>
                                                 <td>@item.Description</td>   
                                                 <td>
-                                                    <a asp-page="Edit" asp-route-Id="@item.Id" class=" fa fa-pencil icon-Actions">
-
-                                                    </a>
-                                                    <a asp-page="ManageRole" asp-route-Id="@item.Id" class=" fa fa-pencil icon-Actions">
-
-                                                    </a>
                                                     <a onclick="Delete('@item.Id')" class=" fa fa-trash icon-Actions">
 
                                                     </a>
+
+                                                    <a asp-page="Edit" asp-route-Id="@item.Id" class=" fa fa-pencil icon-Actions">
+
+                                                    </a>
+                                                    <a asp-page="ManageRole" asp-route-Id="@item.Id" class=" fa fa-th icon-Actions">
+
+                                                    </a>
+                                                    
                                                 </td>
                                             </tr>
                                         }

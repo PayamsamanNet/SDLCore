@@ -1,19 +1,21 @@
 ﻿@page
 @model SDLV1.Pages.Roles.ManageRoleModel
 @{
-    var OldPer = "";
 }
 
-<div class="row">
+
+
+<div class="row" id="DivAll">
 
     @foreach (var item in Model.Permissions.Where(S => S.IsMenu == true))
     {
         var UnderMenu = Model.Permissions.Where(s => s.SubCode == item.SubCode && s.IsMenu == false).ToList();
         var Checked = "";
+        var UndelDiv = "div"+item.Code.ToString();
         if (item.IsChecked == true)
         {
             Checked = "checked";
-            OldPer ="/"+ OldPer + item.Id.ToString();
+            
         }
         <div class="col-md-12 p-4">
             <div class="form-check form-switch">
@@ -21,17 +23,18 @@
                 <label class="form-check-label me-3" for="flexSwitchCheckDefault">@item.Title </label>
             </div>
         </div>
-        <div class="col-md-12 row pe-5">
+
+
+        <div class="col-md-12 row pe-5 @UndelDiv">
             @foreach (var _item in UnderMenu)
             {
                 var _Checked = "";
                 if (_item.IsChecked == true)
                 {
                     _Checked = "checked";
-                    OldPer = "/" + OldPer + _item.Id.ToString();
                 }
                 <div class="form-check form-switch col-md-2">
-                    <input class="form-check-input @item.Code  @_item.Code" data-Main="@item.Code" Id="@_item.Code" data-Id="@item.Id" type="checkbox" onclick="AddPermissionUnderMenu('@_item.Code')" role="switch" id="flexSwitchCheckDefault" @_Checked>
+                    <input class="form-check-input @item.Code  @_item.Code" data-Main="@item.Code" Id="@_item.Code" data-Id="@_item.Id" type="checkbox" onclick="AddPermissionUnderMenu('@_item.Code')" role="switch" id="flexSwitchCheckDefault" @_Checked>
                     <label class="form-check-label me-3" for="flexSwitchCheckDefault">@_item.Title </label>
                 </div>
             }
@@ -39,7 +42,7 @@
         <hr />
     }
     <form asp-page="ManageRole" method="post" >
-        <input type="hidden" value="@OldPer" id="OldPermission"/>
+        <a onclick="AddPerMissin()" class=" btn btn-info"> تست </a>
     </form>
 </div>
 
@@ -52,14 +55,51 @@
             $("." + Code + "").prop("checked", false);
        }
     }
-    function AddPermissionUnderMenu(code) {
-        var _check = $("#" + Code + "").prop('checked');
-        var Main = $("#" + Code + "").attr("data-Main");
-        if (check) {
-         
-            console.log(Main);
+    function AddPermissionUnderMenu(test) {
+        var _check = $("#" + test + "").prop('checked');
+        var Main = $("#" + test + "").attr("data-Main");
+        if (_check) {
+            $("#" + Main + "").prop("checked", true);
         } else {
-            console.log(Main);
+            var x=0;
+            $('.div'+Main+'  input').each(function () {
+                var check = $(this).prop('checked');
+                if (check) {
+                  x=1;
+                } else {
+
+                }
+            });
+            if (x == 0) {
+                $("#" + Main + "").prop("checked", false);
+            }
         }
+    }
+    function AddPerMissin(){
+        var ids="";
+        $('#DivAll input').each(function () {
+            var check = $(this).prop('checked');
+            if (check) {
+                var Id = $(this).attr("data-Id");
+                ids = ids+"/"+Id;
+            } else {
+               
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "?handler=AddPermission",
+            dataType: "json",
+            headers: {
+                RequestVerificationToken:
+                    $('input:hidden[name="__RequestVerificationToken"]').val()
+            },
+            data: {
+                "ids": ids,
+            },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
     }
 </script>

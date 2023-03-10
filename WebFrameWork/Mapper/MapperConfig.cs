@@ -45,9 +45,13 @@ namespace WebFrameWork.Mapper
             ///Box
             CreateMap<BoxDto, Box>().ReverseMap();
             CreateMap<Box, BoxDto>().ReverseMap();
-
+            
             CreateMap<PermissionDto, Permission>().ReverseMap();
             CreateMap<Permission, PermissionDto>().ReverseMap();
+
+
+            CreateMap<RolePermissionDto, RolePermission>().ReverseMap();
+            CreateMap<RolePermission, RolePermissionDto>().ReverseMap();
 
 
             CreateMap<PagedResponse<Box>, PagedResponse<BoxDto>>().ReverseMap();
