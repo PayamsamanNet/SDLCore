@@ -1,0 +1,90 @@
+﻿@page
+@model SDLV1.Pages.Agreement.CreateModel
+@{
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>افزودن قرارداد </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"> صندوق امانات بانک ملت  </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <p> @Html.ValidationMessage("CreateError")</p>
+        </div>
+        <div class="col-md-12 row mb-5">
+           <div class=" col-md-3">
+               <input class=" form-control" type="text" maxlength="10" placeholder="شناسه ملی " />
+           </div>
+            <div class=" col-md-2">
+                <a class="btn btn-info text-white"> استعلام کاربر </a>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <form method="post" asp-page="Create">
+                        <div class="card-body card-custom">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Agreement.CustomerDto.RealCustomer.Name"></label>
+                                    <input asp-for="Agreement.CustomerDto.RealCustomer.Name" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Agreement.CustomerDto.RealCustomer.Name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Agreement.CustomerDto.RealCustomer.Surname"></label>
+                                    <input asp-for="Agreement.CustomerDto.RealCustomer.Surname" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Agreement.CustomerDto.RealCustomer.Surname"></span>
+                                </div>
+                            </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Agreement.CustomerDto.RealCustomer.NationalCode"></label>
+                                    <input asp-for="Agreement.CustomerDto.RealCustomer.NationalCode" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Agreement.CustomerDto.RealCustomer.NationalCode"></span>
+                                </div>
+                            </div>
+                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Agreement.CustomerDto.RealCustomer.FatherName"></label>
+                                    <input asp-for="Agreement.CustomerDto.RealCustomer.FatherName" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Agreement.CustomerDto.RealCustomer.FatherName"></span>
+                                </div>
+                            </div>
+                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Agreement.CustomerDto.RealCustomer.BirthPlace"></label>
+                                    <input asp-for="Agreement.CustomerDto.RealCustomer.BirthPlace" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Agreement.CustomerDto.RealCustomer.BirthPlace"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Agreement.CustomerDto.RealCustomer.Gender"></label>
+                                    <input asp-for="Agreement.CustomerDto.RealCustomer.Gender" class="form-control" />
+                                    <span class="text-danger" asp-validation-for="Agreement.CustomerDto.RealCustomer.BirthPlace"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

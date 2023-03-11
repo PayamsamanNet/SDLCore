@@ -11,6 +11,7 @@ namespace Data.Dto
         public Guid? Id { get; set; }
 
         [MaxLength(10)]
+        [Display(Name = "کد ملی ")]
         public string NationalCode { get; set; }
 
         [Display(Name="نام ")]

@@ -43,6 +43,10 @@ namespace API.Controllers
                 var _User = _mapper.Map<UserDto,User>(userDto);
                 var _Id = Guid.NewGuid();
                 _User.Id = _Id.ToString();
+               
+
+
+
                 var Result = await _userManager.CreateAsync(_User, userDto.PasswordHash);
                 if (Result.Succeeded)
                 {

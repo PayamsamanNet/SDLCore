@@ -67,8 +67,17 @@ namespace Common.Temp
         {
             try
             {
-                // stateDto.Id = Guid.NewGuid();
-                return Ok(await _stateServices.Create(stateDto));
+                var result = await _stateServices.Create(stateDto);
+                if (result.Status == ResponseStatus.Success)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
+
+                
             }
             catch (Exception)
             {

@@ -51,7 +51,12 @@ namespace Service.EntityServices
         {
             try
             {
-               
+                if (await _stateRepository.TableNoTracking.AnyAsync(s=>s.StateCode == stateDto.StateCode))
+                {
+                    return new ServiceResult(ResponseStatus.BadRequest, "کد استان تکراری است ");
+                }
+
+
                 var state = _mapper.Map<State>(stateDto);
                 return await _stateRepository.AddAsync(state);
 

@@ -6,12 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Data.Dto
 {
 
-    public class AgreementDto/* : BaseEntity*/
+    public class AgreementDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string ContractNumber { get; set; }
 
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
+
+        public CustomerDto CustomerDto { get; set; }
+
 
         public CustomerContractRole CustomerRole { get; set; }
         public ContractType ContractType { get; set; }
